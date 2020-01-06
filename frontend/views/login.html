@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link type="text/css" rel="stylesheet" href="../css/materialize.css" media="screen,projection" />
+<title>Memo</title>
+
+<body>
+    <!-- 클릭시 메인 화면으로 이동 -->
+    <div style="margin-top: 50px;">
+        <a href="./memoList">
+            <img src='../resource/logo.png' style="max-width: 100px; margin:0px auto; display:block" alt="">
+        </a>
+    </div>
+
+    <!-- 로그인 폼 -->
+    <form style="width:auto; margin-top: 10px;">
+        <fieldset class="login_form" style="max-width: 400px; margin:auto; border:none;">
+            <!-- ID 입력-->
+            <div class="input-field col s6">
+                <input id="id" type="text" class="validate">
+                <label for="id">Id</label>
+            </div>
+
+            <!-- PW 입력-->
+            <div class="input-field col s6">
+                <input id="password" type="text" class="validate">
+                <label for="password">Password</label>
+            </div>
+
+            <!-- 로그인 버튼 -->
+            <a class="waves-effect waves-light btn" style="width:100%;">로그인</a>
+        </fieldset>
+    </form>
+
+    <script type="text/javascript" src="../js/materialize.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+
+</body>
+
+</html>

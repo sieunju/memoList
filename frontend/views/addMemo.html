@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<link type="text/css" rel="stylesheet" href="../css/materialize.css">
+<link type="text/css" rel="stylesheet" href="../css/common_color.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- <style>
+/* label color */
+.input-field label {
+     color: #000 !important;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #03a9f4 !important;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #03a9f4 !important;
+     box-shadow: 0 1px 0 0 #03a9f4 !important;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid#03a9f4 !important;
+     box-shadow: 0 1px 0 0 #03a9f4 !important;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #03a9f4 !important;
+     box-shadow: 0 1px 0 0 #03a9f4 !important;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color:#03a9f4 !important;
+   }
+   </style> -->
+<title>Memo</title>
+
+<body>
+
+  <form style="width:auto; margin-top: 50px;">
+    <fieldset class="login_form" style="max-width: 500px; margin:auto; border:none;">
+
+      <!-- 태그 선택 -->
+      <div id="select-tag" class="custom-radios" style="text-align: center;">
+        <!-- 빨간색 -->
+        <div>
+          <input type="radio" id="tag1" name="tag" value="tag1" checked>
+          <label for="tag1">
+            <span>
+              <img src="../resource/check.svg" alt="Checked Icon" />
+            </span>
+          </label>
+        </div>
+
+        <!-- 주황색 -->
+        <div>
+          <input type="radio" id="tag2" name="tag" value="tag2">
+          <label for="tag2">
+            <span>
+              <img src="../resource/check.svg" alt="Checked Icon" />
+            </span>
+          </label>
+        </div>
+
+        <!-- 노란색 -->
+        <div>
+          <input type="radio" id="tag3" name="tag" value="tag3">
+          <label for="tag3">
+            <span>
+              <img src="../resource/check.svg" alt="Checked Icon" />
+            </span>
+          </label>
+        </div>
+
+        <!-- 초록색-->
+        <div>
+          <input type="radio" id="tag4" name="tag" value="tag4">
+          <label for="tag4">
+            <span>
+              <img src="../resource/check.svg" alt="Checked Icon" />
+            </span>
+          </label>
+        </div>
+
+        <!-- 파란색-->
+        <div>
+          <input type="radio" id="tag5" name="tag" value="tag5">
+          <label for="tag5">
+            <span>
+              <img src="../resource/check.svg" alt="Checked Icon" />
+            </span>
+          </label>
+        </div>
+
+        <!-- 보라색-->
+        <div>
+          <input type="radio" id="tag6" name="tag" value="tag6">
+          <label for="tag6">
+            <span>
+              <img src="../resource/check.svg" alt="Checked Icon" />
+            </span>
+          </label>
+        </div>
+
+        <!-- 회색-->
+        <div>
+          <input type="radio" id="tag7" name="tag" value="tag7">
+          <label for="tag7">
+            <span>
+              <img src="../resource/check.svg" alt="Checked Icon" />
+            </span>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- 타이틀 입력-->
+      <div class="input-field col s6">
+        <input id="title" type="text" class="validate">
+        <label for="title">Title</label>
+      </div>
+
+      <!-- 메모 입력-->
+      <form class="col s12">
+        <div class="input-field col s12">
+          <textarea id="description" class="materialize-textarea"></textarea>
+          <label for="description">Description</label>
+        </div>
+      </form>
+
+      <!-- 버튼 -->
+      <div style="float:right;">
+        <a id="btn-cancel" class="waves-effect waves-light btn white black-text" style="margin-right: 10px;">취소</a>
+        <a id="btn-save" class="waves-effect waves-light btn">등록</a>
+      </div>
+
+    </fieldset>
+  </form>
+
+  <script type="text/javascript" src="../js/materialize.js"></script>
+  <script type="text/javascript" src="../js/addMemo.js"></script>
+</body>
+
+</html>

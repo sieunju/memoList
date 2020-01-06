@@ -1,0 +1,98 @@
+
+/* [s] 라디오 버튼에 대한 정의 */
+.custom-radios div {
+    display: inline-block;
+}
+
+.custom-radios input[type="radio"] {
+    display: none;
+}
+.custom-radios input[type="radio"] + label {
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+.custom-radios input[type="radio"] + label span {
+   display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    line-height: 44px;
+}
+
+.custom-radios input[type="radio"] + label span img {
+    opacity: 0;
+    transition: all .3s ease;
+}
+/* 빨간색  */
+.custom-radios input[type="radio"]#tag1 + label span {
+    background-color: #ff3b30;
+}
+/* 주황색 */
+.custom-radios input[type="radio"]#tag2 + label span {
+    background-color: #ff9500;
+}
+/* 노란색 */
+.custom-radios input[type="radio"]#tag3 + label span {
+    background-color: #ffcc00;
+}
+/* 초록색 */
+  .custom-radios input[type="radio"]#tag4 + label span {
+    background-color: #34c759;
+}
+/* 파란색 */
+.custom-radios input[type="radio"]#tag5 + label span {
+    background-color: #007aff;
+}
+/* 보라색 */
+.custom-radios input[type="radio"]#tag6 + label span {
+    background-color: #af52de;
+}
+/* 회색 */
+.custom-radios input[type="radio"]#tag7 + label span {
+    background-color: #8e8e93;
+}
+.custom-radios input[type="radio"]:checked + label span img {
+    opacity: 1;
+}
+/* [e] 라디오 버튼에 대한 정의 */
+
+/* [s] 메모 리스트 태그 색상 정의 */
+.tag_color.tag1{
+    background-color: #ff3b30;
+}
+
+.tag_color.tag2{
+    background-color: #ff9500;
+}
+
+.tag_color.tag3{
+    background-color: #ffcc00;
+}
+
+.tag_color.tag4{
+    background-color: #34c759;
+}
+
+.tag_color.tag5{
+    background-color: #007aff;
+}
+
+.tag_color.tag6{
+    background-color: #af52de;
+}
+
+.tag_color.tag7{
+    background-color: #8e8e93;
+}
+
+/* [e] 메모 리스트 태그 색상 정의 */
+
