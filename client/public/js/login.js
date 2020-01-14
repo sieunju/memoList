@@ -36,6 +36,17 @@ document.getElementById('btn-login').onclick = function () {
         const pw = document.getElementById('password').value;
 
         alert('입력한 값 ' + id + "  " + pw);
+        const form = document.createElement('form');
+        form.action = document.URL + 'api/signin';
+        form.method = 'POST';
+
+        // var userData = {
+        //     user_id : id,
+        //     user_pw : pw
+        // };
+        // form.data = userData;
+        // API Call..
+        form.submit();
     } else {
         alert('아이디 혹은 패스워드가 유효하지 않습니다.');
         
