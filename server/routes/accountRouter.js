@@ -27,8 +27,9 @@ router.get('/login',(req,res) =>{
  * ERROR CODE:
  *      104
  */
-router.post('api/signin',(req,res) => {
+router.post('/api/signin',(req,res) => {
     console.log("Sign In Path" + req.path);
+    res.render('memoList.html');
 });
 
 

@@ -14,23 +14,22 @@
     </div>
 
     <!-- 로그인 폼 -->
-    <form style="width:auto; margin-top: 10px;">
-        <fieldset class="login_form" style="max-width: 400px; margin:auto; border:none;">
-            <!-- ID 입력-->
-            <div class="input-field col s6">
-                <input id="id" type="text" class="validate">
-                <label for="id">Id</label>
-            </div>
+    <form style="max-width: 400px; margin-top: 10px; margin:auto;" id="login_form" action="/api/signin" method="POST"
+        onsubmit="return goSignin()">
+        <!-- ID 입력-->
+        <div class="input-field col s6">
+            <input id="id" type="text" class="validate">
+            <label for="id">Id</label>
+        </div>
 
-            <!-- PW 입력-->
-            <div class="input-field col s6">
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
-            </div>
+        <!-- PW 입력-->
+        <div class="input-field col s6">
+            <input id="password" type="password" class="validate">
+            <label for="password">Password</label>
+        </div>
 
-            <!-- 로그인 버튼 -->
-            <a id="btn-login" class="waves-effect waves-light btn" style="width:100%;">로그인</a>
-        </fieldset>
+        <!-- 로그인 버튼 -->
+        <button id="btn-login" type="submit" class="waves-effect waves-light btn" style="width:100%;">로그인</button>
     </form>
 
     <script type="text/javascript" src="../public/js/materialize.js"></script>

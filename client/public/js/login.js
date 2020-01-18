@@ -29,29 +29,17 @@ function checkPw(){
     }
 }
 
-// 로그인 버튼 이벤트
-document.getElementById('btn-login').onclick = function () {
+// 로그인!!
+function goSignin(){
     if(checkId() && checkPw()){
-        const id = document.getElementById('id').value;
-        const pw = document.getElementById('password').value;
-
-        alert('입력한 값 ' + id + "  " + pw);
-        const form = document.createElement('form');
-        form.action = document.URL + 'api/signin';
-        form.method = 'POST';
-
-        // var userData = {
-        //     user_id : id,
-        //     user_pw : pw
-        // };
-        // form.data = userData;
-        // API Call..
-        form.submit();
+        // 고고 로그인!
+        return true;
     } else {
         alert('아이디 혹은 패스워드가 유효하지 않습니다.');
-        
         // 비밀번호 값 재 세팅
         document.getElementById('password').value = "";
+        return false;
     }
-}
 
+    
+}
