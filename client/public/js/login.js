@@ -10,7 +10,6 @@ function checkId() {
     const id = document.getElementById('id').value;
 
     if (id == null || id.length == 0) {
-        alert('Not Valid Id!!');
         return false;
     } else {
         return true;
@@ -22,7 +21,6 @@ function checkPw(){
     const pw = document.getElementById('password').value;
 
     if(pw == null || pw.length < 4){
-        alert('Not Valid Password!!');
         return false;
     } else {
         return true;

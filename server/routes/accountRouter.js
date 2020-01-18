@@ -21,15 +21,18 @@ router.get('/login',(req,res) =>{
 });
 
 /**
- * ACCOUNT SIGN_IN: POST /api/account/signin
- * BODY SAMPLE: {"userId": "test",
- * "userPw": "1234"}
+ * ACCOUNT SIGN_IN: POST /api/signin
+ * BODY SAMPLE: {"user_id": "test",
+ * "user_pw": "1234"}
  * ERROR CODE:
  *      104
  */
 router.post('/api/signin',(req,res) => {
-    console.log("Sign In Path" + req.path);
-    res.render('memoList.html');
+    var body = req.body;
+    console.log("Sign In Path " + req.path);
+    console.log("Sign In Id\t" + body.user_id);
+    console.log("Sign In Pw\t" + body.user_pw);
+    res.redirect('/memoList');
 });
 
 

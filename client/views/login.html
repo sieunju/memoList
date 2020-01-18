@@ -14,17 +14,17 @@
     </div>
 
     <!-- 로그인 폼 -->
-    <form style="max-width: 400px; margin-top: 10px; margin:auto;" id="login_form" action="/api/signin" method="POST"
-        onsubmit="return goSignin()">
+    <form style="max-width: 400px; margin-top: 10px; margin:auto;" 
+    id="login_form" action="/api/signin" method="POST" onsubmit="return goSignin()">
         <!-- ID 입력-->
         <div class="input-field col s6">
-            <input id="id" type="text" class="validate">
+            <input id="id" name="user_id" type="text" class="validate">
             <label for="id">Id</label>
         </div>
 
         <!-- PW 입력-->
         <div class="input-field col s6">
-            <input id="password" type="password" class="validate">
+            <input id="password" name="user_pw" type="password" class="validate">
             <label for="password">Password</label>
         </div>
 
