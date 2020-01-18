@@ -58,7 +58,7 @@ const http = require('http');
 const httpApp = express();
 const httpPort = 100;
 httpApp.all('*',(req,res,next) => {
-    res.redirect('https://' + req.host + ':' + port);
+    res.redirect('https://' + req.hostname + ':' + port);
 });
 http.createServer(httpApp).listen(httpPort,() => {
     console.log('Http Server Start, Port: ' + httpPort);
