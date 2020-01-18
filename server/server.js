@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const https = require('https');
+const fs = require('fs');
 const path = require('path');           
 const api = require('./routes/index');
 const bodyParser = require('body-parser');
@@ -43,6 +45,11 @@ app.use(function (err, req, res, next) {
 });
 
 // Server Start..
-app.listen(port, () => {
+// SSL 세팅.
+https.createServer({
+    key: fs.readFileSync('./ssl/privkey.pem'),
+    cert: fs.readFileSync('./ssl/cert.pem'),
+    ca: fs.readFileSync('./ssl/chain.pem')
+},app).listen(port,() => {
     console.log('Server Start, Port: ' + port);
 });
