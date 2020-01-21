@@ -12,7 +12,6 @@ const port = 1001;
 const view_dist = path.join(__dirname, '..', './client/views');
 const public = path.join(__dirname, '..', './client');
 
-
 // 서버가 읽을 수 있도록 HTML 의 위치를 정의해줍니다.  
 app.set('views', view_dist);
 app.use(express.static(public));
@@ -36,13 +35,11 @@ mysql.open(mysql.init());
 //     saveUninitialized: true
 // }));
 
-
 // Handle Error
-// app.use(function (err, req, res, next) {
-//     console.error(err.stack);
-//     res.status(500).send('Something broke!');
-// });
-
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 // Server Start.. && SSL 세팅.
 https.createServer({
