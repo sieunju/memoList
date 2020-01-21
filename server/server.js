@@ -26,7 +26,7 @@ app.use(express.json());                            // 나중에 앱에서 API C
 app.use('/', api);                                  // 라우터 경로 세팅
 
 // DB 세팅.
-mysql.open(mysql.init());
+// mysql.open(mysql.init());
 
 /* use session */
 // app.use(session({
