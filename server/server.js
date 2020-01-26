@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+// [s] Environment Variable
+const dotenv = require('dotenv');
+dotenv.config();
+// [e] Environment Variable
 const https = require('https');
 const fs = require('fs');
-const path = require('path');           
+const path = require('path');
 const api = require('./routes/index');
 const bodyParser = require('body-parser');
 const mysql = require('./db/db_config');
@@ -26,7 +30,7 @@ app.use(express.json());                            // 나중에 앱에서 API C
 app.use('/', api);                                  // 라우터 경로 세팅
 
 // DB 세팅.
-// mysql.open(mysql.init());
+mysql.init();
 
 /* use session */
 // app.use(session({
@@ -46,7 +50,7 @@ https.createServer({
     key: fs.readFileSync('./ssl/privkey.pem'),
     cert: fs.readFileSync('./ssl/cert.pem'),
     ca: fs.readFileSync('./ssl/chain.pem')
-},app).listen(port,() => {
+}, app).listen(port, () => {
     console.log('Https Server Start, Port: ' + port);
 });
 
@@ -54,9 +58,18 @@ https.createServer({
 const http = require('http');
 const httpApp = express();
 const httpPort = 100;
-httpApp.all('*',(req,res,next) => {
+httpApp.all('*', (req, res, next) => {
     res.redirect('https://' + req.hostname + ':' + port);
 });
-http.createServer(httpApp).listen(httpPort,() => {
+http.createServer(httpApp).listen(httpPort, () => {
     console.log('Http Server Start, Port: ' + httpPort);
 });
+
+const utils = require('./utils/aesUtil');
+var msg = "testMessage one11345";
+var encry = utils.enc(msg);
+var decry = utils.dec(encry);
+
+console.log("TEST " + encry);
+console.log("TEST " + decry);
+
