@@ -1,5 +1,5 @@
 #SSL 
 ssl/
-# Database 정보
-db/
 
+# Environment Variable
+.env
