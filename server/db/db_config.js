@@ -19,7 +19,7 @@ module.exports = (function () {
                 // DB 연결 완료후 Table 생성.
                 /**
                  * USER_ID          -> 사용자 아이디 PK
-                 * USER_KEY         -> 사용자 아이디 암호화
+                 * USER_KEY         -> 사용자 식별 (암호화)
                  * USER_PW          -> 사용자 비밀 번호
                  * REGISTER_DATE    -> 사용자 등록 날짜 
                  */
