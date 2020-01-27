@@ -64,12 +64,3 @@ httpApp.all('*', (req, res, next) => {
 http.createServer(httpApp).listen(httpPort, () => {
     console.log('Http Server Start, Port: ' + httpPort);
 });
-
-const utils = require('./utils/aesUtil');
-var msg = "testMessage one11345";
-var encry = utils.enc(msg);
-var decry = utils.dec(encry);
-
-console.log("TEST " + encry);
-console.log("TEST " + decry);
-

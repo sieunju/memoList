@@ -20,6 +20,28 @@ router.get('/login',(req,res) =>{
     res.render('login.html');
 });
 
+// 회원 가입 페이지 진입.
+router.get('/signUp',(req,res) => {
+    res.render('addUser.html');
+});
+
+/**
+ * ACCOUNT SIGN UP POST /api/signUp
+ * BODY SAMPLE: 
+ * {"user_id": "test",
+ * "user_pw": "1234"}
+ */
+router.post('/api/signUp',(req,res) => {
+    var body = req.body;
+    console.log("Sign Up ID\t" + body.user_id);
+    console.log("Sign Up Pw\t" + body.user_pw);
+    // dataModel.addUser(body.user_id,body.user_pw);
+    dataModel.userCheck(body.user_id);
+    res.status(200);
+    res.write('Account Register Success');
+    res.end();
+});
+
 /**
  * ACCOUNT SIGN_IN: POST /api/signin
  * BODY SAMPLE: {"user_id": "test",
