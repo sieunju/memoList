@@ -9,21 +9,23 @@ const router = express.Router();
 // 어짜피 나만 쓸거니까 회원가입 따윈 PASSSSSSSSS
 
 // 기본 페이지도 로그인 페이지
-router.get('/',(req,res) => {
+router.get('/', (req, res) => {
     console.log("Login Page Enter " + req.path);
     res.render('login.html');
 });
 
 // 로그인 페이지 진입.
-router.get('/login',(req,res) =>{
+router.get('/login', (req, res) => {
     console.log("Login Page Enter " + req.path);
     res.render('login.html');
 });
 
 // 회원 가입 페이지 진입.
-router.get('/signUp',(req,res) => {
+router.get('/signUp', (req, res) => {
     res.render('addUser.html');
 });
+
+// [s] API 
 
 /**
  * ACCOUNT SIGN UP POST /api/signUp
@@ -31,12 +33,11 @@ router.get('/signUp',(req,res) => {
  * {"user_id": "test",
  * "user_pw": "1234"}
  */
-router.post('/api/signUp',(req,res) => {
+router.post('/api/signUp', (req, res) => {
     var body = req.body;
     console.log("Sign Up ID\t" + body.user_id);
     console.log("Sign Up Pw\t" + body.user_pw);
-    // dataModel.addUser(body.user_id,body.user_pw);
-    dataModel.userCheck(body.user_id);
+    dataModel.addUser(body.user_id,body.user_pw);
     res.status(200);
     res.write('Account Register Success');
     res.end();
@@ -49,13 +50,26 @@ router.post('/api/signUp',(req,res) => {
  * ERROR CODE:
  *      104
  */
-router.post('/api/signin',(req,res) => {
+router.post('/api/signin', (req, res) => {
     var body = req.body;
     console.log("Sign In Path " + req.path);
     console.log("Sign In Id\t" + body.user_id);
     console.log("Sign In Pw\t" + body.user_pw);
-    res.redirect('/memoList');
+    dataModel.userCheck(body.user_id, body.user_pw, function onResponse(isSuccess, loginKey) {
+        if (isSuccess) {
+            console.log("Login Success " + loginKey);
+            res.cookie("loginKey",loginKey);
+            res.redirect('/memoList');
+        } else {
+            console.log("Error");
+            res.status(404);
+            res.end();
+        }
+    });
+
+
 });
 
+// [e] API
 
 module.exports = router
