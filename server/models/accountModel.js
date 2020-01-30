@@ -13,7 +13,7 @@ var User = {
         var sql = 'INSERT INTO ACT_USERS_TB (USER_ID,LOGIN_KEY,USER_PW,REGISTER_DATE)' +
             'VALUES(?,?,?,?)';
         var params = [id, loginKey, pw, new Date()];
-        db.getInstance().query(sql, params, function (err, rows, fields) {
+        db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
             } else {
@@ -31,7 +31,7 @@ var User = {
     userCheck: function (id, pw, callback) {
         var sql = 'SELECT USER_ID,LOGIN_KEY FROM ACT_USERS_TB WHERE USER_ID=? and USER_PW=?';
         var params = [id, pw];
-        db.getInstance().query(sql, params, function (err, rows, fields) {
+        db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
                 callback(false, null);
@@ -56,7 +56,7 @@ var User = {
                     callback(false, null);
                 }
             }
-        })
+        });
     }
 };
 

@@ -32,19 +32,16 @@ app.use('/', api);                                  // 라우터 경로 세팅
 // DB 세팅.
 mysql.init();
 
-/* use session */
-// app.use(session({
-//     secret: 'CodeLab1$1$234',
-//     resave: false,
-//     saveUninitialized: true
-// }));
-
-// Handle Error
+// Handle Error Setting
 app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-    res.status(404).send('Not Found');
+    console.error('[' + new Date() + ']\n' + err.stack);
+    next(err);
 });
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.send(err.message || 'Error!!');
+});
+
 
 // Server Start.. && SSL 세팅.
 https.createServer({
