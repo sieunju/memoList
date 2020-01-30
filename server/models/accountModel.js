@@ -1,6 +1,7 @@
-var db = require('../db/db_config');
+const db = require('../db/db_config');
+const aes = require('../utils/aesUtil');
 
-var User = {
+const User = {
 
     /**
      * 사용자 추가 Query
@@ -8,11 +9,10 @@ var User = {
      * @param {String} pw 사용자 비밀 번호
      */
     addUser: function (id, pw) {
-        var aes = require('../utils/aesUtil');
-        var loginKey = aes.enc(id);
-        var sql = 'INSERT INTO ACT_USERS_TB (USER_ID,LOGIN_KEY,USER_PW,REGISTER_DATE)' +
+        let loginKey = aes.enc(id);
+        let sql = 'INSERT INTO ACT_USERS_TB (USER_ID,LOGIN_KEY,USER_PW,REGISTER_DATE)' +
             'VALUES(?,?,?,?)';
-        var params = [id, loginKey, pw, new Date()];
+        let params = [id, loginKey, pw, new Date()];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
@@ -29,8 +29,8 @@ var User = {
      * @param {bool,String}} callback DB 쿼리 진행후 콟백 하는 함수.
      */
     userCheck: function (id, pw, callback) {
-        var sql = 'SELECT USER_ID,LOGIN_KEY FROM ACT_USERS_TB WHERE USER_ID=? and USER_PW=?';
-        var params = [id, pw];
+        let sql = 'SELECT USER_ID,LOGIN_KEY FROM ACT_USERS_TB WHERE USER_ID=? and USER_PW=?';
+        let params = [id, pw];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
@@ -40,8 +40,8 @@ var User = {
             else {
                 // 데이터 있는지 확인
                 if (rows[0] != null) {
-                    var userId = rows[0].USER_ID;
-                    var loginKey = rows[0].LOGIN_KEY;
+                    let userId = rows[0].USER_ID;
+                    let loginKey = rows[0].LOGIN_KEY;
                     // 데이터 유효성 체크후 로그인 키값 전달
                     if (userId != null || loginKey != null) {
                         callback(true, loginKey);

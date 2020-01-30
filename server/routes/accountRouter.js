@@ -8,6 +8,7 @@ const dataModel = require('../models/accountModel');
 const router = express.Router();
 // 어짜피 나만 쓸거니까 회원가입 따윈 PASSSSSSSSS
 
+// [s] Page 
 // 기본 페이지도 로그인 페이지
 router.get('/', (req, res) => {
     console.log("Login Page Enter " + req.path);
@@ -24,9 +25,9 @@ router.get('/login', (req, res) => {
 router.get('/signUp', (req, res) => {
     res.render('addUser.html');
 });
+// [e] Page
 
 // [s] API 
-
 /**
  * ACCOUNT SIGN UP POST /api/signUp
  * BODY SAMPLE: 
@@ -69,7 +70,6 @@ router.post('/api/signin', (req, res) => {
 
 
 });
-
 // [e] API
 
 module.exports = router
