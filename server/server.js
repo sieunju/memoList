@@ -45,6 +45,11 @@ app.use(function (err, req, res, next) {
 });
 
 
+// ssl 없을때
+// https.createServer(app).listen(port,() => {
+//     console.log('Https Server Start, Port: ' + port);
+// })
+
 // Server Start.. && SSL 세팅.
 https.createServer({
     key: fs.readFileSync('./ssl/privkey.pem'),
