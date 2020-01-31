@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const api = require('./routes/index');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mysql = require('./db/db_config');
 const port = 1001;
 
@@ -28,6 +29,7 @@ app.engine('html', require('ejs').renderFile);
 app.use(bodyParser.urlencoded({ extended: true })); // 웹에서 API Call
 app.use(express.json());                            // 나중에 앱에서 API Call 할때.
 app.use('/', api);                                  // 라우터 경로 세팅
+app.use(cookieParser());                            // 쿠키 세팅
 
 // DB 세팅.
 mysql.init();

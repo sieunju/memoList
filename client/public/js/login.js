@@ -38,6 +38,4 @@ function goSignin(){
         document.getElementById('password').value = "";
         return false;
     }
-
-    
 }

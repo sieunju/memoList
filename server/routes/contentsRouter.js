@@ -25,7 +25,15 @@ router.get('/addMemo',(req,res) => {
 // 메모 추가.
 router.post('/api/addMemo',(req,res) => {
     console.log("AddMemo " + req.path);
-    res.render('memoList.html');
+    const body = req.body;
+    console.log("============BODY============");
+    console.log(body);
+    console.log("============BODY============");
+    console.log("============COOKIES============");
+    console.log(req.cookies);
+    console.log("============COOKIES============");
+    // dataModel.addMemo("",body);
+    res.end();
 });
 
 

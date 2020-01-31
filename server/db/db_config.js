@@ -10,14 +10,6 @@ const mysqlConfig = {
 }
 const pool = mysql.createPool(mysqlConfig);
 
-pool.on('conntion', function (connection) {
-    console.log('SET SESSION auto_increment_increment=1')
-});
-
-pool.on('enqueue', function () {
-    console.log('Waiting for available connection slot');
-});
-
 module.exports = (function () {
     return {
         init: function () {
@@ -78,7 +70,7 @@ module.exports = (function () {
                 // Pool에 Connection을 반납 
                 con.release();
                 // 1시간 단위로 Ping 떄림.
-                setInterval(keepAlive, 60 * 1000);
+                setInterval(keepAlive, 60 * 60 * 1000);
             });
         },
 

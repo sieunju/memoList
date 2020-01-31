@@ -6,14 +6,18 @@ const Memo = {
     /**
      * 메모 추가
      * @param {String} loginKey 사용자 로그인 키 값.
-     * @param {Ojbect} form     tag, num, title, contents
+     * @param {Ojbect} body     tag, num, title, contents
      */
-    addMemo: function (loginKey, form) {
+    addMemo: function (loginKey, body) {
         let userId = aes.dec(loginKey);
         console.log('UserId ' + userId);
-        let sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,NUM,TITLE,CONTENTS,REGISTER_DATE)' +
+        console.log(body.tag);
+        console.log(body.title);
+        console.log(body.description);
+
+        let sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,REGISTER_DATE)' +
             'VALUES(?,?,?,?,?,?)';
-        let params = [userId, form.tag, form.num, form.title, form.contents, new Date()];
+        let params = [userId, body.tag, body.title, body.description, new Date()];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
