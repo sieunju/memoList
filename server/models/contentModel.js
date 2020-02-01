@@ -1,5 +1,5 @@
 const db = require('../db/db_config');
-const aes = require('../utils/aesUtil');
+const utils = require('../utils/commandUtil');
 
 const Memo = {
 
@@ -9,15 +9,15 @@ const Memo = {
      * @param {Ojbect} body     tag, num, title, contents
      */
     addMemo: function (loginKey, body) {
-        let userId = aes.dec(loginKey);
+        const userId = utils.dec(loginKey);
         console.log('UserId ' + userId);
         console.log(body.tag);
         console.log(body.title);
         console.log(body.description);
 
-        let sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,REGISTER_DATE)' +
+        const sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,REGISTER_DATE)' +
             'VALUES(?,?,?,?,?,?)';
-        let params = [userId, body.tag, body.title, body.description, new Date()];
+            const params = [userId, body.tag, body.title, body.description, new Date()];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);

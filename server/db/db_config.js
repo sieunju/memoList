@@ -26,7 +26,7 @@ module.exports = (function () {
                  * USER_PW          -> 사용자 비밀 번호
                  * REGISTER_DATE    -> 사용자 등록 날짜 
                  */
-                var sqlQuery = "CREATE TABLE ACT_USERS_TB (" +
+                let sqlQuery = "CREATE TABLE ACT_USERS_TB (" +
                     "USER_ID VARCHAR(30) PRIMARY KEY," +
                     "LOGIN_KEY VARCHAR(200) NOT NULL," +
                     "USER_PW VARCHAR(40)," +
@@ -50,7 +50,7 @@ module.exports = (function () {
                  * CONTENTS         -> 내용
                  * REGISTER_DATE    -> 등록 날짜 DATETIME
                  */
-                var sqlQuery = "CREATE TABLE MEMO_TB (" +
+                sqlQuery = "CREATE TABLE MEMO_TB (" +
                     "USER_ID VARCHAR(30) PRIMARY KEY," +
                     "TAG SMALLINT," +
                     "NUM SMALLINT," +

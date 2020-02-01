@@ -35,7 +35,7 @@ router.get('/signUp', (req, res) => {
  * "user_pw": "1234"}
  */
 router.post('/api/signUp', (req, res) => {
-    var body = req.body;
+    const body = req.body;
     console.log("Sign Up ID\t" + body.user_id);
     console.log("Sign Up Pw\t" + body.user_pw);
     dataModel.addUser(body.user_id, body.user_pw);
@@ -52,7 +52,7 @@ router.post('/api/signUp', (req, res) => {
  *      104
  */
 router.post('/api/signin', (req, res) => {
-    var body = req.body;
+    const body = req.body;
     console.log("Sign In Path " + req.path);
     console.log("Sign In Id\t" + body.user_id);
     console.log("Sign In Pw\t" + body.user_pw);
@@ -69,8 +69,6 @@ router.post('/api/signin', (req, res) => {
             res.end();
         }
     });
-
-
 });
 // [e] API
 
