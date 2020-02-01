@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 const app = express();
 // [s] Environment Variable
 const dotenv = require('dotenv');
@@ -30,6 +32,14 @@ app.use(bodyParser.urlencoded({ extended: true })); // 웹에서 API Call
 app.use(express.json());                            // 나중에 앱에서 API Call 할때.
 app.use('/', api);                                  // 라우터 경로 세팅
 app.use(cookieParser());                            // 쿠키 세팅
+
+// 세션 사용
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    store: new FileStore()
+}));
 
 // DB 세팅.
 mysql.init();

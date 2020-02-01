@@ -38,7 +38,7 @@ router.post('/api/signUp', (req, res) => {
     var body = req.body;
     console.log("Sign Up ID\t" + body.user_id);
     console.log("Sign Up Pw\t" + body.user_pw);
-    dataModel.addUser(body.user_id,body.user_pw);
+    dataModel.addUser(body.user_id, body.user_pw);
     res.status(200);
     res.write('Account Register Success');
     res.end();
@@ -59,7 +59,9 @@ router.post('/api/signin', (req, res) => {
     dataModel.userCheck(body.user_id, body.user_pw, function onMessage(isSuccess, loginKey) {
         if (isSuccess) {
             console.log("Login Success " + loginKey);
-            res.cookie("loginKey",loginKey);
+            res.cookie("loginKey", loginKey, {
+                maxAge: 60 * 60 * 1000
+            });
             res.redirect('/memoList');
         } else {
             console.log("Error");

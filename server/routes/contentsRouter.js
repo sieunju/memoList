@@ -30,6 +30,7 @@ router.post('/api/addMemo',(req,res) => {
     console.log(body);
     console.log("============BODY============");
     console.log("============COOKIES============");
+    console.log("LoginKey " + req.cookies.loginKey);
     console.log(req.cookies);
     console.log("============COOKIES============");
     // dataModel.addMemo("",body);
