@@ -65,9 +65,3 @@ document.getElementById('btn-cancel').onclick = function () {
     // alert("취소 취소");
     history.back();
 }
-
-// 등록 버튼 클릭시.
-// document.getElementById('btn-save').onclick = function () {
-//     // alert("등록 등록");
-//     // checkMemo();
-// }

@@ -23,7 +23,7 @@ router.get('/login', (req, res) => {
 
 // 회원 가입 페이지 진입.
 router.get('/signUp', (req, res) => {
-    res.render('addUser.html');
+    res.render('signUp.html');
 });
 // [e] Page
 
@@ -60,7 +60,7 @@ router.post('/api/signin', (req, res) => {
         if (isSuccess) {
             console.log("Login Success " + loginKey);
             res.cookie("loginKey", loginKey, {
-                maxAge: 60 * 60 * 1000
+                maxAge: 600 * 60 * 1000
             });
             res.redirect('/memoList');
         } else {
