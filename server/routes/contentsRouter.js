@@ -34,11 +34,18 @@ router.get('/memoList', (req, res) => {
         }
         // Query 정상 동작 한경우.
         else {
-            res.send({
-                data:rows,
-                pasing:options
+            res.render('memoList.html',{
+                title:'Memo...',
+                dataList:rows,
+                option:options
             });
-            res.render('memoList.html');
+
+            // res.render('memoList.html');
+        
+            // res.send({
+            //     data:rows,
+            //     pasing:options
+            // });
             // fs.readFileSync('memoList.html', 'utf-8', function (err, data) {
             //     if (err) {
             //         console.log(req.url, 'Ejs Error' + err);
