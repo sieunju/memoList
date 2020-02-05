@@ -6,3 +6,7 @@ ssl/
 
 # 사용자 추가 html 제외.
 addUser.html
+
+# DS 폴더 무시
+.DS_Store
+@eaDir/
