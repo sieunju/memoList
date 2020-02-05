@@ -29,21 +29,21 @@ module.exports = (function () {
                  * USER_PW          -> 사용자 비밀 번호
                  * REGISTER_DATE    -> 사용자 등록 날짜 
                  */
-                // sqlQuery = "CREATE TABLE ACT_USERS_TB (" +
-                //     "USER_ID VARCHAR(30) PRIMARY KEY," +
-                //     "LOGIN_KEY VARCHAR(200) NOT NULL," +
-                //     "USER_PW VARCHAR(40)," +
-                //     "REGISTER_DATE DATETIME" +
-                //     ")";
-                // // Account Table Create
-                // con.query(sqlQuery, function (err, rows) {
+                sqlQuery = "CREATE TABLE ACT_USERS_TB (" +
+                    "USER_ID VARCHAR(30) PRIMARY KEY," +
+                    "LOGIN_KEY VARCHAR(200) NOT NULL," +
+                    "USER_PW VARCHAR(40)," +
+                    "REGISTER_DATE DATETIME" +
+                    ")";
+                // Account Table Create
+                con.query(sqlQuery, function (err, rows) {
 
-                //     if (err) {
-                //         console.log("Create Account Table Error " + err);
-                //     } else {
-                //         console.log("Account Table Created");
-                //     }
-                // });
+                    if (err) {
+                        console.log("Create Account Table Error " + err);
+                    } else {
+                        console.log("Account Table Created");
+                    }
+                });
 
                 /**
                  * USER_ID          -> 사용자 아이디 PK
@@ -53,35 +53,35 @@ module.exports = (function () {
                  * CONTENTS         -> 내용
                  * REGISTER_DATE    -> 등록 날짜 DATETIME
                  */
-                // sqlQuery = "CREATE TABLE MEMO_TB (" +
-                //     "USER_ID VARCHAR(30) NOT NULL," +
-                //     "TAG SMALLINT," +
-                //     "NUM SMALLINT," +
-                //     "TITLE VARCHAR(200) NOT NULL," +
-                //     "CONTENTS VARCHAR(800) NOT NULL," +
-                //     "REGISTER_DATE DATETIME" +
-                //     ")";
-                // // Memo Table Create
-                // con.query(sqlQuery, function (err, result) {
-                //     if (err) {
-                //         console.log("Create Memo Table Error " + err);
-                //     } else {
-                //         console.log("Memo Table Created");
-                //     }
-                // });
+                sqlQuery = "CREATE TABLE MEMO_TB (" +
+                    "USER_ID VARCHAR(30) NOT NULL," +
+                    "TAG SMALLINT," +
+                    "NUM SMALLINT," +
+                    "TITLE VARCHAR(200) NOT NULL," +
+                    "CONTENTS VARCHAR(800) NOT NULL," +
+                    "REGISTER_DATE DATETIME" +
+                    ")";
+                // Memo Table Create
+                con.query(sqlQuery, function (err, result) {
+                    if (err) {
+                        console.log("Create Memo Table Error " + err);
+                    } else {
+                        console.log("Memo Table Created");
+                    }
+                });
 
                 /**
                  * 데이터 베이스 기본 언어 변경
                  */
-                // sqlQuery = "ALTER DATABASE DB_MEMO DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
-                // // Database 언어 변경
-                // con.query(sqlQuery,function(err,result){
-                //     if (err) {
-                //         console.log("Database Alter Error " + err);
-                //     } else {
-                //         console.log("Database Alter Success");
-                //     }
-                // });
+                sqlQuery = "ALTER DATABASE DB_MEMO DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+                // Database 언어 변경
+                con.query(sqlQuery,function(err,result){
+                    if (err) {
+                        console.log("Database Alter Error " + err);
+                    } else {
+                        console.log("Database Alter Success");
+                    }
+                });
 
                 // Pool에 Connection을 반납 
                 con.release();
