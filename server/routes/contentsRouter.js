@@ -39,25 +39,6 @@ router.get('/memoList', (req, res) => {
                 dataList:rows,
                 option:options
             });
-
-            // res.render('memoList.html');
-        
-            // res.send({
-            //     data:rows,
-            //     pasing:options
-            // });
-            // fs.readFileSync('memoList.html', 'utf-8', function (err, data) {
-            //     if (err) {
-            //         console.log(req.url, 'Ejs Error' + err);
-            //         return;
-            //     }
-
-            //     console.log('222222222??');
-            //     res.send(ejs.render(data, {
-            //         data: rows,
-            //         pasing: options
-            //     }));
-            // });
         }
     })
 });
