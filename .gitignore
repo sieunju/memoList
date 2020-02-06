@@ -8,7 +8,7 @@ ssl/
 addUser.html
 
 # 세션 폴더 제외.
-# sessions/
+sessions/
 
 # DS 폴더 무시
 .DS_Store
