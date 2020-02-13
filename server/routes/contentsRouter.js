@@ -34,10 +34,11 @@ router.get('/memoList', (req, res) => {
         }
         // Query 정상 동작 한경우.
         else {
-            res.render('memoList.html',{
-                title:'Memo...',
-                dataList:rows,
-                option:options
+            // res.writeHead('200',{'Content-Type' : 'text/html;charset=utf8'});
+            res.render('memoList.html', {
+                title: 'Memo...',
+                dataList: rows,
+                option: options
             });
         }
     })

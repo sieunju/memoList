@@ -24,22 +24,23 @@
   </nav>
 
   <!-- 메모장들 -->
-  <div class="col s12 m6" style="margin-left: 10px; margin-right: 10px;">
-
-    <% for(let i=0; i<dataList.length;i++) {%>
+  <div id="memo_list" class="col s12 m6" style="margin-left: 10px; margin-right: 10px;">
+    <% for(var i=0; i<dataList.length; i++) {%>
     <!-- [s] 리스트 -->
     <ul>
       <li>
         <!-- 메모 카드 -->
         <div class="card blue-grey darken-1">
           <div class="card-content white-text">
-            <span class="card-title"><%= dataList[i].TITLE %></span>
+            <span class="card-title">
+              <%= dataList[i].TITLE%>
+            </span>
             <p>
-              <%= dataList[i].CONTENTS %>
+              <%= dataList[i].CONTENTS%>
             </p>
           </div>
           <div class="card-action tag_color tag1">
-            <%= dataList[i].TAG %>
+            <%= dataList[i].TAG%>
           </div>
         </div>
       </li>
@@ -69,6 +70,10 @@
       </div>
     </div>
   </div> -->
+
+  <script>
+    
+  </script>
 
   <script type="text/javascript" src="../public/js/materialize.js"></script>
   <script type="text/javascript" src="../public/js/memoList.js"></script>

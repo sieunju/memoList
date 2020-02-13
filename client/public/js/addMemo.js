@@ -30,23 +30,23 @@ function checkMemo() {
 }
 
 function addMemo() {
-    // 테그 정보 get.
-    const tagList = document.getElementsByName('tag');
+    // // 테그 정보 get.
+    // const tagList = document.getElementsByName('tag');
 
-    var selectedTag;
-    for (var i = 0; i < tagList.length; i++) {
-        if (tagList[i].checked) {
-            selectedTag = tagList[i];
-            break;
-        }
-    }
+    // var selectedTag;
+    // for (var i = 0; i < tagList.length; i++) {
+    //     if (tagList[i].checked) {
+    //         selectedTag = tagList[i];
+    //         break;
+    //     }
+    // }
 
-    // 타이틀
-    const title = document.getElementById('title');
-    // 내용 get
+    // // 타이틀
+    // const title = document.getElementById('title');
+    // 내용 <br/> 로 변경
     var description = document.getElementById('description').value;
     description = description.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    
+    document.getElementById('description').value = description;
     return true;
 }
 

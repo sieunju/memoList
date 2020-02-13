@@ -10,3 +10,15 @@
 document.getElementById('btn-floating').onclick = function () {
   // location.href = './addMemo';
 }
+
+function bindView (data){
+
+  console.log('bindView Start');
+
+  data.forEach(element => {
+    console.log(element);
+  });
+  let node = document.createElement("LI");
+
+  document.getElementById("memo_list").appendChild(node);
+}
