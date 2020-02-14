@@ -19,6 +19,35 @@ const fs = require('fs');
  */
 router.get('/memoList', (req, res) => {
     console.log(req.url, 'MemoList Page')
+    res.render('memoList.html');
+    res.end();
+    // const cookie = utils.cookieParser(req.headers.cookie);
+    // const loginKey = cookie.loginKey;
+    // req.query.pageNo = 0;
+    // let pageNo = req.query.pageNo;
+    // pageNo += 20;
+    // let options = {
+    //     "pageNo": pageNo,
+    //     "ttt": 11
+    // };
+    // dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
+    //     if (err) {
+    //         console.log(req.url, err);
+    //     }
+    //     // Query 정상 동작 한경우.
+    //     else {
+    //         // res.writeHead('200',{'Content-Type' : 'text/html;charset=utf8'});
+    //         res.render('memoList.html', {
+    //             title: 'Memo...',
+    //             dataList: rows,
+    //             option: options
+    //         });
+    //     }
+    // })
+});
+
+router.get('/api/memoList',(req,res) =>{
+    console.log(req.url,"Memo Data Get" + req.query);
     const cookie = utils.cookieParser(req.headers.cookie);
     const loginKey = cookie.loginKey;
     req.query.pageNo = 0;
@@ -35,14 +64,14 @@ router.get('/memoList', (req, res) => {
         // Query 정상 동작 한경우.
         else {
             // res.writeHead('200',{'Content-Type' : 'text/html;charset=utf8'});
-            res.render('memoList.html', {
-                title: 'Memo...',
+            res.send({
+                title:'memo..!',
                 dataList: rows,
                 option: options
             });
         }
     })
-});
+})
 
 // 메모 추가 페이지
 router.get('/addMemo', (req, res) => {

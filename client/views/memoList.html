@@ -6,7 +6,8 @@
 <link type="text/css" rel="stylesheet" href="../public/css/common_color.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<title><%= title %></title>
+
+<title>메모</title>
 
 <body>
 
@@ -23,32 +24,13 @@
     </div>
   </nav>
 
-  <!-- 메모장들 -->
+  <button onclick="getMemo()">클릭해봐! </button>
+
+  <!-- 메모 리스트 -->
   <div id="memo_list" class="col s12 m6" style="margin-left: 10px; margin-right: 10px;">
-    <% for(var i=0; i<dataList.length; i++) {%>
-    <!-- [s] 리스트 -->
-    <ul>
-      <li>
-        <!-- 메모 카드 -->
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">
-              <%= dataList[i].TITLE%>
-            </span>
-            <p>
-              <%= dataList[i].CONTENTS%>
-            </p>
-          </div>
-          <div class="card-action tag_color tag1">
-            <%= dataList[i].TAG%>
-          </div>
-        </div>
-      </li>
-    </ul>
-    <!-- [e] 리스트 -->
-    <% } %>
-    
+
   </div>
+
 
   <!-- 플로팅 버튼 -->
   <div class="fixed-action-btn" id="btn-floating">
@@ -57,22 +39,79 @@
   </div>
 
   <!-- 메모장들 -->
-  <!-- <div class="" style="margin-left: 10px; margin-right: 10px;">
-    <div class="col s12 m6">
+  <!-- <div class="col s12 m6">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Card Title</span>
-          <p>안녕하세요 <br />저는 주홍민 입니다.<br />만나서 반갑 습니다.<br />
-          </p>
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
         </div>
-        <div class="card-action tag_color tag3">
+        <div class="card-action">
+          <a href="#">This is a link</a>
+          <a href="#">This is a link</a>
         </div>
       </div>
-    </div>
-  </div> -->
+    </div> -->
 
-  <script>
-    
+  <script type="text/javascript" src="../public/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" language="javascript">
+    function getMemo() {
+
+      // const root = document.createElement('div');
+      // const background = document.createElement('div');
+      // const textArea = document.createElement('div');
+      // const titleSpan = document.createElement('span');
+
+      // root.className = 'col s12 m6';
+      // background.className = 'card blue-grey darken-1';
+      // textArea.className = 'card-content white-text';
+      // titleSpan.className = 'card-title';
+
+      // textArea.append(titleSpan);
+      // background.append(textArea);
+      // root.append(background);
+
+      $.ajax({
+        type: "GET",
+        url: "./api/memoList",
+        data: {
+          pageNo: 1,
+          test: "eee"
+        },
+        dataType: "JSON",
+        success: function (json) {
+          console.log(json);
+          json.dataList.forEach(element => {
+            const title = element.TITLE;
+            const contents = element.CONTENTS;
+            const tag = element.TAG;
+
+            const root = document.createElement('div');
+            const background = document.createElement('div');
+            const textArea = document.createElement('div');
+            const titleSpan = document.createElement('span');
+
+            root.className = 'col s12 m6';
+            background.className = 'card blue-grey darken-1';
+            textArea.className = 'card-content white-text';
+            titleSpan.className = 'card-title';
+
+            textArea.append(titleSpan);
+            background.append(textArea);
+            root.append(background);
+
+            titleSpan.innerHTML = title;
+            textArea.innerHTML = contents;
+            document.getElementById('memo_list').appendChild(root);
+
+            // console.log("Title " + title + " Contents " + contents + " Tag " + tag);
+          });
+        },
+        error: function (xhr, status, error) {
+          alert(error);
+        }
+      });
+    }
   </script>
 
   <script type="text/javascript" src="../public/js/materialize.js"></script>
