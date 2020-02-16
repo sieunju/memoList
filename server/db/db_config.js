@@ -73,15 +73,15 @@ module.exports = (function () {
                 /**
                  * 데이터 베이스 기본 언어 변경
                  */
-                sqlQuery = "ALTER DATABASE DB_MEMO DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
-                // Database 언어 변경
-                con.query(sqlQuery,function(err,result){
-                    if (err) {
-                        console.log("Database Alter Error " + err);
-                    } else {
-                        console.log("Database Alter Success");
-                    }
-                });
+                // sqlQuery = "ALTER DATABASE DB_MEMO DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+                // // Database 언어 변경
+                // con.query(sqlQuery,function(err,result){
+                //     if (err) {
+                //         console.log("Database Alter Error " + err);
+                //     } else {
+                //         console.log("Database Alter Success");
+                //     }
+                // });
 
                 // Pool에 Connection을 반납 
                 con.release();
