@@ -38,84 +38,88 @@
         class="material-icons">add</i></a>
   </div>
 
-  <!-- 메모장들 -->
-  <!-- <div class="col s12 m6">
+  <div class="" style="margin-left: 10px; margin-right: 10px;">
+    <div class="col s12 m6">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+          <p>안녕하세요 <br />저는 주홍민 입니다.<br />만나서 반갑 습니다.<br />
+          </p>
         </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
+        <div class="card-action tag_color tag3">
         </div>
       </div>
-    </div> -->
+    </div>
 
-  <script type="text/javascript" src="../public/js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" language="javascript">
-    function getMemo() {
+    <script type="text/javascript" src="../public/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" language="javascript">
+      function getMemo() {
 
-      // const root = document.createElement('div');
-      // const background = document.createElement('div');
-      // const textArea = document.createElement('div');
-      // const titleSpan = document.createElement('span');
+        // const root = document.createElement('div');
+        // const background = document.createElement('div');
+        // const textArea = document.createElement('div');
+        // const titleSpan = document.createElement('span');
 
-      // root.className = 'col s12 m6';
-      // background.className = 'card blue-grey darken-1';
-      // textArea.className = 'card-content white-text';
-      // titleSpan.className = 'card-title';
+        // root.className = 'col s12 m6';
+        // background.className = 'card blue-grey darken-1';
+        // textArea.className = 'card-content white-text';
+        // titleSpan.className = 'card-title';
 
-      // textArea.append(titleSpan);
-      // background.append(textArea);
-      // root.append(background);
+        // textArea.append(titleSpan);
+        // background.append(textArea);
+        // root.append(background);
 
-      $.ajax({
-        type: "GET",
-        url: "./api/memoList",
-        data: {
-          pageNo: 1,
-          test: "eee"
-        },
-        dataType: "JSON",
-        success: function (json) {
-          console.log(json);
-          json.dataList.forEach(element => {
-            const title = element.TITLE;
-            const contents = element.CONTENTS;
-            const tag = element.TAG;
+        $.ajax({
+          type: "GET",
+          url: "./api/memoList",
+          data: {
+            pageNo: 1,
+            test: "eee"
+          },
+          dataType: "JSON",
+          success: function (json) {
+            console.log(json);
+            json.dataList.forEach(element => {
+              const title = element.TITLE;
+              const contents = element.CONTENTS;
+              const tagColor = 'tag' + element.TAG;
+              
+              /* Root View */
+              const rootDiv = document.createElement('div');
+              rootDiv.className = 'col s12 m6';
 
-            const root = document.createElement('div');
-            const background = document.createElement('div');
-            const textArea = document.createElement('div');
-            const titleSpan = document.createElement('span');
+              /* Background View */
+              const bgDiv = document.createElement('div');
+              bgDiv.className = 'card blue-grey darken-1';
 
-            root.className = 'col s12 m6';
-            background.className = 'card blue-grey darken-1';
-            textArea.className = 'card-content white-text';
-            titleSpan.className = 'card-title';
+              /* Contents View */
+              const contentsDiv = document.createElement('div');
+              contentsDiv.className = 'card-content white-text';
 
-            textArea.append(titleSpan);
-            background.append(textArea);
-            root.append(background);
+              /* Tag View */
+              const tagDiv = document.createElement('div');
+              tagDiv.className = 'card-action tag_color ' + tagColor;
 
-            titleSpan.innerHTML = title;
-            textArea.innerHTML = contents;
-            document.getElementById('memo_list').appendChild(root);
+              /* View Append */
+              bgDiv.append(contentsDiv);
+              bgDiv.append(tagDiv);
+              rootDiv.append(bgDiv);
 
-            // console.log("Title " + title + " Contents " + contents + " Tag " + tag);
-          });
-        },
-        error: function (xhr, status, error) {
-          alert(error);
-        }
-      });
-    }
-  </script>
+              /* bindView */
+              contentsDiv.innerHTML = '<span class="card-title">' + title + '</span>' + '<p>' + contents + '</p>'; 
+                          
+              document.getElementById('memo_list').appendChild(rootDiv);
+            });
+          },
+          error: function (xhr, status, error) {
+            alert(error);
+          }
+        });
+      }
+    </script>
 
-  <script type="text/javascript" src="../public/js/materialize.js"></script>
-  <script type="text/javascript" src="../public/js/memoList.js"></script>
+    <script type="text/javascript" src="../public/js/materialize.js"></script>
+    <script type="text/javascript" src="../public/js/memoList.js"></script>
 </body>
 
 </html>
