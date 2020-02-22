@@ -35,12 +35,15 @@ const Memo = {
      */
     getMemo: function (loginKey,query,callBack){
         const userId = utils.dec(loginKey);
-        // 페이지 20개씩 끊어서
-        let pageNumber = query.pageNo;
-        const pageSize = 20;
+        const pageCnt = 20; // 한번 불러올 데이터 양 고정
+
+        // PageIndex 계산 ex.) 0, 20, 40, 60...
+        let pageIndex = (query.pageNo - 1) * pageCnt;
+        
+        // ASC 오름차순 오른쪽으로 갈수록 커진다.   
         const sql = 'SELECT TAG, TITLE, CONTENTS FROM MEMO_TB WHERE USER_ID=? ' + 
         'ORDER BY TAG, TITLE ASC LIMIT ?,?';
-        const params = [userId,pageNumber,pageSize];
+        const params = [userId,pageIndex,pageCnt];
         db.getQuery(sql,params,callBack);
     }
 };

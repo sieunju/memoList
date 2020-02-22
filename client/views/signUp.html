@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link type="text/css" rel="stylesheet" href="../public/css/materialize.css" media="screen,projection" />
-<title>Memo</title>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link type="text/css" rel="stylesheet" href="../public/css/materialize.css" media="screen,projection" />
+    <link rel="shortcut icon" href="../public/resource/icon/favicon.ico">
+    <title>Memo</title>
+</head>
 
 <body>
 
     <!-- 로그인 폼 -->
-    <form style="max-width: 400px; margin-top: 200px; margin:auto;" 
-    id="login_form" action="/api/signUp" method="POST">
+    <form style="max-width: 400px; margin-top: 200px; margin:auto;" id="login_form" action="/api/signUp" method="POST">
         <!-- ID 입력-->
         <div class="input-field col s6">
             <input id="id" name="user_id" type="text" class="validate">
