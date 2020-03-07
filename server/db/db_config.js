@@ -46,7 +46,8 @@ module.exports = (function () {
                 });
 
                 /**
-                 * USER_ID          -> 사용자 아이디 PK
+                 * USER_ID          -> 사용자 아이디
+                 * MEMO_ID          -> 메모 아이디 (AUTO_INCREMENT)
                  * TAG              -> 우선 순위에 대한 테그
                  * INDEX            -> 같은 태그에서도 순서를 정하기 위한 값(추후 값 세팅할 예정)
                  * TITLE            -> 제목
@@ -55,6 +56,7 @@ module.exports = (function () {
                  */
                 sqlQuery = "CREATE TABLE MEMO_TB (" +
                     "USER_ID VARCHAR(30) NOT NULL," +
+                    "MEMO_ID SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     "TAG SMALLINT," +
                     "NUM SMALLINT," +
                     "TITLE VARCHAR(200) NOT NULL," +
