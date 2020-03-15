@@ -1,14 +1,14 @@
-let nowPage = 1;
+let currentPage = 1;
 let sortOption = '';
 let filterOption = '';
 let hasMore = false;
 
-window.onLoad = getMemo();
+window.onLoad = getMemoList();
 
 /**
  * 필터 및 옵션에 따라서 메모 리스트 가져오기.
  */
-function getMemo() {
+function getMemoList() {
 
   /**
    * TYPE : GET
@@ -23,13 +23,13 @@ function getMemo() {
     type: "GET",
     url: "./api/memoList",
     data: {
-      pageNo: nowPage,
+      pageNo: currentPage,
       sortOpt: sortOption,
       filterOpt: filterOption
     },
     dataType: "JSON",
     success: function (json) {
-      console.log(json);
+      // console.log(json);
       json.dataList.forEach(element => {
         const title = element.TITLE;
         const contents = element.CONTENTS;
@@ -64,13 +64,25 @@ function getMemo() {
         document.getElementById('memo_list').appendChild(rootDiv);
       });
 
-      nowPage = json.pageNo;
-      hasMore = json.hasMore;
-      console.log("PageNum\t" + nowPage);
-      console.log("hasMore\t" + hasMore)
+      currentPage = json.pageNo;
+      hasMore     = json.hasMore;
+      // console.log("PageNum\t" + nowPage);
+      // console.log("hasMore\t" + hasMore)
     },
     error: function (xhr, status, error) {
       alert(error);
     }
   });
 }
+
+// 스크롤 페이징 처리
+window.onscroll = function (ev) {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    // 데이터를 더 호출할수 있다면 추가 로딩
+    if(hasMore){
+      currentPage++;
+      console.log("Add Loading Current Page " + currentPage);
+      getMemoList();
+    }
+  }
+};

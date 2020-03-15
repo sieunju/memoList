@@ -8,6 +8,7 @@ const mysqlConfig = {
     database: process.env.DB_NAME,
     connectionLimit: 10
 }
+
 const pool = mysql.createPool(mysqlConfig);
 
 module.exports = (function () {
@@ -15,7 +16,7 @@ module.exports = (function () {
         init: function () {
             pool.getConnection(function (err, con) {
                 if (err) {
-                    con.release();
+                    // con.release();
                     throw err;
                 }
                 console.log("MySql Database Connected!");

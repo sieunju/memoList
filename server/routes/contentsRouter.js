@@ -21,65 +21,9 @@ router.get('/memoList', (req, res) => {
     console.log(req.url, 'MemoList Page')
     res.render('memoList.html');
     res.end();
-    // const cookie = utils.cookieParser(req.headers.cookie);
-    // const loginKey = cookie.loginKey;
-    // req.query.pageNo = 0;
-    // let pageNo = req.query.pageNo;
-    // pageNo += 20;
-    // let options = {
-    //     "pageNo": pageNo,
-    //     "ttt": 11
-    // };
-    // dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
-    //     if (err) {
-    //         console.log(req.url, err);
-    //     }
-    //     // Query 정상 동작 한경우.
-    //     else {
-    //         // res.writeHead('200',{'Content-Type' : 'text/html;charset=utf8'});
-    //         res.render('memoList.html', {
-    //             title: 'Memo...',
-    //             dataList: rows,
-    //             option: options
-    //         });
-    //     }
-    // })
 });
 
-router.get('/api/memoList',(req,res) =>{
-    console.log(req.url,"Memo Data Get" + req.query);
-    const cookie = utils.cookieParser(req.headers.cookie);
-    const loginKey = cookie.loginKey;
 
-    let pageNo = Number(req.query.pageNo);
-
-    dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
-        if (err) {
-            console.log(req.url, err);
-        }
-        // Query 정상 동작 한경우.
-        else {
-            console.log(rows);
-            // 옵션 세팅
-            // let options = {
-            //     "pageNo" : ++pageNo,
-            //     "sortOpt" : sortOpt,
-            // }
-
-            // 데이터 더이상 부를것인지 체크.
-            let hasMore = false;
-            if(rows[19] == null){
-                hasMore = true;
-            }
-
-            res.send({
-                dataList: rows,
-                pageNo: ++pageNo,
-                hasMore: hasMore
-            });
-        }
-    })
-})
 
 // 메모 추가 페이지
 router.get('/addMemo', (req, res) => {
@@ -117,13 +61,48 @@ router.post('/api/addMemo', (req, res) => {
  * 사용자에 맞게 리스트 가져오기
  * loginKey,
  * query {
- *  pageNo    {페이지 Index}
- *  
+ *  pageNo      {페이지 Index}
+ *  sortOpt     {정렬 옵션}
+ *  filterOpt   {필터 옵션}
  * }
  */
-router.get('/api/memoList', (req, res) => {
-    console.log(req.url, 'Api MemoList');
-    // 쿠키값 파싱.
+router.get('/api/memoList',(req,res) =>{
+    console.log(req.url,"Memo Data Get" + req.query);
+    const cookie = utils.cookieParser(req.headers.cookie);
+    const loginKey = cookie.loginKey;
+
+    let currentPage = Number(req.query.pageNo);
+
+    dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
+        if (err) {
+            console.log(req.url, err);
+        }
+        // Query 정상 동작 한경우.
+        else {
+            console.log(rows);
+            // 옵션 세팅
+            // let options = {
+            //     "pageNo" : ++pageNo,
+            //     "sortOpt" : sortOpt,
+            // }
+
+            // 데이터 더이상 부를것인지 체크.
+            let hasMore = true;
+            // if(rows[19] == null){
+            //     hasMore = false;
+            // }
+
+            if(rows[9] == null) {
+                hasMore = false;
+            }
+
+            res.send({
+                dataList: rows,
+                pageNo: currentPage,
+                hasMore: hasMore
+            });
+        }
+    })
 })
 // [e] API
 

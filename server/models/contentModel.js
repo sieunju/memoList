@@ -29,21 +29,21 @@ const Memo = {
     },
 
     /**
-     * 
+     * 사용자에 맞는 메모 리스트 가져오기
      * @param {String} loginKey  사용자 로그인 키값. 
      * @param {Object} query     필터 옶션 및 정렬 기준
      */
     getMemo: function (loginKey,query,callBack){
         const userId = utils.dec(loginKey);
-        const pageCnt = 20; // 한번 불러올 데이터 양 고정
+        const pageSize = 10; // 한번 불러올 데이터 양 고정
 
         // PageIndex 계산 ex.) 0, 20, 40, 60...
-        let pageIndex = (query.pageNo - 1) * pageCnt;
+        let pageIndex = (query.pageNo - 1) * pageSize;
         
         // ASC 오름차순 오른쪽으로 갈수록 커진다.   
         const sql = 'SELECT TAG, TITLE, CONTENTS FROM MEMO_TB WHERE USER_ID=? ' + 
         'ORDER BY TAG, TITLE ASC LIMIT ?,?';
-        const params = [userId,pageIndex,pageCnt];
+        const params = [userId,pageIndex,pageSize];
         db.getQuery(sql,params,callBack);
     }
 };
