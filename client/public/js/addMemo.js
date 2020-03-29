@@ -1,6 +1,5 @@
-
 // 글자수 보여지도록..
-$(document).ready(function () {
+$(document).ready(function() {
     $('input#title, textarea#description').characterCounter();
 });
 
@@ -51,7 +50,7 @@ function addMemo() {
 }
 
 // 타이틀 엔터키 방지 로직
-document.getElementById('title').addEventListener('keydown', function (event) {
+document.getElementById('title').addEventListener('keydown', function(event) {
     switch (event.keyCode) {
         case 13:
             // 엔터 키 방지.
@@ -61,7 +60,7 @@ document.getElementById('title').addEventListener('keydown', function (event) {
 })
 
 // 취소 버튼 클릭시.
-document.getElementById('btn-cancel').onclick = function () {
+document.getElementById('btn-cancel').onclick = function() {
     // alert("취소 취소");
     history.back();
 }

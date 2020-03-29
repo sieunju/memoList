@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="../public/css/materialize.css">
+    <link type="text/css" rel="stylesheet" href="../public/css/common_color.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="../public/resource/icon/favicon.ico">
+
+    <title>메모</title>
+</head>
+
+<body style="overflow-x: hidden !important;">
+
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1 memo_contents">
+                <div class="ellipsis card-content white-text">
+                    <span class="card-title">111타이틀</span>
+                    <h class="card-contents">통영의 신흥보물 강구안의 동쪽벼랑인 동피랑의 벽화마을을 다녀왔다. <br><br><br><br><br><br><br><br><br><br><br><br>비도 추적추적 내리고 일정상 늦으막<br>해서 그런지 사람이 많지<br>는 않았다. 덕분에 보통때는<br> 한참을 기다려야 겨우 날개<br>달린 사진을 찍을 수 있었을 텐데, 이<br>번에는 바로 천사날<br>개를 달고 사진을 찍을 수 있는 행운까지 얻었다. 이번이
+                        동피랑 벽화마을 방문 3번째인데 예전에 왔을때에 비해서 벽화가 많이 바뀌어 있었다
+                    </h>
+                </div>
+                <h class="etc_tags" style="display: none;">11,tag1</h>
+                <div class="card-action tag_color tag1">
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1 memo_contents">
+                <div class="ellipsis card-content white-text">
+                    <span class="card-title">222타이틀</span>
+                    <h class="card-contents">2통영의 신흥보물 강구안의 동쪽벼랑인 동피랑의 벽화마을을 다녀왔다. <br>비도 추적추적 내리고 일정상 늦으막해서 그런지 사람이 많지는 않았다. 덕분에 보통때는 한참을 기다려야 겨우 날개달린 사진을 찍을 수 있었을 텐데, 이번에는 바로 천사날개를 달고 사진을 찍을 수 있는 행운까지 얻었다. 이번이 동피랑 벽화마을 방문 3번째인데 예전에 왔을때에 비해서 벽화가 많이 바뀌어 있었다</h>
+                </div>
+                <h class="etc_tags" style="display: none;">12,tag2</h>
+                <div class="card-action tag_color tag2">
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1 memo_contents">
+                <div class="ellipsis card-content white-text">
+                    <span class="card-title">333타이틀</span>
+                    <h class="card-contents">3통영의 신흥보물 강구안의 동쪽벼랑인 동피랑의 벽화마을을 다녀왔다. <br>비도 추적추적 내리고 일정상 늦으막해서 그런지 사람이 많지는 않았다. 덕분에 보통때는 한참을 기다려야 겨우 날개달린 사진을 찍을 수 있었을 텐데, 이번에는 바로 천사날개를 달고 사진을 찍을 수 있는 행운까지 얻었다. 이번이 동피랑 벽화마을 방문 3번째인데 예전에 왔을때에 비해서 벽화가 많이 바뀌어 있었다</h>
+                </div>
+                <h class="etc_tags" style="display: none;">13,tag3</h>
+                <div class="card-action tag_color tag3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [s] 상세 보기 레이아웃 -->
+    <div id="detail_root" style="position: absolute; top: 0px; left: 0px; right: 0px;
+    bottom: 0px; display:inline; background-color: #000000d8;">
+
+        <div style="position: absolute; background-color: #596d79; width: 90%; height: 60%; 
+        left: 0; right: 0; top: 0; bottom: 0;margin: auto;">
+            <img src="../public/resource/close_white.svg" style="position: absolute; width: 30px; height: 30px; top: 10px; right: 10px;" onclick="javascript:showDetailHidden();">
+
+            <!-- 태그 색상 -->
+            <div id="tag" class="card-action tag_color tag1" style="width: 100%; height: 50px;"></div>
+
+            <div style="display:block; width: 100%; padding: 10px;">
+                <!-- 타이틀 -->
+                <div id="title" class="card-title" style="width: 100%; text-align: center; font-size: 16px; 
+            color: #ffffff;"></div>
+                <!-- 내용 -->
+                <div style="display: block; overflow-y: scroll; width: 100%; height: 300px; margin-top: 10px;">
+                    <a id="contents" style="color: #ffffff; font-size: 13px;"></a>
+                </div>
+
+                <div style="margin:10px;">
+                    <!-- 태그 색상 -->
+                    <a id="selected_tag" class="dropdown-trigger btn" style="float: left;" data-target='tag_selector'>레드</a>
+
+                    <!-- 태그 선택창 Structure -->
+                    <ul id="tag_selector" class="dropdown-content">
+                        <li>빨강</li>
+                        <li>빨강</li>
+                        <li>빨강</li>
+                        <li>빨강</li>
+                        <li>빨강</li>
+                        <li>빨강</li>
+                        <li>빨강</li>
+                    </ul>
+                    <!-- 수정 -->
+                    <a class="waves-effect wave-light btn" style="float:right;">수정</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- [e] 상세 보기 레이아웃 -->
+
+
+    <script type="text/javascript" src="../public/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../public/js/materialize.js"></script>
+    <script type="text/javascript">
+        // 내용 펼치기 & 접기
+        $(document).ready(function() {
+            // $('#contents').click(function(event) {
+            //     console.log("Click!");
+            // })
+            $('.memo_contents').on('click', function() {
+                let divContents = $(this);
+                showDetail(divContents);
+            });
+
+            // 메모 상세 보기 태그 선택창 init.
+            $('.dropdown-trigger').dropdown();
+        });
+
+        // 상세 보기 팝업창
+        function showDetail(divContents) {
+            const title = divContents.find('.card-title').text();
+            const contents = divContents.find('.card-contents').html();
+            const etc = divContents.find('.etc_tags').text().split(',');
+            const memoId = Number(etc[0]);
+            const tagColor = etc[1];
+
+            console.log(title);
+            console.log(contents);
+            console.log(memoId);
+            console.log(tagColor);
+
+            const divDetailRoot = $('#detail_root');
+
+            divDetailRoot.find('#tag').removeClass('tag1 tag2 tag3 tag4 tag5 tag6 tag7');
+            divDetailRoot.find('#tag').addClass(tagColor);
+            divDetailRoot.find('#title').text(title);
+            divDetailRoot.find('#contents').html(contents);
+            divDetailRoot.find('#selected_tag').text(tagColor);
+
+            // 남아있는 Div 삭제
+            // divDetailRoot.empty();
+
+            // const imgClose = $('<img src="../public/resource/close_white.svg" style="max-width: 50px; top: 0%; left: 90%;">');
+
+            // const divRoot = $('<div col s12 m6>Detail</div>');
+
+            // divDetailRoot.prepend(imgClose);
+            // divDetailRoot.prepend(divRoot);
+
+            divDetailRoot.css("display", "inline");
+
+        }
+
+        function showDetailHidden() {
+            console.log("Click!!");
+            $('#detail_root').css("display", "none");
+        }
+    </script>
+    <script type="text/javascript" src="../public/js/demo.js"></script>
+</body>
+
+</html>

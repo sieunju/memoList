@@ -2,44 +2,44 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link type="text/css" rel="stylesheet" href="../public/css/materialize.css">
-  <link type="text/css" rel="stylesheet" href="../public/css/common_color.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="shortcut icon" href="../public/resource/icon/favicon.ico">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="../public/css/materialize.css">
+    <link type="text/css" rel="stylesheet" href="../public/css/common_color.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="../public/resource/icon/favicon.ico">
 
-  <title>메모</title>
+    <title>메모</title>
 </head>
 
 <body style="overflow-x: hidden !important;">
 
-  <!-- 검색 -->
-  <nav>
-    <div class="nav-wrapper">
-      <form>
-        <div class="input-field">
-          <input id="search" type="search" required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
+    <!-- 검색 -->
+    <nav>
+        <div class="nav-wrapper">
+            <form>
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
         </div>
-      </form>
+    </nav>
+
+    <!-- 메모 리스트 -->
+    <div id="memo_list" class="col s12 m6" style="margin-left: 10px; margin-right: 10px;">
     </div>
-  </nav>
 
-  <!-- 메모 리스트 -->
-  <div id="memo_list" class="col s12 m6" style="margin-left: 10px; margin-right: 10px;">
-  </div>
-
-  <!-- 플로팅 버튼 -->
-  <div class="fixed-action-btn" id="btn-floating">
-    <a href="./addMemo" class="btn-floating btn-large waves-effect waves-light red"><i
+    <!-- 플로팅 버튼 -->
+    <div class="fixed-action-btn" id="btn-floating">
+        <a href="./addMemo" class="btn-floating btn-large waves-effect waves-light red"><i
         class="material-icons">add</i></a>
-  </div>
+    </div>
 
-  <script type="text/javascript" src="../public/js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="../public/js/materialize.js"></script>
-  <script type="text/javascript" src="../public/js/memoList.js"></script>
+    <script type="text/javascript" src="../public/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../public/js/materialize.js"></script>
+    <script type="text/javascript" src="../public/js/memoList.js"></script>
 </body>
 
 </html>
