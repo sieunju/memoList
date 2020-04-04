@@ -8789,6 +8789,7 @@ input[type=range]::-ms-thumb {
     width: 100%;
     height: auto;
     position: fixed;
+    display: none;
     top: 0;
     left: 0;
     background-color: #000000d8;
@@ -8799,9 +8800,10 @@ input[type=range]::-ms-thumb {
     background-color: #596d79;
     width: 90%;
     height: 450px;
-    left: 0px;
-    top: 50%;
-    bottom: 50%;
+    left: 5%;
+    right:5%;
+    top:50%;
+    margin-top: -225px;
 }
 
 .detail-close-btn {

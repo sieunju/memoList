@@ -68,6 +68,7 @@ router.post('/api/addMemo', (req, res) => {
  */
 router.get('/api/memoList',(req,res) =>{
     console.log(req.url,"Memo Data Get" + req.query);
+    // 쿠키값 파싱.
     const cookie = utils.cookieParser(req.headers.cookie);
     const loginKey = cookie.loginKey;
 
@@ -103,7 +104,17 @@ router.get('/api/memoList',(req,res) =>{
             });
         }
     })
-})
+});
+
+router.put('/api/updateMemo',(req,res) => {
+    console.log(req.url,"Memo Update ");
+    const cookie = utils.cookieParser(req.headers.cookie);
+    const loginKey = cookie.loginKey;
+    dataModel.updateMemo(loginKey,req.body);
+
+    // 업데이트 이후 갱신 처리 한다..?음..
+    // res.redirect('/memoList');
+});
 // [e] API
 
 module.exports = router

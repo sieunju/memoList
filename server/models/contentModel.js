@@ -8,17 +8,17 @@ const Memo = {
      * @param {String} loginKey 사용자 로그인 키 값.
      * @param {Ojbect} body     tag, num, title, contents
      */
-    addMemo: function(loginKey, body) {
+    addMemo: function (loginKey, body) {
         // 로그인 키로 사용자 아이디 값 복호화.
         const userId = utils.dec(loginKey);
-        const description = body.description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+        const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
         console.log('UserId ' + userId);
         console.log(body.tag);
         console.log(body.title);
-        console.log(body.description);
+        console.log(body.contents);
         const sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,REGISTER_DATE)' +
             'VALUES(?,?,?,?,?)';
-        const params = [userId, body.tag, body.title, description, new Date()];
+        const params = [userId, body.tag, body.title, contents, new Date()];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
@@ -33,7 +33,7 @@ const Memo = {
      * @param {String} loginKey  사용자 로그인 키값. 
      * @param {Object} query     필터 옶션 및 정렬 기준
      */
-    getMemo: function(loginKey, query, callBack) {
+    getMemo: function (loginKey, query, callBack) {
         const userId = utils.dec(loginKey);
         const pageSize = 10; // 한번 불러올 데이터 양 고정
 
@@ -45,6 +45,33 @@ const Memo = {
             'ORDER BY TAG, TITLE ASC LIMIT ?,?';
         const params = [userId, pageIndex, pageSize];
         db.getQuery(sql, params, callBack);
+    },
+
+    /**
+     * 메모값 수정
+     * @param {String} loginKey 사용자 로그인 키값.
+     * @param {Object} body memo_id, tag, title, contents 
+     */
+    updateMemo: function (loginKey, body) {
+        // 로그인 키로 사용자 아이디 값 복호화.
+        const userId = utils.dec(loginKey);
+        // 데이터 유효성 검사.
+        if(body.memo_id == null) return;
+
+        console.log(body.memo_id);
+        console.log(body.tagColor);
+        console.log(body.title);
+        console.log(body.contents);
+
+        const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, REGISTER_DATE=? WHERE MEMO_ID=?';
+        const params = [body.tag,body.title,body.contents,new Date(),body.memo_id];
+        db.getQuery(sql,params,function onMessage(err,rows){
+            if(err){
+                console.log('Error ' + err);
+            } else {
+                console.log("Success " + rows.insertId);
+            }
+        })
     }
 };
 

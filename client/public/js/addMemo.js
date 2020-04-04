@@ -9,7 +9,7 @@ function checkMemo() {
     // 테그 정보 get.
     const tagList = document.getElementsByName('tag');
 
-    var selectedTag;
+    let selectedTag;
     for (var i = 0; i < tagList.length; i++) {
         if (tagList[i].checked) {
             selectedTag = tagList[i];
@@ -21,10 +21,10 @@ function checkMemo() {
     const title = document.getElementById('title');
 
     // 내용 get
-    var description = document.getElementById('description').value;
-    description = description.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    console.log('값' + description);
-    alert('선택한 값 ' + description);
+    let contents = document.getElementById('contents').value;
+    contents = contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    console.log('값' + contents);
+    alert('선택한 값 ' + contents);
     return true;
 }
 
@@ -43,9 +43,9 @@ function addMemo() {
     // // 타이틀
     // const title = document.getElementById('title');
     // 내용 <br/> 로 변경
-    var description = document.getElementById('description').value;
-    description = description.replace(/(?:\r\n|\r|\n)/g, '<br />');
-    document.getElementById('description').value = description;
+    let contents = document.getElementById('contents').value;
+    contents = description.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    document.getElementById('contents').value = contents;
     return true;
 }
 
