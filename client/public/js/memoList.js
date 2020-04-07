@@ -31,46 +31,25 @@ function getMemoList() {
         success: function (json) {
             // console.log(json);
             json.dataList.forEach(element => {
-                const title = element.TITLE;
-                const contents = element.CONTENTS;
-                const tagColor = 'tag' + element.TAG;
-                const memoId = element.MEMO_ID;
+                // init View
+                const divRoot = $('<div class="card-normal-bg" onclick=showDetail(this)></div>');
+                let divTitle = $('<div id="card-title" class="card-normal-title"></div>');
+                let divContents = $('<div id="card-contents" class="card-normal-contents"></div>');
+                let hEtc = $('<h id="card-etc" class="etc-tags"></h>');
+                let divTag = $('<div class="card-normal-tag tag_color"></div>');
 
-                /* Root View */
-                const rootDiv = document.createElement('div');
-                rootDiv.className = 'col s12 m6';
+                // DataBinding.
+                divTitle.text(element.TITLE);
+                divContents.html(element.CONTENTS);
+                hEtc.text(element.MEMO_ID + "," + element.TAG);
+                divTag.addClass('tag' + element.TAG);
+                
+                divRoot.append(divTitle);
+                divRoot.append(divContents);
+                divRoot.append(hEtc);
+                divRoot.append(divTag);
 
-                /* Background View */
-                const bgDiv = document.createElement('div');
-                bgDiv.className = 'card blue-grey darken-1';
-                bgDiv.setAttribute('onclick','showDetail(this)');
-
-                /* Contents View */
-                const contentsDiv = document.createElement('div');
-                contentsDiv.className = 'card-content white-text ellipsis';
-
-                /* etc Tag */
-                const etcTagDiv = document.createElement('h');
-                etcTagDiv.className = 'etc_tags';
-                etcTagDiv.style = 'display: none;';
-                etcTagDiv.innerText = memoId + ',' + element.TAG;
-
-                /* Tag View */
-                const tagDiv = document.createElement('div');
-                tagDiv.className = 'card-action tag_color ' + tagColor;
-
-                /* View Append */
-                bgDiv.append(contentsDiv);
-                bgDiv.append(etcTagDiv);
-                bgDiv.append(tagDiv);
-                rootDiv.append(bgDiv);
-
-                /* bindView */
-                contentsDiv.innerHTML =
-                    '<span class="card-title">' + title + '</span>' +
-                    '<p class="card-contents">' + contents + '</p>';
-
-                document.getElementById('memo_list').appendChild(rootDiv);
+                $('#memo_list').append(divRoot);
             });
 
             currentPage = json.pageNo;
@@ -110,9 +89,10 @@ $(document).ready(function () {
  */
 function showDetail(divContents) {
     divContents = $(divContents);
-    const title = divContents.find('.card-title').text();
-    const contents = divContents.find('.card-contents').html();
-    const etc = divContents.find('.etc_tags').text().split(',');
+
+    const title = divContents.find('#card-title').text();
+    const contents = divContents.find('#card-contents').html();
+    const etc = divContents.find('#card-etc').text().split(',');
     const memoId = Number(etc[0]);
     const tagColor = Number(etc[1]);
 
@@ -124,10 +104,10 @@ function showDetail(divContents) {
     const divDetailRoot = $('#detail_root');
 
     divDetailRoot.find('#tag').removeClass('tag1 tag2 tag3 tag4 tag5 tag6 tag7');
-    divDetailRoot.find('#tag').addClass(tagColor);
-    divDetailRoot.find('#title').text(title);
-    divDetailRoot.find('#contents').html(contents);
-    divDetailRoot.find('#etc_tags').text(memoId + ',' + tagColor);
+    divDetailRoot.find('#tag').addClass('tag' + tagColor);
+    divDetailRoot.find('#title').val(title);
+    divDetailRoot.find('#contents').val(contents);
+    divDetailRoot.find('#etc_tags').text(memoId);
     selectedTag(tagColor);
 
     divDetailRoot.css("display", "inline");
@@ -144,12 +124,12 @@ function showDetailHidden() {
 
 /*
  * 선택한 태그 노출 처리하는 함수
- * @param tagId : 선택한 태그 id
+ * @param tagIndex : 선택한 태그
  */
-function selectedTag(color) {
+function selectedTag(tagIndex) {
     let tagNm;
     let tagColor;
-    switch (color) {
+    switch (tagIndex) {
         case 1:
             tagNm = '빨강';
             tagColor = '#ff3b30';
@@ -189,30 +169,56 @@ function selectedTag(color) {
  */
 function updateData(divDetail) {
 
-    const title = divDetail.find('#title').text();
-    const contents = divDetail.find('#contents').html();
-    const etc = divDetail.find('#etc_tags').text().split(',');
-    const memoId = Number(etc[0]);
-    const tag = etc[1];
+    const title = divDetail.find('#title').val();
+    const contents = divDetail.find('#contents').val();
+    const memoId = Number(divDetail.find('#etc_tags').text());
+    let tagCd;
 
-    const obj = new Object();
-    obj.title = title;
-    obj.contents = contents;
-    obj.memoId = memoId;
-    obj.tag = tag;
+    switch ($('#selected_tag').text()) {
+        case '빨강':
+            tagCd = 1;
+            break;
+        case '주황':
+            tagCd = 2;
+            break;
+        case '노랑':
+            tagCd = 3;
+            break;
+        case '초록':
+            tagCd = 4;
+            break;
+        case '파랑':
+            tagCd = 5;
+            break;
+        case '보라':
+            tagCd = 6;
+            break;
+        default:
+            tagCd = 7;
+            break;
+    }
 
-    console.log('Title ' + title);
+    console.log('Update Title ' + title);
+    console.log('Update Contents ' + contents);
+    console.log('Update Tag ' + tag);
+
     $.ajax({
         type: 'PUT',
-        url: '../api/updateMemo',
+        url: './api/updateMemo',
         contentType: 'application/json; charset=utf-8',
         dataType: 'JSON',
-        data: title,
+        data: JSON.stringify({
+            title: title,
+            contents: contents,
+            memo_id: memoId,
+            tag: tagCd
+        }),
+        async: true,
         success: function (json) {
             console.log('Success json');
         },
         error: function (xhr, status, error) {
-            alert(error);
+            console.log('Update Error Code ' + status + '  ' + error);
         }
     });
 

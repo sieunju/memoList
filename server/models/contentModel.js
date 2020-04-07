@@ -52,26 +52,18 @@ const Memo = {
      * @param {String} loginKey 사용자 로그인 키값.
      * @param {Object} body memo_id, tag, title, contents 
      */
-    updateMemo: function (loginKey, body) {
-        // 로그인 키로 사용자 아이디 값 복호화.
-        const userId = utils.dec(loginKey);
+    updateMemo: function (loginKey, body, callBack) {
         // 데이터 유효성 검사.
         if(body.memo_id == null) return;
 
-        console.log(body.memo_id);
-        console.log(body.tagColor);
-        console.log(body.title);
-        console.log(body.contents);
+        console.log('Id ' + body.memo_id);
+        console.log('Tag ' + body.tag);
+        console.log('Title ' + body.title);
+        console.log('Contents ' + body.contents);
 
         const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, REGISTER_DATE=? WHERE MEMO_ID=?';
         const params = [body.tag,body.title,body.contents,new Date(),body.memo_id];
-        db.getQuery(sql,params,function onMessage(err,rows){
-            if(err){
-                console.log('Error ' + err);
-            } else {
-                console.log("Success " + rows.insertId);
-            }
-        })
+        db.getQuery(sql,params,callBack);
     }
 };
 

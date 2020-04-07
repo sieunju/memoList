@@ -1,0 +1,253 @@
+/* 100% — FF
+99% — FC
+98% — FA
+97% — F7
+96% — F5
+95% — F2
+94% — F0
+93% — ED
+92% — EB
+91% — E8
+90% — E6
+89% — E3
+88% — E0
+87% — DE
+86% — DB
+85% — D9
+84% — D6
+83% — D4
+82% — D1
+81% — CF
+80% — CC
+79% — C9
+78% — C7
+77% — C4
+76% — C2
+75% — BF
+74% — BD
+73% — BA
+72% — B8
+71% — B5
+70% — B3
+69% — B0
+68% — AD
+67% — AB
+66% — A8
+65% — A6
+64% — A3
+63% — A1
+62% — 9E
+61% — 9C
+60% — 99
+59% — 96
+57% — 94
+56% — 91
+56% — 8F
+55% — 8C
+54% — 8A
+53% — 87
+52% — 85
+51% — 82
+50% — 80
+49% — 7D
+48% — 7A
+47% — 78
+46% — 75
+45% — 73
+44% — 70
+43% — 6E
+42% — 6B
+41% — 69
+40% — 66
+39% — 63
+38% — 61
+37% — 5E
+36% — 5C
+35% — 59
+34% — 57
+33% — 54
+32% — 52
+31% — 4F
+30% — 4D
+28% — 4A
+28% — 47
+27% — 45
+26% — 42
+25% — 40
+24% — 3D
+23% — 3B
+22% — 38
+21% — 36
+20% — 33
+19% — 30
+18% — 2E
+17% — 2B
+16% — 29
+15% — 26
+14% — 24
+13% — 21
+12% — 1F
+11% — 1C
+10% — 1A
+9% — 17
+8% — 14
+7% — 12
+6% — 0F
+5% — 0D
+4% — 0A
+3% — 08
+2% — 05
+1% — 03
+0% — 00 */
+
+.memolist-body-bg{
+    overflow-x:hidden;
+    margin:0;
+}
+
+.search-bg {
+    width: 100%;
+    height: 35px;
+    position: fixed;
+    background-color: rgb(26, 78,102);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.20), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.floating-add-memo-bg {
+    width:60px;
+    height:60px;
+    position: fixed;
+    right:23px;
+    bottom:23px;
+    border-radius: 30px;
+    background-image: url("../resource/add_white.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(26, 78,102);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.20), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.memolist-bg{
+    padding-top: 45px;
+}
+
+.card-normal-bg {
+    margin: auto;
+    width: 95%;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.20), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.card-normal-title {
+    width: auto;
+    padding-left: 19px;
+    padding-right: 19px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #000000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.card-normal-contents {
+    width: auto;
+    height: 100%;
+    margin-left: 19px;
+    margin-right: 19px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #666;
+    line-height: 1.3;
+    max-height: 3.9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.card-normal-tag {
+    width: auto;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.etc-tags {
+    display: none;
+}
+
+/* TODO 삭제 예정 */
+.ellipsis-line-3 {
+    font-size: 13px;
+    color: #FFFFFF;
+    height: 100%;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: inherit;
+    white-space: inherit;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.detail-bg {
+    min-height: 100%;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    background-color: #000000d8;
+}
+
+.detail-fg {
+    position: absolute;
+    background-color: #596d79;
+    width: 90%;
+    height: 450px;
+    left: 5%;
+    right: 5%;
+    top: 50%;
+    margin-top: -225px;
+}
+
+.detail-close-btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    right: 5px;
+}
+
+.detail-header-tag {
+    width: 100%;
+    height: 40px;
+}
+
+.detail-title {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.detail-contents {
+    display: block;
+    overflow-y: scroll;
+    width: 100%;
+    height: 300px;
+    margin-top: 5px;
+    font-size: 13px;
+    color: #FFFFFF;
+    letter-spacing: 0.05px;
+    line-height: 150%;
+}

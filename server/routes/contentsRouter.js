@@ -110,10 +110,17 @@ router.put('/api/updateMemo',(req,res) => {
     console.log(req.url,"Memo Update ");
     const cookie = utils.cookieParser(req.headers.cookie);
     const loginKey = cookie.loginKey;
-    dataModel.updateMemo(loginKey,req.body);
-
-    // 업데이트 이후 갱신 처리 한다..?음..
-    // res.redirect('/memoList');
+    dataModel.updateMemo(loginKey,req.body, function onMessage(err){
+        if(err){
+            res.status(416);
+        } else {
+            // res.status(200);
+            console.log(req.url,"Sucess");
+            res.send({
+                status: 200
+            });
+        }
+    });
 });
 // [e] API
 
