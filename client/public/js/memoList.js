@@ -75,12 +75,34 @@ $(document).ready(function () {
     // });
 
     // 메모 상세 보기 태그 선택창 init.
-    $('.dropdown-trigger').dropdown();
+    // $('.dropdown-trigger').dropdown();
 
     // 메모 수정 이벤트
     $('.update_memo').on('click', function () {
         const divDetail = $('#detail_root');
         updateData(divDetail);
+    })
+
+    // 메모 상세 내용 글자수 제한
+    $(function(){
+        $('#detail-title').keyup(function (e){
+            let content = $(this).val();
+            if(content.length <= 40){
+                console.log('제목 ' + content.length);
+                $('#title-counter').text(content.length + '/40');
+            }
+        });
+        $('#detail-title').keyup();
+
+        $('#detail-contents').keyup(function (e){
+            let content = $(this).val();
+            if(content.length <= 400){
+                console.log('내용 ' + content.length);
+                $('#contents-counter').text(content.length + '/400');
+            }
+        });
+        $('#detail-contents').keyup();
+        
     })
 });
 
@@ -105,8 +127,10 @@ function showDetail(divContents) {
 
     divDetailRoot.find('#tag').removeClass('tag1 tag2 tag3 tag4 tag5 tag6 tag7');
     divDetailRoot.find('#tag').addClass('tag' + tagColor);
-    divDetailRoot.find('#title').val(title);
-    divDetailRoot.find('#contents').val(contents);
+    divDetailRoot.find('#detail-title').val(title);
+    divDetailRoot.find('#title-counter').text(title.length + '/40');
+    divDetailRoot.find('#detail-contents').val(contents);
+    divDetailRoot.find('#contents-counter').text(contents.length + '/400');
     divDetailRoot.find('#etc_tags').text(memoId);
     selectedTag(tagColor);
 

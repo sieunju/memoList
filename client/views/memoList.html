@@ -5,9 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link type="text/css" rel="stylesheet" href="../public/css/common_color.css">
-    <link type="text/css" rel="stylesheet" href="../public/css/materialize.css">
     <link type="text/css" rel="stylesheet" href="../public/css/memo_style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shortcut icon" href="../public/resource/icon/favicon.ico">
 
     <title>메모</title>
@@ -16,8 +14,9 @@
 <body class="memolist-body-bg">
 
     <!-- 검색 -->
-    <nav class="search-bg">
-    </nav>
+    <div class="search-bg">여기에 검색을 넣을겁니다..!
+        <img class="search-white-icon" src="../public/resource/search-white.svg"/>
+    </div>
 
     <!-- 메모 리스트 -->
     <div id="memo_list" class="memolist-bg">
@@ -27,19 +26,21 @@
     <div class="floating-add-memo-bg" onclick="location.href='./addMemo'"></div>
 
     <!-- [s] 상세 보기 레이아웃 -->
-    <div id="detail_root" class="detail-bg">
-        <div class="detail-fg">
-            <img src="../public/resource/close_white.svg" class="detail-close-btn"
-                onclick="javascript:showDetailHidden();">
+    <div id="detail_root" class="detail-root-bg">
+        <div class="detail-root-fg">
+            <img src="../public/resource/close_white.svg" class="detail-close-btn" onclick="javascript:showDetailHidden();">
 
             <!-- 태그 색상 -->
             <div id="tag" class="tag_color detail-header-tag"></div>
 
-            <div style="display:block; width: 100%; padding: 10px;">
+            <div class="detail-body-bg">
                 <!-- 타이틀 -->
-                <input id="title" type="text" class="detail-title detail-title" data-length="40"></input>
+                <input id="detail-title" type="text" class="detail-title" maxlength="40"></input>
+                <span id="title-counter" class="detail-counter"></span>
                 <!-- 내용 -->
-                <textarea id="contents" class="detail-contents" data-length="400"></textarea>
+                <textarea id="detail-contents" class="detail-contents" maxlength="400"></textarea>
+                <span id="contents-counter" class="detail-counter"></span>
+                
                 <div id="etc_tags" style="display: none;"></div>
                 <div style="margin:10px;">
                     <!-- 태그 색상 -->
@@ -66,7 +67,6 @@
     <!-- [e] 상세 보기 레이아웃 -->
 
     <script type="text/javascript" src="../public/js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="../public/js/materialize.js"></script>
     <script type="text/javascript" src="../public/js/memoList.js"></script>
 </body>
 
