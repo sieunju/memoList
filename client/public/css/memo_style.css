@@ -128,8 +128,8 @@
     width: 60px;
     height: 60px;
     position: fixed;
-    right: 23px;
-    bottom: 23px;
+    right: 10px;
+    bottom: 10px;
     border-radius: 30px;
     background-image: url("../resource/add_white.svg");
     background-repeat: no-repeat;
@@ -209,7 +209,7 @@
     position: absolute;
     background-color: #596d79;
     width: 90%;
-    height: 450px;
+    height: 400px;
     left: 5%;
     right: 5%;
     top: 50%;
@@ -234,15 +234,65 @@
     margin-right: 5px;
 }
 
+.detail-tag-bg {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.2);
+    /* background-color: transparent; */
+}
+
+.detail-tag-item {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.detail-tag1 {
+    background-color: rgb(255,59,48);
+}
+
+.detail-tag2 {
+    background-color: rgb(255,149,0);
+}
+
+.detail-tag3 {
+    background-color: rgb(255,204,0);;
+}
+
+.detail-tag4 {
+    background-color: rgb(52,199,89);;
+}
+
+.detail-tag5 {
+    background-color: rgb(0,122,255);
+}
+
+.detail-tag6 {
+    background-color: rgb(175,82,222);
+}
+
+.detail-tag7 {
+    background-color: rgb(142,142,147);
+}
+
 .detail-title {
-    width:98%;
+    width: 98%;
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     border: none;
     background-color: transparent;
     outline: none;
@@ -251,15 +301,15 @@
 .detail-contents {
     display: block;
     overflow-y: scroll;
-    width:98%;
-    height: 300px;
+    width: 98%;
+    height: 260px;
     padding-top: 0px;
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     letter-spacing: 0.05px;
     line-height: 1.6em;
     border: none;
@@ -270,5 +320,71 @@
 .detail-counter {
     right: 5px;
     float: right;
-    color:rgb(255, 255, 255);
+    font-size: 9px;
+    color: rgb(255, 255, 255);
+}
+
+.dropbtn {
+    background-color: rgb(57, 175, 179);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.dropdown {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: rgb(57, 175, 179);
+}
+
+.common-btn-bg {
+    background-color: rgb(226, 108, 34);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.20), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.detail-update-btn {
+    position: absolute;
+    width: 100px;
+    border: none;
+    outline: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    right: 5px;
+    bottom: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }

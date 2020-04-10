@@ -78,7 +78,7 @@ $(document).ready(function () {
     // $('.dropdown-trigger').dropdown();
 
     // 메모 수정 이벤트
-    $('.update_memo').on('click', function () {
+    $('#update_memo').on('click', function () {
         const divDetail = $('#detail_root');
         updateData(divDetail);
     })
@@ -185,7 +185,7 @@ function selectedTag(tagIndex) {
     }
 
     $('#selected_tag').text(tagNm);
-    $('#selected_tag').css('background-color', tagColor);
+    
 }
 
 /*
@@ -193,8 +193,8 @@ function selectedTag(tagIndex) {
  */
 function updateData(divDetail) {
 
-    const title = divDetail.find('#title').val();
-    const contents = divDetail.find('#contents').val();
+    const title = divDetail.find('#detail-title').val();
+    const contents = divDetail.find('#detail-contents').val();
     const memoId = Number(divDetail.find('#etc_tags').text());
     let tagCd;
 

@@ -34,31 +34,31 @@
 }
 /* 빨간색  */
 .custom-radios input[type="radio"]#tag1 + label span {
-    background-color: #ff3b30;
+    background-color: rgb(255,59,48);
 }
 /* 주황색 */
 .custom-radios input[type="radio"]#tag2 + label span {
-    background-color: #ff9500;
+    background-color: rgb(255,149,0);
 }
 /* 노란색 */
 .custom-radios input[type="radio"]#tag3 + label span {
-    background-color: #ffcc00;
+    background-color: rgb(255,204,0);
 }
 /* 초록색 */
   .custom-radios input[type="radio"]#tag4 + label span {
-    background-color: #34c759;
+    background-color: rgb(52,199,89);
 }
 /* 파란색 */
 .custom-radios input[type="radio"]#tag5 + label span {
-    background-color: #007aff;
+    background-color: rgb(0,122,255);
 }
 /* 보라색 */
 .custom-radios input[type="radio"]#tag6 + label span {
-    background-color: #af52de;
+    background-color: rgb(175,82,222);
 }
 /* 회색 */
 .custom-radios input[type="radio"]#tag7 + label span {
-    background-color: #8e8e93;
+    background-color: rgb(142,142,147);
 }
 .custom-radios input[type="radio"]:checked + label span img {
     opacity: 1;

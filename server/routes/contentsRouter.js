@@ -66,8 +66,8 @@ router.post('/api/addMemo', (req, res) => {
  *  filterOpt   {필터 옵션}
  * }
  */
-router.get('/api/memoList',(req,res) =>{
-    console.log(req.url,"Memo Data Get" + req.query);
+router.get('/api/memoList', (req, res) => {
+    console.log(req.url, "Memo Data Get" + req.query);
     // 쿠키값 파싱.
     const cookie = utils.cookieParser(req.headers.cookie);
     const loginKey = cookie.loginKey;
@@ -93,7 +93,7 @@ router.get('/api/memoList',(req,res) =>{
             //     hasMore = false;
             // }
 
-            if(rows[9] == null) {
+            if (rows[9] == null) {
                 hasMore = false;
             }
 
@@ -106,16 +106,27 @@ router.get('/api/memoList',(req,res) =>{
     })
 });
 
-router.put('/api/updateMemo',(req,res) => {
-    console.log(req.url,"Memo Update ");
+/**
+ * 메모 데이터 수정
+ * loginKey,
+ * body {
+ *  memoId,
+ *  tag,
+ *  title,
+ *  contents
+ * }
+ */
+router.put('/api/updateMemo', (req, res) => {
+    console.log(req.url, "Memo Update ");
     const cookie = utils.cookieParser(req.headers.cookie);
     const loginKey = cookie.loginKey;
-    dataModel.updateMemo(loginKey,req.body, function onMessage(err){
-        if(err){
-            res.status(416);
+    dataModel.updateMemo(loginKey, req.body, function onMessage(err) {
+        if (err) {
+            res.send({
+                status: 416
+            });
         } else {
-            // res.status(200);
-            console.log(req.url,"Sucess");
+            console.log(req.url, "Sucess");
             res.send({
                 status: 200
             });
