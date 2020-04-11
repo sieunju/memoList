@@ -32,19 +32,19 @@
                 onclick="javascript:showDetailHidden();">
 
             <!-- 태그 색상 -->
-            <div id="tag" class="tag_color detail-header-tag"></div>
+            <div id="detail-header-tag" class="tag_color detail-header-tag"></div>
 
             <div class="detail-body-bg">
 
                 <!-- 태그 선택 -->
                 <div class="detail-tag-bg">
-                    <div class="detail-tag-item detail-tag1"></div>
-                    <div class="detail-tag-item detail-tag2"></div>
-                    <div class="detail-tag-item detail-tag3"></div>
-                    <div class="detail-tag-item detail-tag4"></div>
-                    <div class="detail-tag-item detail-tag5"></div>
-                    <div class="detail-tag-item detail-tag6"></div>
-                    <div class="detail-tag-item detail-tag7"></div>
+                    <div class="detail-tag-item detail-tag1" onclick="javascript:bindHeaderTag(1);"></div>
+                    <div class="detail-tag-item detail-tag2" onclick="javascript:bindHeaderTag(2);"></div>
+                    <div class="detail-tag-item detail-tag3" onclick="javascript:bindHeaderTag(3);"></div>
+                    <div class="detail-tag-item detail-tag4" onclick="javascript:bindHeaderTag(4);"></div>
+                    <div class="detail-tag-item detail-tag5" onclick="javascript:bindHeaderTag(5);"></div>
+                    <div class="detail-tag-item detail-tag6" onclick="javascript:bindHeaderTag(6);"></div>
+                    <div class="detail-tag-item detail-tag7" onclick="javascript:bindHeaderTag(7);"></div>
                 </div>
 
                 <!-- 타이틀 -->
@@ -55,32 +55,9 @@
                 <span id="contents-counter" class="detail-counter"></span>
 
                 <!-- 화면에 표시하지 않는 정보들 -->
-                <div id="etc_tags" style="display: none;"></div>
-                <!-- 태그 색상 -->
-                <!-- <div class="dropdown">
-                    <button class="dropbtn">태그 선택</button>
-                    <div class="dropdown-content">
-                        <a onclick="javascript:selectedTag(1);">빨강</a>
-                        <a onclick="javascript:selectedTag(2);">주황</a>
-                        <a onclick="javascript:selectedTag(3);">노랑</a>
-                        <a onclick="javascript:selectedTag(4);">초록</a>
-                        <a onclick="javascript:selectedTag(5);">파랑</a>
-                        <a onclick="javascript:selectedTag(6);">보라</a>
-                        <a onclick="javascript:selectedTag(7);">기타</a>
-                    </div>
-                </div> -->
-                <!-- <div id="selected_tag" class="detail-selected-tag ">빨강</div> -->
-
-                <!-- 태그 선택창 Structure -->
-                <!-- <ul id="tag_selector" class="dropdown-content">
-                        <li><a onclick="javascript:selectedTag(1);">빨강</a></li>
-                        <li><a onclick="javascript:selectedTag(2);">주황</a></li>
-                        <li><a onclick="javascript:selectedTag(3);">노랑</a></li>
-                        <li><a onclick="javascript:selectedTag(4);">초록</a></li>
-                        <li><a onclick="javascript:selectedTag(5);">파랑</a></li>
-                        <li><a onclick="javascript:selectedTag(6);">보라</a></li>
-                        <li><a onclick="javascript:selectedTag(7);">기타</a></li>
-                    </ul> -->
+                <div id="etc_id" style="display: none;"></div>
+                <div id="etc_tag" style="display: none;"></div>
+                
                 <!-- 수정 -->
                 <div id="update_memo" class="common-btn-bg detail-update-btn">수정</div>
             </div>

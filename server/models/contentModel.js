@@ -61,8 +61,10 @@ const Memo = {
         console.log('Title ' + body.title);
         console.log('Contents ' + body.contents);
 
+        const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
         const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, REGISTER_DATE=? WHERE MEMO_ID=?';
-        const params = [body.tag,body.title,body.contents,new Date(),body.memo_id];
+        const params = [body.tag,body.title,contents,new Date(),body.memo_id];
         db.getQuery(sql,params,callBack);
     }
 };

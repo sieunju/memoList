@@ -67,7 +67,7 @@ router.post('/api/addMemo', (req, res) => {
  * }
  */
 router.get('/api/memoList', (req, res) => {
-    console.log(req.url, "Memo Data Get" + req.query);
+    console.log(req.url, " Memo List");
     // 쿠키값 파싱.
     const cookie = utils.cookieParser(req.headers.cookie);
     const loginKey = cookie.loginKey;
@@ -76,11 +76,11 @@ router.get('/api/memoList', (req, res) => {
 
     dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
         if (err) {
-            console.log(req.url, err);
+            console.log(req.url, " Error " + err);
         }
         // Query 정상 동작 한경우.
         else {
-            console.log(rows);
+            console.log(req.url," Query Success");
             // 옵션 세팅
             // let options = {
             //     "pageNo" : ++pageNo,

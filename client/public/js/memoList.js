@@ -43,7 +43,7 @@ function getMemoList() {
                 divContents.html(element.CONTENTS);
                 hEtc.text(element.MEMO_ID + "," + element.TAG);
                 divTag.addClass('tag' + element.TAG);
-                
+
                 divRoot.append(divTitle);
                 divRoot.append(divContents);
                 divRoot.append(hEtc);
@@ -84,55 +84,48 @@ $(document).ready(function () {
     })
 
     // 메모 상세 내용 글자수 제한
-    $(function(){
-        $('#detail-title').keyup(function (e){
+    $(function () {
+        $('#detail-title').keyup(function (e) {
             let content = $(this).val();
-            if(content.length <= 40){
-                console.log('제목 ' + content.length);
+            if (content.length <= 40) {
                 $('#title-counter').text(content.length + '/40');
             }
         });
         $('#detail-title').keyup();
 
-        $('#detail-contents').keyup(function (e){
+        $('#detail-contents').keyup(function (e) {
             let content = $(this).val();
-            if(content.length <= 400){
-                console.log('내용 ' + content.length);
+            if (content.length <= 400) {
                 $('#contents-counter').text(content.length + '/400');
             }
         });
         $('#detail-contents').keyup();
-        
+
     })
 });
 
 /*
  * 메모 상세 팝업창 보기
  */
-function showDetail(divContents) {
-    divContents = $(divContents);
+function showDetail(divRoot) {
+    divRoot = $(divRoot);
 
-    const title = divContents.find('#card-title').text();
-    const contents = divContents.find('#card-contents').html();
-    const etc = divContents.find('#card-etc').text().split(',');
+    const title = divRoot.find('#card-title').text();
+    let contents = divRoot.find('#card-contents').html();
+    contents = contents.replace(/<br>/gi,'\n');
+    const etc = divRoot.find('#card-etc').text().split(',');
     const memoId = Number(etc[0]);
     const tagColor = Number(etc[1]);
 
-    console.log(title);
-    console.log(contents);
-    console.log(memoId);
-    console.log(tagColor);
-
     const divDetailRoot = $('#detail_root');
 
-    divDetailRoot.find('#tag').removeClass('tag1 tag2 tag3 tag4 tag5 tag6 tag7');
-    divDetailRoot.find('#tag').addClass('tag' + tagColor);
+    bindHeaderTag(tagColor);
     divDetailRoot.find('#detail-title').val(title);
     divDetailRoot.find('#title-counter').text(title.length + '/40');
     divDetailRoot.find('#detail-contents').val(contents);
     divDetailRoot.find('#contents-counter').text(contents.length + '/400');
-    divDetailRoot.find('#etc_tags').text(memoId);
-    selectedTag(tagColor);
+    divDetailRoot.find('#etc_id').text(memoId);
+    divDetailRoot.find('#etc_tag').text(tagColor);
 
     divDetailRoot.css("display", "inline");
 
@@ -148,44 +141,14 @@ function showDetailHidden() {
 
 /*
  * 선택한 태그 노출 처리하는 함수
- * @param tagIndex : 선택한 태그
+ * @param tagValue : 선택한 태그값
  */
-function selectedTag(tagIndex) {
-    let tagNm;
-    let tagColor;
-    switch (tagIndex) {
-        case 1:
-            tagNm = '빨강';
-            tagColor = '#ff3b30';
-            break;
-        case 2:
-            tagNm = '주황';
-            tagColor = '#ff9500';
-            break;
-        case 3:
-            tagNm = '노랑';
-            tagColor = '#ffcc00';
-            break;
-        case 4:
-            tagNm = '초록';
-            tagColor = '#34c759';
-            break;
-        case 5:
-            tagNm = '파랑';
-            tagColor = '#007aff';
-            break;
-        case 6:
-            tagNm = '보라';
-            tagColor = '#af52de';
-            break;
-        default:
-            tagNm = '기타';
-            tagColor = '#8e8e93';
-            break;
-    }
+function bindHeaderTag(tagValue) {
+    console.log("bindHeaderTag " + tagValue);
+    $('#detail-header-tag').removeClass('tag1 tag2 tag3 tag4 tag5 tag6 tag7');
+    $('#detail-header-tag').addClass('tag' + tagValue);
 
-    $('#selected_tag').text(tagNm);
-    
+    $('#etc_tag').text(tagValue);
 }
 
 /*
@@ -194,37 +157,11 @@ function selectedTag(tagIndex) {
 function updateData(divDetail) {
 
     const title = divDetail.find('#detail-title').val();
-    const contents = divDetail.find('#detail-contents').val();
-    const memoId = Number(divDetail.find('#etc_tags').text());
-    let tagCd;
+    const contents = divDetail.find('#detail-contents').val().replace(/(?:\r\n|\r|\n)/g, '<br />');
+    const memoId = Number(divDetail.find('#etc_id').text());
+    const tagCd = Number(divDetail.find('#etc_tag').text());
 
-    switch ($('#selected_tag').text()) {
-        case '빨강':
-            tagCd = 1;
-            break;
-        case '주황':
-            tagCd = 2;
-            break;
-        case '노랑':
-            tagCd = 3;
-            break;
-        case '초록':
-            tagCd = 4;
-            break;
-        case '파랑':
-            tagCd = 5;
-            break;
-        case '보라':
-            tagCd = 6;
-            break;
-        default:
-            tagCd = 7;
-            break;
-    }
-
-    console.log('Update Title ' + title);
-    console.log('Update Contents ' + contents);
-    console.log('Update Tag ' + tag);
+    console.log("내용 " + contents);
 
     $.ajax({
         type: 'PUT',
@@ -240,12 +177,21 @@ function updateData(divDetail) {
         async: true,
         success: function (json) {
             console.log('Success json');
+            refresh();
         },
         error: function (xhr, status, error) {
             console.log('Update Error Code ' + status + '  ' + error);
         }
     });
+}
 
+// 갱신 처리..
+function refresh() {
+    currentPage = 1;
+    sortOption = '';
+    filterOption = '';
+    hasMore = false;
+    window.location.reload();
 }
 
 // 스크롤 페이징 처리
