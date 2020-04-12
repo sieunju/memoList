@@ -1,9 +1,35 @@
+// [s] Memo List Options
 let currentPage = 1;
 let sortOption = '';
 let filterOption = '';
 let hasMore = false;
+// [e] Memo List Options
 
-window.onLoad = getMemoList();
+let preScrollY;     // 이전 스크롤 Y 값.
+
+let divFloating;    // 플로팅 버튼 View
+let floatingMaxY;   // 플로팅 버튼 초기 Y 값.
+let preFloatingY;   // 이전 플로팅 Y 값.
+let floatingTransY; // 플로팅 현재 Y 축 좌표.
+
+let divHeader;
+let headerMaxY;
+let preHeaderY;
+let headerTransY;
+
+window.onload = function(){
+    getMemoList();
+
+    divHeader = $('#header');
+    headerMaxY = divHeader.outerHeight();
+    preHeaderY = 0;
+    headerTransY = 0;
+
+    divFloating = $('#floating_btn');
+    floatingMaxY = window.innerHeight - divFloating.offset().top;
+    preScrollY = 0;
+    floatingTransY = 0;
+}
 
 /**
  * 필터 및 옵션에 따라서 메모 리스트 가져오기.
@@ -115,9 +141,9 @@ function showDetail(divRoot) {
 
     bindHeaderTag(tagColor);
     divDetailRoot.find('#detail-title').val(title);
-    divDetailRoot.find('#title-counter').text(title.length + '/40');
-    divDetailRoot.find('#detail-contents').val(contents);
-    divDetailRoot.find('#contents-counter').text(contents.length + '/400');
+    divDetailRoot.find('#title-counter').text(title.length + ' /40');
+    divDetailRoot.find('#detail-contents').html(contents);
+    divDetailRoot.find('#contents-counter').text(contents.length + ' /400');
     divDetailRoot.find('#etc_id').text(memoId);
     divDetailRoot.find('#etc_tag').text(tagColor);
     divDetailRoot.css("display", "block");
@@ -155,8 +181,6 @@ function updateData(divDetail) {
     const memoId = Number(divDetail.find('#etc_id').text());
     const tagCd = Number(divDetail.find('#etc_tag').text());
 
-    console.log("내용 " + contents);
-
     $.ajax({
         type: 'PUT',
         url: './api/updateMemo',
@@ -188,48 +212,65 @@ function refresh() {
     window.location.reload();
 }
 
-let preScrollTop = 0;
-let floatingMaxHeight;
-let floatingBtn;
-let isScrollDown = false;
-let floatingTransY = 0;
+// 부모 스크롤 방지
+function scrollDisable(){
+    $('html, body').addClass('scroll-stop');
+}
+
+// 부모 스크롤 작동
+function scrollAble(){
+    $('html, body').removeClass('scroll-stop');
+}
 
 // 스크롤 이벤트
 window.onscroll = function (ev) {
-
-    if(floatingBtn == null){
-        floatingBtn = $('#floating_btn');
-        floatingMaxHeight = floatingBtn.outerHeight(true) + 10;
-    }
-
     let scrollOffset;
 
     const scrollY = window.scrollY;
 
-    if(scrollY > preScrollTop){
-        console.log("Scroll Down");
-        scrollOffset = preScrollTop - scrollY;
-        isScrollDown = true;
+    // Scroll Down..
+    if(scrollY > preScrollY){
+        scrollOffset = preScrollY - scrollY;
+        headerTransY += scrollOffset;
         floatingTransY -= scrollOffset;
-
-    } else {
-        console.log("Scroll Up");
-        scrollOffset = scrollY - preScrollTop;
-        isScrollDown = false;
+    } 
+    // Scroll Up
+    else {
+        scrollOffset = scrollY - preScrollY;
+        headerTransY -= scrollOffset;
         floatingTransY += scrollOffset;
     }
 
-    if(floatingTransY > floatingMaxHeight){
-        floatingTransY = floatingMaxHeight;
-    } else if(floatingTransY < 0){
+    // 헤더 최대값 고정 -35~ 0
+    if(headerTransY < (-headerMaxY)){
+        headerTransY = -headerMaxY;
+    } else if(headerTransY > 0){
+        headerTransY = 0;
+    }
+
+    // 변화 값이 있는경우 동작.
+    if(preHeaderY != headerTransY){
+        divHeader.css('transform','translateY(' + headerTransY + 'px)');
+        preHeaderY = headerTransY;
+    }
+
+    // 플로팅 최대값 고정.
+    if(floatingTransY > floatingMaxY){
+        floatingTransY = floatingMaxY;
+    } 
+    // 음수 고정.
+    else if(floatingTransY < 0){
         floatingTransY = 0;
     }
 
-    floatingBtn.css('transform','translateY('+ floatingTransY+'px)');
-
-    console.log("TEST:: " + floatingTransY);
+    // 변화 값이 있는경우 동작.
+    if(preFloatingY != floatingTransY){
+        divFloating.css('transform','translateY('+ floatingTransY+'px)');
+        preFloatingY = floatingTransY;
+    }
     
-    preScrollTop = scrollY;
+    // Scroll 값 저장.
+    preScrollY = scrollY;
     
     // 페이징 처리
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -241,16 +282,6 @@ window.onscroll = function (ev) {
         }
     }
 };
-
-// 부모 스크롤 방지
-function scrollDisable(){
-    $('html, body').addClass('scroll-stop');
-}
-
-// 부모 스크롤 작동
-function scrollAble(){
-    $('html, body').removeClass('scroll-stop');
-}
 
 /*
 var scrollTop = $win.scrollTop(),
