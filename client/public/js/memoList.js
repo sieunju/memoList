@@ -67,16 +67,6 @@ function getMemoList() {
  * Window Ready Listener Set.
  */
 $(document).ready(function () {
-    // 메모 클릭시 이벤트 처리
-    // $('.memo_contents').on('click', function () {
-    //     let divContents = $(this);
-    //     console.log("클릭!");
-    //     showDetail(divContents);
-    // });
-
-    // 메모 상세 보기 태그 선택창 init.
-    // $('.dropdown-trigger').dropdown();
-
     // 메모 수정 이벤트
     $('#update_memo').on('click', function () {
         const divDetail = $('#detail_root');
@@ -88,7 +78,7 @@ $(document).ready(function () {
         $('#detail-title').keyup(function (e) {
             let content = $(this).val();
             if (content.length <= 40) {
-                $('#title-counter').text(content.length + '/40');
+                $('#title-counter').text(content.length + ' /40');
             }
         });
         $('#detail-title').keyup();
@@ -96,7 +86,7 @@ $(document).ready(function () {
         $('#detail-contents').keyup(function (e) {
             let content = $(this).val();
             if (content.length <= 400) {
-                $('#contents-counter').text(content.length + '/400');
+                $('#contents-counter').text(content.length + ' /400');
             }
         });
         $('#detail-contents').keyup();
@@ -108,6 +98,10 @@ $(document).ready(function () {
  * 메모 상세 팝업창 보기
  */
 function showDetail(divRoot) {
+
+    // 부모 View 스크롤 방지
+    scrollDisable();
+
     divRoot = $(divRoot);
 
     const title = divRoot.find('#card-title').text();
@@ -126,9 +120,7 @@ function showDetail(divRoot) {
     divDetailRoot.find('#contents-counter').text(contents.length + '/400');
     divDetailRoot.find('#etc_id').text(memoId);
     divDetailRoot.find('#etc_tag').text(tagColor);
-
-    divDetailRoot.css("display", "inline");
-
+    divDetailRoot.css("display", "block");
 }
 
 /*
@@ -137,6 +129,8 @@ function showDetail(divRoot) {
 function showDetailHidden() {
     console.log("Click!!");
     $('#detail_root').css("display", "none");
+
+    scrollAble();
 }
 
 /*
@@ -194,8 +188,50 @@ function refresh() {
     window.location.reload();
 }
 
-// 스크롤 페이징 처리
+let preScrollTop = 0;
+let floatingMaxHeight;
+let floatingBtn;
+let isScrollDown = false;
+let floatingTransY = 0;
+
+// 스크롤 이벤트
 window.onscroll = function (ev) {
+
+    if(floatingBtn == null){
+        floatingBtn = $('#floating_btn');
+        floatingMaxHeight = floatingBtn.outerHeight(true) + 10;
+    }
+
+    let scrollOffset;
+
+    const scrollY = window.scrollY;
+
+    if(scrollY > preScrollTop){
+        console.log("Scroll Down");
+        scrollOffset = preScrollTop - scrollY;
+        isScrollDown = true;
+        floatingTransY -= scrollOffset;
+
+    } else {
+        console.log("Scroll Up");
+        scrollOffset = scrollY - preScrollTop;
+        isScrollDown = false;
+        floatingTransY += scrollOffset;
+    }
+
+    if(floatingTransY > floatingMaxHeight){
+        floatingTransY = floatingMaxHeight;
+    } else if(floatingTransY < 0){
+        floatingTransY = 0;
+    }
+
+    floatingBtn.css('transform','translateY('+ floatingTransY+'px)');
+
+    console.log("TEST:: " + floatingTransY);
+    
+    preScrollTop = scrollY;
+    
+    // 페이징 처리
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         // 데이터를 더 호출할수 있다면 추가 로딩
         if (hasMore) {
@@ -205,3 +241,39 @@ window.onscroll = function (ev) {
         }
     }
 };
+
+// 부모 스크롤 방지
+function scrollDisable(){
+    $('html, body').addClass('scroll-stop');
+}
+
+// 부모 스크롤 작동
+function scrollAble(){
+    $('html, body').removeClass('scroll-stop');
+}
+
+/*
+var scrollTop = $win.scrollTop(),
+            maxScrollTop = $doc.outerHeight() - $win.height() - 100;
+            
+bottomBarTop = bottomBarTop - (preScrollTop - scrollTop);
+	
+				if (bottomBarTop < 0){
+					bottomBarTop = 0;
+				} else if (bottomBarTop > bottomBarH + bottomBarTopAddiHeight) {
+					bottomBarTop = bottomBarH + bottomBarTopAddiHeight;
+				}
+	
+				bottomFixedUITop = bottomBarTop - bottomBarH;
+	
+				if (bottomFixedUITop > 0){
+					bottomFixedUITop = 0;
+				}
+
+				console.log("TEST " + bottomBarTop);
+	
+				$bottomBar.stop().prop('translateY', bottomBarTop).css({
+					'-webkit-transform' : 'translateY('+bottomBarTop+'px) translateZ(0)',
+					'transform' : 'translateY('+bottomBarTop+'px) translateZ(0)'
+                });
+                */
