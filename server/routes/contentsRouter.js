@@ -80,7 +80,7 @@ router.get('/api/memoList', (req, res) => {
         }
         // Query 정상 동작 한경우.
         else {
-            console.log(req.url," Query Success");
+            console.log(req.url, " Query Success");
             // 옵션 세팅
             // let options = {
             //     "pageNo" : ++pageNo,
@@ -136,11 +136,13 @@ router.put('/api/updateMemo', (req, res) => {
 // [e] API
 
 // [s] 임시 곧 삭제 예정
-router.get('/api/jschoi/fighting',(req,res) => {
-    console.log(req.url,"테스트");
+router.get('/api/jschoi/fighting', (req, res) => {
+    console.log(req.url, "테스트");
     console.log(req.headers);
     const loginKey = req.header('loginKey')
 
+    let currentPage = Number(req.query.pageNo);
+    
     dataModel.getMemoTest(loginKey, req.query, function onMessage(err, rows) {
         if (err) {
             console.log(req.url, " Error " + err);
@@ -150,7 +152,7 @@ router.get('/api/jschoi/fighting',(req,res) => {
         }
         // Query 정상 동작 한경우.
         else {
-            console.log(req.url," Query Success");
+            console.log(req.url, " Query Success");
             // 옵션 세팅
             // let options = {
             //     "pageNo" : ++pageNo,
