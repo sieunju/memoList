@@ -66,6 +66,20 @@ const Memo = {
         const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, REGISTER_DATE=? WHERE MEMO_ID=?';
         const params = [body.tag,body.title,contents,new Date(),body.memo_id];
         db.getQuery(sql,params,callBack);
+    },
+
+    getMemoTest: function (loginKey, query, callBack) {
+        const userId = utils.dec(loginKey);
+        const pageSize = 10; // 한번 불러올 데이터 양 고정
+
+        // PageIndex 계산 ex.) 0, 20, 40, 60...
+        let pageIndex = (query.pageNo - 1) * pageSize;
+
+        // ASC 오름차순 오른쪽으로 갈수록 커진다.   
+        const sql = 'SELECT TAG, MEMO_ID, TITLE, CONTENTS FROM MEMO_TB WHERE USER_ID=? ' +
+            'ORDER BY TAG, TITLE ASC LIMIT ?,?';
+        const params = [userId, pageIndex, pageSize];
+        db.getQuery(sql, params, callBack);
     }
 };
 

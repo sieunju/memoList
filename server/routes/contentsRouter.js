@@ -139,9 +139,42 @@ router.put('/api/updateMemo', (req, res) => {
 router.get('/api/jschoi/fighting',(req,res) => {
     console.log(req.url,"테스트");
     console.log(req.headers);
-    res.send({
-        status: 503
-    });
+    const loginKey = req.header('loginKey')
+
+    dataModel.getMemoTest(loginKey, req.query, function onMessage(err, rows) {
+        if (err) {
+            console.log(req.url, " Error " + err);
+            res.send({
+                status: 400
+            })
+        }
+        // Query 정상 동작 한경우.
+        else {
+            console.log(req.url," Query Success");
+            // 옵션 세팅
+            // let options = {
+            //     "pageNo" : ++pageNo,
+            //     "sortOpt" : sortOpt,
+            // }
+
+            // 데이터 더이상 부를것인지 체크.
+            let hasMore = true;
+            // if(rows[19] == null){
+            //     hasMore = false;
+            // }
+
+            if (rows[9] == null) {
+                hasMore = false;
+            }
+
+            res.send({
+                status: 200,
+                dataList: rows,
+                pageNo: currentPage,
+                hasMore: hasMore
+            });
+        }
+    })
 
 });
 // [e] 임시 곧 삭제 예정
