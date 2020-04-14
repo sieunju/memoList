@@ -135,4 +135,15 @@ router.put('/api/updateMemo', (req, res) => {
 });
 // [e] API
 
+// [s] 임시 곧 삭제 예정
+router.get('/api/jschoi/fighting',(req,res) => {
+    console.log(req.url,"테스트");
+    console.log(req.headers);
+    res.send({
+        status: 503
+    });
+
+});
+// [e] 임시 곧 삭제 예정
+
 module.exports = router
