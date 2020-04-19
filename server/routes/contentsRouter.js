@@ -137,7 +137,6 @@ router.put('/api/updateMemo', (req, res) => {
 
 // [s] 임시 곧 삭제 예정
 router.get('/api/jschoi/fighting', (req, res) => {
-    console.log(req.url, "테스트");
     console.log(req.headers);
     const loginKey = req.header('loginKey')
 

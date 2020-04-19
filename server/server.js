@@ -55,27 +55,34 @@ app.use(function (err, req, res, next) {
 });
 
 
-// ssl 없을때
-// https.createServer(app).listen(port,() => {
-//     console.log('Https Server Start, Port: ' + port);
-// })
+// 릴리즈 모드
+if (process.env.BUILD_TYPE == 'RELEASE') {
+    // Server Start.. && SSL 세팅.
+    https.createServer({
+        key: fs.readFileSync('./ssl/privkey.pem'),
+        cert: fs.readFileSync('./ssl/cert.pem'),
+        ca: fs.readFileSync('./ssl/chain.pem')
+    }, app).listen(port, () => {
+        console.log('Release Https Server Start, Port: ' + port);
+    });
 
-// Server Start.. && SSL 세팅.
-https.createServer({
-    key: fs.readFileSync('./ssl/privkey.pem'),
-    cert: fs.readFileSync('./ssl/cert.pem'),
-    ca: fs.readFileSync('./ssl/chain.pem')
-}, app).listen(port, () => {
-    console.log('Https Server Start, Port: ' + port);
-});
+    // redirect http -> https
+    const http = require('http');
+    const httpApp = express();
+    const httpPort = 100;
+    httpApp.all('*', (req, res, next) => {
+        res.redirect('https://' + req.hostname + ':' + port);
+    });
+    http.createServer(httpApp).listen(httpPort, () => {
+        console.log('Http Server Start, Port: ' + httpPort);
+    });
+} 
+// 개발 모드
+else {
+    const http = require('http');
+    http.createServer(app).listen(port, () => {
+        console.log('Dev Http Server Start, Port: ' + port);
+    })
+}
 
-// redirect http -> https
-const http = require('http');
-const httpApp = express();
-const httpPort = 100;
-httpApp.all('*', (req, res, next) => {
-    res.redirect('https://' + req.hostname + ':' + port);
-});
-http.createServer(httpApp).listen(httpPort, () => {
-    console.log('Http Server Start, Port: ' + httpPort);
-});
+
