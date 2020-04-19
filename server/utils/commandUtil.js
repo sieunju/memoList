@@ -7,6 +7,7 @@ const CryptoJS = require("crypto-js");
  * getter
  * AES_256 암호화. 
  * @param {String} msg 암후화 하고싶은 문자열
+ * @author hmju
  */
 exports.enc = function (msg) {
     return '' + CryptoJS.AES.encrypt(JSON.stringify(msg), process.env.AES_KEY);
@@ -16,6 +17,7 @@ exports.enc = function (msg) {
  * getter 
  * AES_256 복호화
  * @param {String} msg 암호화된 문자열
+ * @author hmju
  */
 exports.dec = function (msg) {
     const bytes = CryptoJS.AES.decrypt(msg.toString(), process.env.AES_KEY);
@@ -25,6 +27,7 @@ exports.dec = function (msg) {
 /**
  * Header Cookie 값 파싱 해주는 함수.
  * @param {String} cookie
+ * @author hmju
  */
 exports.cookieParser = function (cookie = '') {
     return cookie
@@ -35,4 +38,31 @@ exports.cookieParser = function (cookie = '') {
             acc[k.trim()] = decodeURIComponent(v);
             return acc;
         }, {});
+}
+
+/**
+ * UTF-8 인코딩
+ * @param {String} str
+ * @author hmju
+ */
+exports.encode_utf8 = function(str){
+    return encodeURIComponent(str);
+}
+
+/**
+ * UTF-8 디코딩
+ * @param {String} str
+ * @author hmju
+ */
+exports.decode_utf8 = function(str){
+    return decodeURIComponent(str);
+}
+
+/**
+ * 문자열 유효성 검사.
+ * @param {String} str
+ * @author hmju
+ */
+exports.isValidString = function(str) {
+    return !(str == null || str == "");
 }

@@ -17,8 +17,11 @@ let headerMaxY;
 let preHeaderY;
 let headerTransY;
 
-window.onload = function(){
-    getMemoList();
+let searchKeyWord;
+let isSearchCall = false; // 검색 API 연속 호출 방지 변수
+
+window.onload = function () {
+    doMemoList();
 
     divHeader = $('#header');
     headerMaxY = divHeader.outerHeight();
@@ -32,30 +35,52 @@ window.onload = function(){
 }
 
 /**
- * 필터 및 옵션에 따라서 메모 리스트 가져오기.
+ * Call MemoList
+ * TYPE : GET
+ * URL : api/memoList
+ * {
+ *  pageNo : 1,
+ *  sortOpt : '태그 상위순', '태그 하위순', '최신순', '타이틀순'... 추후 예정.. -> defalut 태그 상위순 and 타이틀  
+ *  filterOpt : 'tag 1만 보이도록?'
+ * }
  */
-function getMemoList() {
+function doMemoList() {
 
-    /**
-     * TYPE : GET
-     * URL : api/memoList
-     * {
-     *  pageNo : 1,
-     *  sortOpt : '태그 상위순', '태그 하위순', '최신순', '타이틀순'... 추후 예정.. -> defalut 태그 상위순 and 타이틀  
-     *  filterOpt : 'tag 1만 보이도록?'
-     * }
-     */
+    let queryMap = new Object();
+    queryMap.pageNo = currentPage;
+
+    // 정렬 옵션 유효하면 값 추가.
+    if (isValidString(sortOption)) {
+        queryMap.sortOpt = sortOption;
+    }
+
+    // 필터 옵션 유효하면 값 추가.
+    if (isValidString(filterOption)) {
+        queryMap.filterOpt = filterOption;
+    }
+
+    // 검색 키워드 유효하면 값 추가.
+    if (isValidString(searchKeyWord)) {
+        queryMap.keyWord = searchKeyWord;
+    }
+
+    console.log();
     $.ajax({
         type: "GET",
         url: "./api/memoList",
-        data: {
-            pageNo: currentPage,
-            sortOpt: sortOption,
-            filterOpt: filterOption
-        },
+        data: queryMap,
         dataType: "JSON",
         success: function (json) {
             // console.log(json);
+            // 데이터 없다.
+            if ((json == null || json.dataList == null || json.dataList.length == 0) &&
+                currentPage == 1) {
+                $('#memo_list').empty();
+                hasMore = false;
+                console.log("데이터가 없습니다.");
+                return;
+            }
+
             json.dataList.forEach(element => {
                 // init View
                 const divRoot = $('<div class="card-normal-bg" onclick=showDetail(this)></div>');
@@ -84,7 +109,7 @@ function getMemoList() {
             // console.log("hasMore\t" + hasMore)
         },
         error: function (xhr, status, error) {
-            alert(error);
+            console.log(status, 'Error ' + error);
         }
     });
 }
@@ -116,7 +141,32 @@ $(document).ready(function () {
             }
         });
         $('#detail-contents').keyup();
+    })
 
+    // 검색어 이벤트
+    $('#search_input').on("propertychange change keyup paste input", function () {
+        searchKeyWord = $(this).val();
+
+        // API Call 인경우 리턴
+        if (isSearchCall) return;
+
+        // API Call.
+        // doKeyWord();
+    })
+
+    $('#search_input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            console.log("엔터키 누름!");
+            // 키워드가 유효한 경우.
+            if (isValidString(searchKeyWord)) {
+                currentPage = 1;
+                doMemoList();
+            }
+            // 검색어 없이 이동 클릭 한경우 초기화 처리.
+            else {
+                refresh();
+            }
+        }
     })
 });
 
@@ -132,7 +182,7 @@ function showDetail(divRoot) {
 
     const title = divRoot.find('#card-title').text();
     let contents = divRoot.find('#card-contents').html();
-    contents = contents.replace(/<br>/gi,'\n');
+    contents = contents.replace(/<br>/gi, '\n');
     const etc = divRoot.find('#card-etc').text().split(',');
     const memoId = Number(etc[0]);
     const tagColor = Number(etc[1]);
@@ -203,7 +253,7 @@ function updateData(divDetail) {
     });
 }
 
-// 갱신 처리..
+// 갱신 처리.
 function refresh() {
     currentPage = 1;
     sortOption = '';
@@ -212,13 +262,44 @@ function refresh() {
     window.location.reload();
 }
 
+// 검색 API 호출.
+function doKeyWord() {
+    // 빈 값인 경우 갱신 처리.
+    if (searchKeyWord == null || searchKeyWord == "") {
+        refresh();
+        return;
+    }
+
+    isSearchCall = true;
+
+    $.ajax({
+        type: 'GET',
+        url: './api/searchKeyword',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+            keyword: searchKeyWord
+        }),
+        dataType: 'JSON',
+        success: function (json) {
+            isSearchCall = false;
+            json.dataList.forEach(element => {
+                console.log("Title " + element.TITLE);
+            })
+        },
+        error: function (xhr, status, error) {
+            isSearchCall = false;
+            console.log("Search KeyWord Error " + error);
+        }
+    })
+}
+
 // 부모 스크롤 방지
-function scrollDisable(){
+function scrollDisable() {
     $('html, body').addClass('scroll-stop');
 }
 
 // 부모 스크롤 작동
-function scrollAble(){
+function scrollAble() {
     $('html, body').removeClass('scroll-stop');
 }
 
@@ -229,11 +310,11 @@ window.onscroll = function (ev) {
     const scrollY = window.scrollY;
 
     // Scroll Down..
-    if(scrollY > preScrollY){
+    if (scrollY > preScrollY) {
         scrollOffset = preScrollY - scrollY;
         headerTransY += scrollOffset;
         floatingTransY -= scrollOffset;
-    } 
+    }
     // Scroll Up
     else {
         scrollOffset = scrollY - preScrollY;
@@ -242,67 +323,79 @@ window.onscroll = function (ev) {
     }
 
     // 헤더 최대값 고정 -35~ 0
-    if(headerTransY < (-headerMaxY)){
+    if (headerTransY < (-headerMaxY)) {
         headerTransY = -headerMaxY;
-    } else if(headerTransY > 0){
+    } else if (headerTransY > 0) {
         headerTransY = 0;
     }
 
     // 변화 값이 있는경우 동작.
-    if(preHeaderY != headerTransY){
-        divHeader.css('transform','translateY(' + headerTransY + 'px)');
+    if (preHeaderY != headerTransY) {
+        divHeader.css('transform', 'translateY(' + headerTransY + 'px)');
         preHeaderY = headerTransY;
     }
 
     // 플로팅 최대값 고정.
-    if(floatingTransY > floatingMaxY){
+    if (floatingTransY > floatingMaxY) {
         floatingTransY = floatingMaxY;
-    } 
+    }
     // 음수 고정.
-    else if(floatingTransY < 0){
+    else if (floatingTransY < 0) {
         floatingTransY = 0;
     }
 
     // 변화 값이 있는경우 동작.
-    if(preFloatingY != floatingTransY){
-        divFloating.css('transform','translateY('+ floatingTransY+'px)');
+    if (preFloatingY != floatingTransY) {
+        divFloating.css('transform', 'translateY(' + floatingTransY + 'px)');
         preFloatingY = floatingTransY;
     }
-    
+
     // Scroll 값 저장.
     preScrollY = scrollY;
-    
+
     // 페이징 처리
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         // 데이터를 더 호출할수 있다면 추가 로딩
         if (hasMore) {
             currentPage++;
             console.log("Add Loading Current Page " + currentPage);
-            getMemoList();
+            doMemoList();
         }
     }
 };
 
+/**
+ * 문자열 유효성 검사.
+ * @param {String} tmpStr 
+ */
+function isValidString(tmpStr) {
+    if (tmpStr == null || tmpStr == "") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 /*
 var scrollTop = $win.scrollTop(),
             maxScrollTop = $doc.outerHeight() - $win.height() - 100;
-            
+
 bottomBarTop = bottomBarTop - (preScrollTop - scrollTop);
-	
+
 				if (bottomBarTop < 0){
 					bottomBarTop = 0;
 				} else if (bottomBarTop > bottomBarH + bottomBarTopAddiHeight) {
 					bottomBarTop = bottomBarH + bottomBarTopAddiHeight;
 				}
-	
+
 				bottomFixedUITop = bottomBarTop - bottomBarH;
-	
+
 				if (bottomFixedUITop > 0){
 					bottomFixedUITop = 0;
 				}
 
 				console.log("TEST " + bottomBarTop);
-	
+
 				$bottomBar.stop().prop('translateY', bottomBarTop).css({
 					'-webkit-transform' : 'translateY('+bottomBarTop+'px) translateZ(0)',
 					'transform' : 'translateY('+bottomBarTop+'px) translateZ(0)'
