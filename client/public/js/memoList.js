@@ -81,6 +81,11 @@ function doMemoList() {
                 return;
             }
 
+            // 첫 페이지인경우 이전에 있던 View 들 제거.
+            if (currentPage == 1) {
+                $('#memo_list').empty();
+            }
+
             json.dataList.forEach(element => {
                 // init View
                 const divRoot = $('<div class="card-normal-bg" onclick=showDetail(this)></div>');
@@ -154,6 +159,7 @@ $(document).ready(function () {
         // doKeyWord();
     })
 
+    // 검색어 입력시
     $('#search_input').keydown(function (e) {
         if (e.keyCode == 13) {
             console.log("엔터키 누름!");
@@ -168,6 +174,20 @@ $(document).ready(function () {
             }
         }
     })
+
+    // 검색 최소 버튼 클릭시
+    $('#search_cancel').on('click', function () {
+        $('html, body').animate({ scrollTop: 0 }, 400);
+        $('#search_input').val('');
+        
+        const timer = setInterval(function () {
+            console.log("다시 데이터 가져옵니다.");
+            searchKeyWord = '';
+            currentPage = 1;
+            doMemoList();
+            clearInterval(timer);
+        }, 500);
+    });
 });
 
 /*
