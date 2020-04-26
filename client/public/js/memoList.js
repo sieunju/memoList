@@ -179,7 +179,7 @@ $(document).ready(function () {
     $('#search_cancel').on('click', function () {
         $('html, body').animate({ scrollTop: 0 }, 400);
         $('#search_input').val('');
-        
+
         const timer = setInterval(function () {
             console.log("다시 데이터 가져옵니다.");
             searchKeyWord = '';
@@ -327,7 +327,8 @@ function scrollAble() {
 window.onscroll = function (ev) {
     let scrollOffset;
 
-    const scrollY = window.scrollY;
+    // Safari Scroll Bounding 이슈 방어 코드.
+    const scrollY = Math.max(0, window.scrollY);
 
     // Scroll Down..
     if (scrollY > preScrollY) {
@@ -341,6 +342,7 @@ window.onscroll = function (ev) {
         headerTransY -= scrollOffset;
         floatingTransY += scrollOffset;
     }
+
 
     // 헤더 최대값 고정 -35~ 0
     if (headerTransY < (-headerMaxY)) {
@@ -378,7 +380,7 @@ window.onscroll = function (ev) {
         // 데이터를 더 호출할수 있다면 추가 로딩
         if (hasMore) {
             currentPage++;
-            console.log("Add Loading Current Page " + currentPage);
+            // console.log("Add Loading Current Page " + currentPage);
             doMemoList();
         }
     }
@@ -395,29 +397,3 @@ function isValidString(tmpStr) {
         return true;
     }
 }
-
-/*
-var scrollTop = $win.scrollTop(),
-            maxScrollTop = $doc.outerHeight() - $win.height() - 100;
-
-bottomBarTop = bottomBarTop - (preScrollTop - scrollTop);
-
-				if (bottomBarTop < 0){
-					bottomBarTop = 0;
-				} else if (bottomBarTop > bottomBarH + bottomBarTopAddiHeight) {
-					bottomBarTop = bottomBarH + bottomBarTopAddiHeight;
-				}
-
-				bottomFixedUITop = bottomBarTop - bottomBarH;
-
-				if (bottomFixedUITop > 0){
-					bottomFixedUITop = 0;
-				}
-
-				console.log("TEST " + bottomBarTop);
-
-				$bottomBar.stop().prop('translateY', bottomBarTop).css({
-					'-webkit-transform' : 'translateY('+bottomBarTop+'px) translateZ(0)',
-					'transform' : 'translateY('+bottomBarTop+'px) translateZ(0)'
-                });
-                */
