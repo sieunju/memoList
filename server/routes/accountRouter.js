@@ -63,8 +63,7 @@ router.post('/api/signin', (req, res) => {
                 console.log("Login Success " + loginKey);
                 // 앱인경우 
                 if(utils.isApp(req)){
-                    res.send({
-                        status:200,
+                    res.status(200).send({
                         loginKey:loginKey
                     })
                 } 
@@ -77,13 +76,14 @@ router.post('/api/signin', (req, res) => {
                 }
             } else {
                 console.log("Error");
-                res.status(404);
-                res.end();
+                res.status(404).send({
+                    error: 'Login Fail..'
+                })
             }
         });
     }catch(err){
         console.log("Error /api/signin", err);
-        res.status(104).send({error:'로그인 실패하였습니다.'});
+        res.status(404).send({error:'로그인 실패하였습니다.'});
     }
     
 });

@@ -19,6 +19,7 @@ let headerTransY;
 
 let searchKeyWord;
 let isSearchCall = false; // 검색 API 연속 호출 방지 변수
+let isApiCall = false; // 추가 로딩 API 연속 호출 방지 변소.
 
 window.onload = function () {
     doMemoList();
@@ -46,6 +47,7 @@ window.onload = function () {
  */
 function doMemoList() {
 
+    isApiCall = true;
     let queryMap = new Object();
     queryMap.pageNo = currentPage;
 
@@ -63,8 +65,7 @@ function doMemoList() {
     if (isValidString(searchKeyWord)) {
         queryMap.keyWord = searchKeyWord;
     }
-
-    console.log();
+    
     $.ajax({
         type: "GET",
         url: "./api/memoList",
@@ -110,11 +111,12 @@ function doMemoList() {
 
             currentPage = json.pageNo;
             hasMore = json.hasMore;
-            // console.log("PageNum\t" + nowPage);
-            // console.log("hasMore\t" + hasMore)
+
+            isApiCall = false;
         },
         error: function (xhr, status, error) {
             console.log(status, 'Error ' + error);
+            isApiCall = false;
         }
     });
 }
@@ -378,7 +380,7 @@ window.onscroll = function (ev) {
     // 페이징 처리
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         // 데이터를 더 호출할수 있다면 추가 로딩
-        if (hasMore) {
+        if (hasMore && !isApiCall) {
             currentPage++;
             // console.log("Add Loading Current Page " + currentPage);
             doMemoList();
