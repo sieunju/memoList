@@ -4,6 +4,7 @@
  */
 const express = require('express');
 const dataModel = require('../models/accountModel');
+const utils = require('../utils/commandUtil');
 
 const router = express.Router();
 // 어짜피 나만 쓸거니까 회원가입 따윈 PASSSSSSSSS
@@ -52,23 +53,39 @@ router.post('/api/signUp', (req, res) => {
  *      104
  */
 router.post('/api/signin', (req, res) => {
-    const body = req.body;
-    console.log("Sign In Path " + req.path);
-    console.log("Sign In Id\t" + body.user_id);
-    console.log("Sign In Pw\t" + body.user_pw);
-    dataModel.userCheck(body.user_id, body.user_pw, function onMessage(isSuccess, loginKey) {
-        if (isSuccess) {
-            console.log("Login Success " + loginKey);
-            res.cookie("loginKey", loginKey, {
-                maxAge: 600 * 60 * 1000
-            });
-            res.redirect('/memoList');
-        } else {
-            console.log("Error");
-            res.status(404);
-            res.end();
-        }
-    });
+    try{
+        const body = req.body;
+        console.log("Sign In Headers " + req.headers);
+        console.log("Sign In Id\t" + body.user_id);
+        console.log("Sign In Pw\t" + body.user_pw);
+        dataModel.userCheck(body.user_id, body.user_pw, function onMessage(isSuccess, loginKey) {
+            if (isSuccess) {
+                console.log("Login Success " + loginKey);
+                // 앱인경우 
+                if(utils.isApp(req)){
+                    res.send({
+                        status:200,
+                        loginKey:loginKey
+                    })
+                } 
+                // 웹인경우
+                else {
+                    res.cookie("loginKey", loginKey, {
+                        // maxAge: 600 * 60 * 1000
+                    });
+                    res.redirect('/memoList');
+                }
+            } else {
+                console.log("Error");
+                res.status(404);
+                res.end();
+            }
+        });
+    }catch(err){
+        console.log("Error /api/signin", err);
+        res.status(104).send({error:'로그인 실패하였습니다.'});
+    }
+    
 });
 // [e] API
 

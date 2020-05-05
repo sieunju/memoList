@@ -45,7 +45,7 @@ exports.cookieParser = function (cookie = '') {
  * @param {String} str
  * @author hmju
  */
-exports.encode_utf8 = function(str){
+exports.encode_utf8 = function (str) {
     return encodeURIComponent(str);
 }
 
@@ -54,7 +54,7 @@ exports.encode_utf8 = function(str){
  * @param {String} str
  * @author hmju
  */
-exports.decode_utf8 = function(str){
+exports.decode_utf8 = function (str) {
     return decodeURIComponent(str);
 }
 
@@ -63,6 +63,41 @@ exports.decode_utf8 = function(str){
  * @param {String} str
  * @author hmju
  */
-exports.isValidString = function(str) {
+exports.isValidString = function (str) {
     return !(str == null || str == "");
+}
+
+/**
+ * 해당 API 가 APP 인지 판단하는 함수.
+ * @parma {Object} req
+ * @author hmju
+ */
+exports.isApp = function (req) {
+    try {
+        const type = req.header('req-type')
+        return (type == 'APP');
+    } catch (err) {
+        console.log('isApp Err ' + err);
+        return false;
+    }
+}
+
+exports.getLoginKey = function(req) {
+    try{
+        // 앱인경우 헤더에서 login-key 를 가져온다.
+        const reqType = req.header('req-type');
+
+        if(reqType != null && reqType == 'APP'){
+            console.log('App loginKey ' + req.header('login-key'));
+            return req.header('login-key');
+        } 
+        // 웹에서 보낸경우 쿠키에서 loginKey 를 가져온다.
+        else {
+            let cookie = exports.cookieParser(req.headers.cookie);
+            return cookie.loginKey;
+        }
+    }catch(err){
+        console.log('getLoginKey Error' + err);
+        return '';
+    }
 }
