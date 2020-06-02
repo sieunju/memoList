@@ -74,6 +74,29 @@ module.exports = (function () {
                 });
 
                 /**
+                 * OS_TYPE              -> APP OS 정보
+                 * CURRENT_VERSION_NM   -> 현재 버전 (이름)
+                 * CURRENT_VERSION_CD   -> 현재 버전 (코드)
+                 * LATE_VERSION_NM      -> 최신 버전 (이름)
+                 * LATE_VERSION_CD      -> 최신 버전 (코드)
+                 */
+                sqlQuery = "CREATE TABLE APP_VERSION_TB (" +
+                    "OS_TYPE VARCHAR(10) NOT NULL," +
+                    "CURRENT_VERSION_NM VARCHAR(20)," +
+                    "CURRENT_VERSION_CD SMALLINT," +
+                    "LATE_VERSION_NM VARChAR(20)," +
+                    "LATE_VERSION_CD SMALLINT" +
+                    ")";
+                // APP Info Table Create
+                con.query(sqlQuery, function (err, result) {
+                    if (err) {
+                        console.log("Create App Version Table Error " + err);
+                    } else {
+                        console.log("App Version Created");
+                    }
+                });
+
+                /**
                  * 데이터 베이스 기본 언어 변경
                  */
                 // sqlQuery = "ALTER DATABASE DB_MEMO DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";

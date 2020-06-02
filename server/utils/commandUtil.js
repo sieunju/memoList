@@ -88,8 +88,8 @@ exports.getLoginKey = function(req) {
         const reqType = req.header('req-type');
 
         if(reqType != null && reqType == 'APP'){
-            console.log('App loginKey ' + req.header('login-key'));
-            return req.header('login-key');
+            console.log('App loginKey ' + req.header('req-login-key'));
+            return req.header('req-login-key');
         } 
         // 웹에서 보낸경우 쿠키에서 loginKey 를 가져온다.
         else {
@@ -99,5 +99,43 @@ exports.getLoginKey = function(req) {
     }catch(err){
         console.log('getLoginKey Error' + err);
         return '';
+    }
+}
+
+exports.reqInfo = function(req) {
+    try{
+        const reqType = req.header('req-type');
+        // APP 인경우.
+        if(reqType != null){
+            return {
+                osType: reqType,
+                loginKey: req.header('req-login-key')
+            } 
+
+            // Android 인경우.
+            if(reqType == 'AND'){
+                return {
+                    osType: 'AND',
+                    loginKey: req.header('req-login-key')
+                }
+            } 
+            // iOS 인경우
+            else {
+                return {
+                    osType: "iOS",
+                    loginKey: req.header('req-login-key')
+                }
+            }
+        }
+        // Web 인경우 쿠키에서 로그인 키값을 리턴함
+        else {
+            let cookie = exports.cookieParser(req.headers.cookie);
+            return {
+                loginKey: cookie.loginKey
+            }
+        }
+    } catch(err){
+        console.log("reqInfo Error " + err);
+        return null;
     }
 }
