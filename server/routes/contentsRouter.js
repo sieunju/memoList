@@ -46,24 +46,28 @@ router.post('/api/addMemo', (req, res) => {
     try {
         console.log(req.url, 'AddMemo');
         // 쿠키값 파싱.
-        const loginKey = utils.getLoginKey(req);
+        const cmmInfo = utils.reqInfo(req);
         console.log("============================");
-        console.log(req.url, 'LoginKey ' + loginKey);
+        console.log(req.url, 'LoginKey ' + cmmInfo.loginKey);
         console.log(req.url, req.body);
         console.log("============================");
         dataModel.addMemo(loginKey, req.body);
 
         // 앱인경우.
-        if (utils.isApp(req)) {
+        if (utils.isApp(cmmInfo)) {
             res.status(200).send({
-                msg: 'success'
-            })
+                status: true
+            }).end();
         }
         // 웹인경우.
         else {
             res.redirect('/memoList');
         }
     } catch (err) {
+        res.status(416).send({
+            status: false,
+            errMsg: err
+        }).end();
         console.log("Error /api/addMemo ", err);
     }
 });
@@ -80,7 +84,7 @@ router.post('/api/addMemo', (req, res) => {
 router.get('/api/memoList', (req, res) => {
     try {
         // 로그인 키값 get
-        const loginKey = utils.getLoginKey(req);
+        const loginKey = utils.reqInfo(req).loginKey;
         let currentPage = Number(req.query.pageNo);
 
         console.log(req.url, "Login Key " + loginKey);
@@ -90,8 +94,9 @@ router.get('/api/memoList', (req, res) => {
                 console.log(req.url, " Error " + err);
 
                 res.status(416).send({
-                    error: err
-                })
+                    status : false,
+                    errMsg : err
+                }).end()
             }
             // Query 정상 동작 한경우.
             else {
@@ -112,19 +117,21 @@ router.get('/api/memoList', (req, res) => {
                     hasMore = false;
                 }
 
-                // console.log(rows);
-
                 res.status(200).send({
+                    status: true,
                     dataList: rows,
                     pageNo: currentPage,
                     hasMore: hasMore
-                });
+                }).end();
 
             }
         })
     } catch (err) {
         console.log("Error /api/memoList ", err);
-        res.status(416).send({ error: '유효하지 않는 값입니다.' });
+        res.status(416).send({ 
+            status : false,
+            errMsg: 'Error ' + err
+        }).end();
     }
 });
 
@@ -141,36 +148,43 @@ router.get('/api/memoList', (req, res) => {
 router.put('/api/updateMemo', (req, res) => {
     try {
         console.log(req.url, "Memo Update ");
-        const loginKey = utils.getLoginKey(req);
-        console.log('LoginKey ' + loginKey);
-        dataModel.updateMemo(loginKey, req.body, function onMessage(err) {
+        const cmmInfo = utils.reqInfo(req)
+        console.log('LoginKey ' + cmmInfo.loginKey);
+        dataModel.updateMemo(cmmInfo.loginKey, req.body, function onMessage(err) {
             if (err) {
                 // 앱인경우
-                if (utils.isApp(req)) {
+                if (utils.isApp(cmmInfo)) {
                     res.status(416).send({
-                        error: err
-                    })
+                        status : false,
+                        errMsg : err
+                    }).end()
                 }
                 // 웹인경우.
                 else {
-                    res.end();
+                    res.status(404).send({
+                        status : false,
+                        errMsg : err
+                    }).end()
                 }
             } else {
                 console.log(req.url, "Sucess");
                 res.status(200).send({
-                    msg: 'success'
-                })
+                    status : true
+                }).end();
             }
         });
     } catch (err) {
         console.log("Error /api/updateMemo ", err);
-        res.status(416).send({ error: '유효하지 않는 값입니다.' });
+        res.status(416).send({ 
+            status : false,
+            errMsg : err
+        }).end();
     }
 });
 
 router.get('api/searchKeyword', (req, res) => {
     console.log(req.url, "Memo KeyWord ");
-    const loginKey = utils.getLoginKey(req);
+    const cmmInfo = utils.reqInfo(req);
 
 })
 // [e] API

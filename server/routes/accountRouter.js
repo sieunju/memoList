@@ -53,7 +53,7 @@ router.post('/api/signUp', (req, res) => {
  *      104
  */
 router.post('/api/signin', (req, res) => {
-    try{
+    try {
         const body = req.body;
         console.log("Sign In Headers " + req.headers);
         console.log("Sign In Id\t" + body.user_id);
@@ -61,12 +61,13 @@ router.post('/api/signin', (req, res) => {
         dataModel.userCheck(body.user_id, body.user_pw, function onMessage(isSuccess, loginKey) {
             if (isSuccess) {
                 console.log("Login Success " + loginKey);
-                // 앱인경우 
-                if(utils.isApp(req)){
+
+                // 앱인경우.
+                if (utils.reqInfo(req).osType != null) {
                     res.status(200).send({
-                        loginKey:loginKey
+                        loginKey: loginKey
                     })
-                } 
+                }
                 // 웹인경우
                 else {
                     res.cookie("loginKey", loginKey, {
@@ -81,11 +82,11 @@ router.post('/api/signin', (req, res) => {
                 })
             }
         });
-    }catch(err){
+    } catch (err) {
         console.log("Error /api/signin", err);
-        res.status(404).send({error:'로그인 실패하였습니다.'});
+        res.status(404).send({ error: '로그인 실패하였습니다.' });
     }
-    
+
 });
 // [e] API
 

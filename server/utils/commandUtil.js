@@ -67,64 +67,22 @@ exports.isValidString = function (str) {
     return !(str == null || str == "");
 }
 
+exports.isValidInt = function (value) {
+    return !(value == null)
+}
+
 /**
- * 해당 API 가 APP 인지 판단하는 함수.
- * @parma {Object} req
- * @author hmju
+ * Request 정보 가져오기.
+ * APP 인경우 
  */
-exports.isApp = function (req) {
+exports.reqInfo = function (req) {
     try {
-        const type = req.header('req-type')
-        return (type == 'APP');
-    } catch (err) {
-        console.log('isApp Err ' + err);
-        return false;
-    }
-}
-
-exports.getLoginKey = function(req) {
-    try{
-        // 앱인경우 헤더에서 login-key 를 가져온다.
-        const reqType = req.header('req-type');
-
-        if(reqType != null && reqType == 'APP'){
-            console.log('App loginKey ' + req.header('req-login-key'));
-            return req.header('req-login-key');
-        } 
-        // 웹에서 보낸경우 쿠키에서 loginKey 를 가져온다.
-        else {
-            let cookie = exports.cookieParser(req.headers.cookie);
-            return cookie.loginKey;
-        }
-    }catch(err){
-        console.log('getLoginKey Error' + err);
-        return '';
-    }
-}
-
-exports.reqInfo = function(req) {
-    try{
-        const reqType = req.header('req-type');
+        const reqType = req.header(process.env.HEADER_TYPE);
         // APP 인경우.
-        if(reqType != null){
+        if (reqType != null) {
             return {
                 osType: reqType,
-                loginKey: req.header('req-login-key')
-            } 
-
-            // Android 인경우.
-            if(reqType == 'AND'){
-                return {
-                    osType: 'AND',
-                    loginKey: req.header('req-login-key')
-                }
-            } 
-            // iOS 인경우
-            else {
-                return {
-                    osType: "iOS",
-                    loginKey: req.header('req-login-key')
-                }
+                loginKey: req.header(process.env.HEADER_LOGIN)
             }
         }
         // Web 인경우 쿠키에서 로그인 키값을 리턴함
@@ -134,8 +92,24 @@ exports.reqInfo = function(req) {
                 loginKey: cookie.loginKey
             }
         }
-    } catch(err){
+    } catch (err) {
         console.log("reqInfo Error " + err);
         return null;
+    }
+}
+
+/**
+ * CmmInfo 에서 앱인지 아닌지 판별
+ */
+exports.isApp = function (cmmInfo) {
+    try {
+        if (cmmInfo.osType != null) {
+            if (cmmInfo.osType == 'AND' || cmmInfo.osType == 'iOS') {
+                return true
+            }
+        }
+        return false
+    } catch (err) {
+        return false
     }
 }
