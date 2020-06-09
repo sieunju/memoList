@@ -13,3 +13,5 @@ sessions/
 # DS 폴더 무시
 .DS_Store
 @eaDir/
+
+resource/
