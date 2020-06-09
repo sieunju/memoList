@@ -54,6 +54,36 @@ app.use(function (err, req, res, next) {
     res.send(err.message || 'Error!!');
 });
 
+const checkDir = (path,callback) => {
+    fs.stat(path, (err, stats) => {       
+        if (err && err.code === 'ENOENT')   
+          return callback(null, true);
+        if (err) 
+          return callback(err);
+    
+        return callback(null, !stats.isDirectory()); 
+      });
+}
+
+
+// 이미지 리소스 폴더 생성
+const resPath = './resource'
+checkDir(resPath, (err, isTrue) => {  // C
+    if (err) 
+      return console.log(err);
+  
+    if (!isTrue) {  
+      console.log('이미 동일한 디렉토리가 있습니다. 패스 합니다.');
+    }
+  
+    fs.mkdir(resPath, (err) => { 
+      if (err) 
+        console.log(err);
+  
+      console.log(`${resPath} 경로로 디렉토리를 생성했습니다.`);
+    });
+  });
+  
 
 // 릴리즈 모드
 if (process.env.BUILD_TYPE == 'RELEASE') {
@@ -84,5 +114,6 @@ else {
         console.log('Dev Http Server Start, Port: ' + port);
     })
 }
+
 
 
