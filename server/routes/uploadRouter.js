@@ -11,8 +11,9 @@ const path = require('path');
 const storage = multer.diskStorage({
     // 서버에 저장할 폴더 생성.
     destination: function (req, file, callback) {
-        // console.log("서버에 저장할 폴더 생성.")
-        // console.log(req)
+        
+        utils.logD("File Path Setting " + file.mimetype);
+
         switch (file.mimetype) {
             case 'image/png':
             case 'image/jpeg':
@@ -32,7 +33,7 @@ const storage = multer.diskStorage({
         let extension = path.extname(file.originalname);
         let basename = path.basename(file.originalname, extension)
         let loginKey = utils.reqInfo(req).loginKey
-        // console.log('File Success ' + loginKey)
+        utils.logD("File Path " + file.path);
         callback(null, Date.now() + '_file' + extension);
     }
 });
