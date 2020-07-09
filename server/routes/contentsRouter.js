@@ -1,12 +1,11 @@
 /**
- * 메모에 대한 API 클래스
+ * 메모에 대한 라우터
  * Created by hmju
  */
 const express = require('express');
 const router = express.Router();
 const dataModel = require('../models/contentModel');
 const utils = require('../utils/commandUtil');
-const fs = require('fs');
 
 // [s] Page
 
@@ -18,7 +17,7 @@ const fs = require('fs');
  * }
  */
 router.get('/memoList', (req, res) => {
-    console.log(req.url, 'MemoList Page')
+    utils.logD("Enter" + req.url);
     res.render('memoList.html');
     res.end();
 });
@@ -27,7 +26,7 @@ router.get('/memoList', (req, res) => {
 
 // 메모 추가 페이지
 router.get('/addMemo', (req, res) => {
-    console.log("addMemo Page Enter " + req.path);
+    utils.logD("Enter" + req.url);
     res.render('addMemo.html');
 })
 // [e] Page
@@ -44,14 +43,10 @@ router.get('/addMemo', (req, res) => {
  */
 router.post('/api/addMemo', (req, res) => {
     try {
-        console.log(req.url, 'AddMemo');
         // 쿠키값 파싱.
         const cmmInfo = utils.reqInfo(req);
-        console.log("============================");
-        console.log(req.url, 'LoginKey ' + cmmInfo.loginKey);
-        console.log(req.url, req.body);
-        console.log("============================");
-        dataModel.addMemo(loginKey, req.body);
+        utils.logD('AddMemo LoginKey: ' + cmmInfo.loginKey + '\tBody: ' + req.body);
+        dataModel.addMemo(cmmInfo.loginKey, req.body);
 
         // 앱인경우.
         if (utils.isApp(cmmInfo)) {
@@ -64,11 +59,12 @@ router.post('/api/addMemo', (req, res) => {
             res.redirect('/memoList');
         }
     } catch (err) {
+        utils.logD('AddMemo Error ' + err);
         res.status(416).send({
             status: false,
             errMsg: err
         }).end();
-        console.log("Error /api/addMemo ", err);
+
     }
 });
 
@@ -87,20 +83,19 @@ router.get('/api/memoList', (req, res) => {
         const loginKey = utils.reqInfo(req).loginKey;
         let currentPage = Number(req.query.pageNo);
 
-        console.log(req.url, "Login Key " + loginKey);
-
         dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
             if (err) {
-                console.log(req.url, " Error " + err);
+                utils.logE('GetMemo Sql Error LoginKey: ' + loginKey + '\t' + err)
 
                 res.status(416).send({
-                    status : false,
-                    errMsg : err
+                    status: false,
+                    errMsg: err
                 }).end()
             }
             // Query 정상 동작 한경우.
             else {
-                console.log(req.url, " Query Success");
+                
+                utils.logD('GetMemo Success LoginKey: ' + loginKey + '\t Path' + req.url)
                 // 옵션 세팅
                 // let options = {
                 //     "pageNo" : ++pageNo,
@@ -127,9 +122,10 @@ router.get('/api/memoList', (req, res) => {
             }
         })
     } catch (err) {
-        console.log("Error /api/memoList ", err);
-        res.status(416).send({ 
-            status : false,
+
+        utils.logE('GetMemo Error LoginKey: ' + loginKey + '\t' + err);
+        res.status(416).send({
+            status: false,
             errMsg: 'Error ' + err
         }).end();
     }
@@ -147,37 +143,37 @@ router.get('/api/memoList', (req, res) => {
  */
 router.put('/api/updateMemo', (req, res) => {
     try {
-        console.log(req.url, "Memo Update ");
         const cmmInfo = utils.reqInfo(req)
-        console.log('LoginKey ' + cmmInfo.loginKey);
+        
         dataModel.updateMemo(cmmInfo.loginKey, req.body, function onMessage(err) {
             if (err) {
+                utils.logE('Update Memo SQL Fail LoginKey: ' + cmmInfo.loginKey + '\t ' + err)
                 // 앱인경우
                 if (utils.isApp(cmmInfo)) {
                     res.status(416).send({
-                        status : false,
-                        errMsg : err
+                        status: false,
+                        errMsg: err
                     }).end()
                 }
                 // 웹인경우.
                 else {
                     res.status(404).send({
-                        status : false,
-                        errMsg : err
+                        status: false,
+                        errMsg: err
                     }).end()
                 }
             } else {
-                console.log(req.url, "Sucess");
+                utils.logD('UpDate Memo Success LoginKey: ' + cmmInfo.loginKey)
                 res.status(200).send({
-                    status : true
+                    status: true
                 }).end();
             }
         });
     } catch (err) {
-        console.log("Error /api/updateMemo ", err);
-        res.status(416).send({ 
-            status : false,
-            errMsg : err
+        utils.logE('Update Memo Fail LoginKey: ' + cmmInfo.loginKey + '\t ' + err)
+        res.status(416).send({
+            status: false,
+            errMsg: err
         }).end();
     }
 });

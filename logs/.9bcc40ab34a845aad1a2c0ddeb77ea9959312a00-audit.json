@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/juhongmin/MemoList/memoList/logs/.9bcc40ab34a845aad1a2c0ddeb77ea9959312a00-audit.json",
+    "files": [
+        {
+            "date": 1594302321040,
+            "name": "/Users/juhongmin/MemoList/memoList/logs/memo-2020-07-09.log",
+            "hash": "43439cc98f047f5c39da77bc6c7006af"
+        }
+    ]
+}

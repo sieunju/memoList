@@ -2,6 +2,7 @@
  * 자주 사용하는 것들에 대한 유틸 클래스.
  */
 const CryptoJS = require("crypto-js");
+const logger = require("../utils/winston");
 
 /**
  * getter
@@ -111,5 +112,33 @@ exports.isApp = function (cmmInfo) {
         return false
     } catch (err) {
         return false
+    }
+}
+
+/**
+ * 운영 및 개발 버전에 따라서 로그 분기 처리.
+ * @param {String} msg 
+ */
+exports.logD = function (msg) {
+    try {
+        if (process.env.BUILD_TYPE == 'RELEASE') {
+            logger.info(msg);
+        } else {
+            logger.debug(msg);
+        }
+    } catch (err) {
+
+    }
+}
+
+exports.logE = function (msg){
+    try {
+        if (process.env.BUILD_TYPE == 'RELEASE') {
+            logger.error(msg);
+        } else {
+            logger.error(msg);
+        }
+    } catch (err) {
+
     }
 }

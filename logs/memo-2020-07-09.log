@@ -1,0 +1,253 @@
+2020. 07. 09 22:58:08 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:08 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:08 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:08 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:09 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:09 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:09 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:09 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:09 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:09 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:10 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:10 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:10 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:10 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:11 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 22:58:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:13:58:11 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:00:53 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:00:53 +0000] "GET /api/memoList?pageN=1 HTTP/1.1" 416 71 "-" "-"
+
+2020. 07. 09 23:01:44 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:01:44 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:01:44 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:01:44 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:01:46 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:01:46 +0000] "GET /upload HTTP/1.1" 200 602 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:01:47 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:01:47 +0000] "GET / HTTP/1.1" 200 1613 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:02:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:02:12 +0000] "POST /api/signin HTTP/1.1" 302 62 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:02:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:02:12 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:02:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:02:12 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 416 71 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:10 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:10 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:10 info: /api/memoList?pageNo=1LoginKey	U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:05:10 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:10 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:11 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:11 info: /api/memoList?pageNo=1LoginKey	U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:05:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:11 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:11 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:11 info: /api/memoList?pageNo=1LoginKey	U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:05:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:11 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:11 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:11 info: /api/memoList?pageNo=1LoginKey	U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:05:11 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:11 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:12 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:12 info: /api/memoList?pageNo=1LoginKey	U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:05:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:12 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:12 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:12 info: /api/memoList?pageNo=1LoginKey	U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:05:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:12 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:14 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:14 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:05:14 info: /api/memoList?pageNo=1LoginKey	U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:05:14 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:05:14 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:22:34 debug: Enter/memoList
+2020. 07. 09 23:22:34 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:22:34 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:22:34 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:22:34 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:22:34 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3339 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:22:51 debug: UpDate Memo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:22:51 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:22:51 +0000] "PUT /api/updateMemo HTTP/1.1" 200 15 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:22:51 debug: Enter/memoList
+2020. 07. 09 23:22:51 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:22:51 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:22:51 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:22:51 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:22:51 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3242 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:22:58 debug: Enter/addMemo
+2020. 07. 09 23:22:58 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:22:58 +0000] "GET /addMemo HTTP/1.1" 200 3842 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:23:09 debug: AddMemo LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	Body: [object Object]
+2020. 07. 09 23:23:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:23:09 +0000] "POST /api/addMemo HTTP/1.1" 500 1332 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:22 debug: AddMemo LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	Body: [object Object]
+2020. 07. 09 23:24:22 debug: AddMemo Error ReferenceError: loginKey is not defined
+2020. 07. 09 23:24:22 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:22 +0000] "POST /api/addMemo HTTP/1.1" 416 28 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:24 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:24 +0000] "GET / HTTP/1.1" 200 1613 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:27 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:27 +0000] "POST /api/signin HTTP/1.1" 302 62 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:27 debug: Enter/memoList
+2020. 07. 09 23:24:27 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:27 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:27 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:24:27 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:27 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3242 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:29 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:24:29 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:29 +0000] "GET /api/memoList?pageNo=2 HTTP/1.1" 200 3025 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:29 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:24:29 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:29 +0000] "GET /api/memoList?pageNo=3 HTTP/1.1" 200 4451 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:30 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:24:30 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:30 +0000] "GET /api/memoList?pageNo=4 HTTP/1.1" 200 3990 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:30 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:24:30 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:30 +0000] "GET /api/memoList?pageNo=5 HTTP/1.1" 200 411 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:33 debug: UpDate Memo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:24:33 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:33 +0000] "PUT /api/updateMemo HTTP/1.1" 200 15 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:33 debug: Enter/memoList
+2020. 07. 09 23:24:33 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:33 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:33 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:24:33 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:33 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3242 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:34 debug: Enter/addMemo
+2020. 07. 09 23:24:34 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:34 +0000] "GET /addMemo HTTP/1.1" 200 3842 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:24:45 debug: AddMemo LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	Body: [object Object]
+2020. 07. 09 23:24:45 debug: AddMemo Error ReferenceError: loginKey is not defined
+2020. 07. 09 23:24:45 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:24:45 +0000] "POST /api/addMemo HTTP/1.1" 416 28 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:20 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:20 +0000] "GET / HTTP/1.1" 200 1613 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:28 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:28 +0000] "POST /api/signin HTTP/1.1" 302 62 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:28 debug: Enter/memoList
+2020. 07. 09 23:25:28 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:28 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:28 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:25:28 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:28 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3242 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:29 debug: Enter/addMemo
+2020. 07. 09 23:25:29 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:29 +0000] "GET /addMemo HTTP/1.1" 200 3842 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:48 debug: AddMemo LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	Body: [object Object]
+2020. 07. 09 23:25:48 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:48 +0000] "POST /api/addMemo HTTP/1.1" 302 62 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:48 debug: Enter/memoList
+2020. 07. 09 23:25:48 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:48 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:48 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:25:48 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:48 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3169 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:50 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:25:50 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:50 +0000] "GET /api/memoList?pageNo=2 HTTP/1.1" 200 2928 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:50 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:25:50 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:50 +0000] "GET /api/memoList?pageNo=3 HTTP/1.1" 200 4034 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:51 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:25:51 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:51 +0000] "GET /api/memoList?pageNo=4 HTTP/1.1" 200 4612 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:25:51 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:25:51 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:25:51 +0000] "GET /api/memoList?pageNo=5 HTTP/1.1" 200 510 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:26:01 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:26:01 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:26:01 +0000] "GET /api/memoList?pageNo=1&keyWord=%EA%B2%80%EC%83%89%EC%96%B4 HTTP/1.1" 200 56 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:26:10 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:26:10 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:26:10 +0000] "GET /api/memoList?pageNo=1&keyWord=%ED%99%94 HTTP/1.1" 200 56 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:26:12 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:26:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:26:12 +0000] "GET /api/memoList?pageNo=1&keyWord=%EC%9E%A5 HTTP/1.1" 200 56 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:26:14 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:26:14 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:26:14 +0000] "GET /api/memoList?pageNo=1&keyWord=%ED%81%AC HTTP/1.1" 200 1930 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:26:17 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=
+2020. 07. 09 23:26:17 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:26:17 +0000] "GET /api/memoList?pageNo=1&keyWord=%ED%81%AC%EB%A6%BC HTTP/1.1" 200 1930 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:27:09 debug: Enter/memoList
+2020. 07. 09 23:27:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:27:09 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:27:09 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path/api/memoList
+2020. 07. 09 23:27:09 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:27:09 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3169 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:27:12 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path/api/memoList
+2020. 07. 09 23:27:12 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:27:12 +0000] "GET /api/memoList?pageNo=1&keyWord=%ED%81%AC HTTP/1.1" 200 1930 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:27:37 debug: Enter/memoList
+2020. 07. 09 23:27:37 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:27:37 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:27:37 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path[object Object]
+2020. 07. 09 23:27:37 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:27:37 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3169 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:27:40 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path[object Object]
+2020. 07. 09 23:27:40 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:27:40 +0000] "GET /api/memoList?pageNo=1&keyWord=%EA%B0%80%EC%9D%84 HTTP/1.1" 200 398 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:27:57 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Pathfunction param(name, defaultValue) {
+  var params = this.params || {};
+  var body = this.body || {};
+  var query = this.query || {};
+
+  var args = arguments.length === 1
+    ? 'name'
+    : 'name, default';
+  deprecate('req.param(' + args + '): Use req.params, req.body, or req.query instead');
+
+  if (null != params[name] && params.hasOwnProperty(name)) return params[name];
+  if (null != body[name]) return body[name];
+  if (null != query[name]) return query[name];
+
+  return defaultValue;
+}
+2020. 07. 09 23:27:57 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:27:57 +0000] "GET /api/memoList?pageNo=1&keyWord=%EA%B0%80%EC%9D%84 HTTP/1.1" 200 398 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:28:35 debug: Enter/memoList
+2020. 07. 09 23:28:35 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:28:35 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:28:35 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path[object Object]
+2020. 07. 09 23:28:35 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:28:35 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3169 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:28:38 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path[object Object]
+2020. 07. 09 23:28:38 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:28:38 +0000] "GET /api/memoList?pageNo=1&keyWord=%EA%B0%80 HTTP/1.1" 200 398 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:28:47 debug: Enter/memoList
+2020. 07. 09 23:28:47 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:28:47 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:28:47 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path[object Object]
+2020. 07. 09 23:28:47 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:28:47 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3169 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:28:51 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path[object Object]
+2020. 07. 09 23:28:51 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:28:51 +0000] "GET /api/memoList?pageNo=1&keyWord=%EC%A0%9C HTTP/1.1" 200 270 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:29:52 debug: Enter/memoList
+2020. 07. 09 23:29:52 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:29:52 +0000] "GET /memoList HTTP/1.1" 200 3284 "http://127.0.0.1:1001/addMemo" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:29:52 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path/api/memoList?pageNo=1
+2020. 07. 09 23:29:53 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:29:53 +0000] "GET /api/memoList?pageNo=1 HTTP/1.1" 200 3169 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:29:59 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path/api/memoList?pageNo=1&keyWord=%EA%B0%80
+2020. 07. 09 23:29:59 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:29:59 +0000] "GET /api/memoList?pageNo=1&keyWord=%EA%B0%80 HTTP/1.1" 200 398 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
+2020. 07. 09 23:30:02 debug: GetMemo Success LoginKey: U2FsdGVkX1/NDGFkpeyxN5Kyl5c+wMFzFbqe+EpzLm4=	 Path/api/memoList?pageNo=1&keyWord=%EC%9D%84
+2020. 07. 09 23:30:02 debug: ::ffff:127.0.0.1 - - [09/Jul/2020:14:30:02 +0000] "GET /api/memoList?pageNo=1&keyWord=%EC%9D%84 HTTP/1.1" 200 398 "http://127.0.0.1:1001/memoList" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+
