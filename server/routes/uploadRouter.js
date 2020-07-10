@@ -46,7 +46,6 @@ router.get('/upload', (req, res) => {
 })
 
 router.post('/uploads', upload.single('file'), (req, res) => {
-    console.log(res);
     utils.logFileReq(req);
     utils.logFileRes(res);
     res.send()

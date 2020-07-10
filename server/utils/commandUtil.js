@@ -120,41 +120,41 @@ exports.isApp = function (cmmInfo) {
  * @param {String} msg 
  */
 exports.logD = function (msg) {
-    try {
-        if (process.env.BUILD_TYPE == 'RELEASE') {
-            logger.info(msg);
-        } else {
-            logger.debug(msg);
-        }
-    } catch (err) {
+    // try {
+    //     if (process.env.BUILD_TYPE == 'RELEASE') {
+    //         logger.info(msg);
+    //     } else {
+    //         logger.debug(msg);
+    //     }
+    // } catch (err) {
 
-    }
+    // }
 }
 
 exports.logFileReq = function (any) {
-    try {
-        logger.info('Request File\n[Headers]\n' + JSON.stringify(any.rawHeaders) + '\n\n[File]\n' + JSON.stringify(any.file));
-    }catch(err){
+    // try {
+    //     logger.info('Request File\n[Headers]\n' + JSON.stringify(any.rawHeaders) + '\n\n[File]\n' + JSON.stringify(any.file));
+    // }catch(err){
 
-    }
+    // }
 }
 
 exports.logFileRes = function (any) {
-    try {
-        logger.info('Response File\n[Headers]\n' + any.response + '\n\n[Client]\n' + any.client);
-    }catch(err){
+    // try {
+    //     logger.info('Response File\n[Headers]\n' + any.response + '\n\n[Client]\n' + any.client);
+    // }catch(err){
 
-    }
+    // }
 }
 
 exports.logE = function (msg) {
-    try {
-        if (process.env.BUILD_TYPE == 'RELEASE') {
-            logger.error(msg);
-        } else {
-            logger.error(msg);
-        }
-    } catch (err) {
+    // try {
+    //     if (process.env.BUILD_TYPE == 'RELEASE') {
+    //         logger.error(msg);
+    //     } else {
+    //         logger.error(msg);
+    //     }
+    // } catch (err) {
 
-    }
+    // }
 }

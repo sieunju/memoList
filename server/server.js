@@ -29,10 +29,10 @@ app.use('/resource', serveStatic(path.join(__dirname, 'resource')));  // Upload 
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-const morgan = require('morgan')
-const winston = require('./utils/winston')
+// const morgan = require('morgan')
+// const winston = require('./utils/winston')
 
-app.use(morgan('combined', { stream: winston.stream }));
+// app.use(morgan('combined', { stream: winston.stream }));
 
 // Json Body Parser
 app.use(bodyParser.urlencoded({ extended: true })); // 웹에서 API Call
@@ -54,33 +54,15 @@ app.use(session({
 // DB 세팅.
 mysql.init();
 
-// Http 에러 로그 생성 및 Http 에러 발생시 로그 저장 처리
-// const logger = require('./utils/Logger')
-// const morgan = require('morgan')
-// app.use(
-//   morgan('combined',
-//   {
-//     skip: function(req,res) {
-//       console.log("Combined \t" + res.statusCode)
-//       res.statusCode < 400
-//     } , // http retrun 이 에러일때만 출력 200~ 399 정상.
-//     stream: logger.stream // logger 에서 morgan의 stream 을 받도록 추가.
-//   })
-// );
-// app.use(
-//   morgan('combined',{stream : logger.stream})
-// )
-
-
 // Handle Error Setting
-// app.use(function (err, req, res, next) {
-//   logger.log('info','Handle Error\t'+err);
-//   next(err);
-// });
-// app.use(function (err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.send(err.message || 'Error!!');
-// });
+app.use(function (err, req, res, next) {
+  logger.log('info', 'Handle Error\t' + err);
+  next(err);
+});
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.send(err.message || 'Error!!');
+});
 
 /**
  * 디렉토리 체크 로직
