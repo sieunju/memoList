@@ -52,7 +52,7 @@ const Memo = {
      */
     getMemo: function (loginKey, query, callBack) {
         const userId = utils.dec(loginKey);
-        const pageSize = 10; // 한번 불러올 데이터 양 고정
+        const pageSize = 20; // 한번 불러올 데이터 양 고정
 
         // PageIndex 계산 ex.) 0, 20, 40, 60...
         let pageIndex = (query.pageNo - 1) * pageSize;
