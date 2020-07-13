@@ -15,6 +15,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mysql = require('./db/db_config');
 const cors = require('cors'); //다중 서버로 접속하게 해주는 기능을 제공, 다른 ip 로 다른서버에 접속
+const utils = require('./utils/commandUtil');
 
 // 폴더 경로 설정.
 const view_dist = path.join(__dirname, '..', './client/views');
@@ -56,47 +57,26 @@ mysql.init();
 
 // Handle Error Setting
 app.use(function (err, req, res, next) {
-  logger.log('info', 'Handle Error\t' + err);
+  console.log('Handle Error\t' + err + '\n\turl\t' + req.url);
   next(err);
 });
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
-  res.send(err.message || 'Error!!');
+  res.send(err || 'Error!!');
 });
 
-/**
- * 디렉토리 체크 로직
- * @param {*} path 
- * @param {*} callback 
- */
-const checkDir = (path, callback) => {
-  fs.stat(path, (err, stats) => {
-    if (err && err.code === 'ENOENT')
-      return callback(null, true);
-    if (err)
-      return callback(err);
-
-    return callback(null, !stats.isDirectory());
-  });
-}
-
-// 파일 업로드 관련 폴더 생성 및 체크
-const resPath = './resource'
-checkDir(resPath, (err, isTrue) => {
-  if (err)
-    return console.log(err);
-
-  if (!isTrue) {
-    console.log('이미 동일한 디렉토리가 있습니다. 패스 합니다.');
+// 업로드 용 디렉토리 생성 로직.
+utils.checkDir(fs, process.env.UPLOAD_ROOT, function (isSuccess, msg) {
+  if (isSuccess) {
+    console.log("성공 !" + msg);
+    utils.checkDir(fs, process.env.UPLOAD_IMG, null);
+    utils.checkDir(fs, process.env.UPLOAD_TXT, null);
+    utils.checkDir(fs, process.env.UPLOAD_ETC, null);
   }
-
-  fs.mkdir(resPath, (err) => {
-    if (err)
-      console.log(err);
-
-    console.log(`${resPath} 경로로 디렉토리를 생성했습니다.`);
-  });
-});
+  else {
+    console.log("실패! " + msg);
+  }
+})
 
 // 릴리즈 모드
 if (process.env.BUILD_TYPE == 'RELEASE') {

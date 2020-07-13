@@ -53,6 +53,7 @@ module.exports = (function () {
                  * INDEX            -> 같은 태그에서도 순서를 정하기 위한 값(추후 값 세팅할 예정)
                  * TITLE            -> 제목
                  * CONTENTS         -> 내용
+                 * IMAGES           -> 메모 이미지 최대 4장
                  * REGISTER_DATE    -> 등록 날짜 DATETIME
                  */
                 sqlQuery = "CREATE TABLE MEMO_TB (" +
@@ -62,6 +63,7 @@ module.exports = (function () {
                     "NUM SMALLINT," +
                     "TITLE VARCHAR(200) NOT NULL," +
                     "CONTENTS VARCHAR(800) NOT NULL," +
+                    "IMAGES VARCHAR(500) NULL," +
                     "REGISTER_DATE DATETIME" +
                     ")";
                 // Memo Table Create

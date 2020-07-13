@@ -2,24 +2,34 @@ const db = require('../db/db_config');
 const utils = require('../utils/commandUtil');
 const StringBuffer = require('stringbuffer');
 
+/**
+ * 메모 Module
+ */
 const Memo = {
 
     /**
      * 메모 추가
      * @param {String} loginKey 사용자 로그인 키 값.
-     * @param {Ojbect} body     tag, num, title, contents
+     * @param {Ojbect} body     tag, num, title, contents, images
      */
     addMemo: function (loginKey, body) {
         // 로그인 키로 사용자 아이디 값 복호화.
         const userId = utils.dec(loginKey);
         const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
-        console.log('UserId ' + userId);
-        console.log(body.tag);
-        console.log(body.title);
-        console.log(body.contents);
-        const sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,REGISTER_DATE)' +
-            'VALUES(?,?,?,?,?)';
-        const params = [userId, body.tag, body.title, contents, new Date()];
+
+        let imgArr = null;
+        // 이미지 데이터 있는 경우.
+        if (body.images != null) {
+            imgArr = JSON.parse(JSON.stringify(body.images));
+
+            // 이미지 최대 4장.
+            imgArr = imgArr.splice(0, 4);
+            imgArr = JSON.stringify(imgArr);
+        }
+
+        const sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,IMAGES,REGISTER_DATE)' +
+            'VALUES(?,?,?,?,?,?)';
+        const params = [userId, body.tag, body.title, contents, imgArr, new Date()];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
@@ -50,7 +60,7 @@ const Memo = {
         // [s] SQL Query
         const queryBuf = new StringBuffer();
         const paramsArr = new Array();
-        queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS FROM MEMO_TB ');
+        queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS, IMAGES FROM MEMO_TB ');
         queryBuf.append('WHERE USER_ID=? ');
         paramsArr.push(userId);
 
@@ -81,7 +91,7 @@ const Memo = {
                     break;
 
             }
-            if(filterTag != -1){
+            if (filterTag != -1) {
                 queryBuf.append('AND TAG=? ')
                 paramsArr.push(utils.decode_utf8(filterTag))
             }
@@ -134,8 +144,18 @@ const Memo = {
 
         const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-        const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, REGISTER_DATE=? WHERE MEMO_ID=?';
-        const params = [body.tag, body.title, contents, new Date(), body.memo_id];
+        let imgArr = null;
+        // 이미지 데이터 있는 경우.
+        if (body.images != null) {
+            imgArr = JSON.parse(JSON.stringify(body.images));
+
+            // 이미지 최대 4장.
+            imgArr = imgArr.splice(0, 4);
+            imgArr = JSON.stringify(imgArr);
+        }
+
+        const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, IMAGES=?, REGISTER_DATE=? WHERE MEMO_ID=?';
+        const params = [body.tag, body.title, contents, imgArr, new Date(), body.memo_id];
         db.getQuery(sql, params, callBack);
     },
 
@@ -158,7 +178,7 @@ const Memo = {
         let pageIndex = (query.pageNo - 1) * pageSize;
 
         // ASC 오름차순 오른쪽으로 갈수록 커진다.   
-        const sql = 'SELECT TAG, MEMO_ID, TITLE, CONTENTS FROM MEMO_TB WHERE USER_ID=? ' +
+        const sql = 'SELECT TAG, MEMO_ID, TITLE, CONTENTS, IMAGES FROM MEMO_TB WHERE USER_ID=? ' +
             'ORDER BY TAG, TITLE ASC LIMIT ?,?';
         const params = [userId, pageIndex, pageSize];
         db.getQuery(sql, params, callBack);

@@ -41,11 +41,11 @@ router.get('/addMemo', (req, res) => {
  *  description     {내용}
  * }
  */
-router.post('/api/addMemo', (req, res) => {
+router.post('/api/memo', (req, res) => {
     try {
         // 쿠키값 파싱.
         const cmmInfo = utils.reqInfo(req);
-        utils.logD('AddMemo LoginKey: ' + cmmInfo.loginKey + '\tBody: ' + req.body);
+        console.log('AddMemo LoginKey: ' + cmmInfo.loginKey + '\tBody: ' + req.body);
         dataModel.addMemo(cmmInfo.loginKey, req.body);
 
         // 앱인경우.
@@ -59,7 +59,7 @@ router.post('/api/addMemo', (req, res) => {
             res.redirect('/memoList');
         }
     } catch (err) {
-        utils.logD('AddMemo Error ' + err);
+        console.log('AddMemo Error ' + err);
         res.status(416).send({
             status: false,
             errMsg: err
@@ -77,7 +77,7 @@ router.post('/api/addMemo', (req, res) => {
  *  filterOpt   {필터 옵션}
  * }
  */
-router.get('/api/memoList', (req, res) => {
+router.get('/api/memo', (req, res) => {
     try {
         // 로그인 키값 get
         const loginKey = utils.reqInfo(req).loginKey;
@@ -141,7 +141,7 @@ router.get('/api/memoList', (req, res) => {
  *  contents
  * }
  */
-router.put('/api/updateMemo', (req, res) => {
+router.put('/api/memo', (req, res) => {
     try {
         const cmmInfo = utils.reqInfo(req)
         
