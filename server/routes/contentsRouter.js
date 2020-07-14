@@ -327,10 +327,12 @@ router.post('/api/blobTT',(req,res) => {
         console.log("Body =======")
         console.log(req.body);
         console.log("==========================");
-        res.status(400).send({
+
+        res.status(200).send({
             status: false,
-            errMsg: req.body
+            msg: req.body
         }).end();
+        
     }catch(err){
         console.log('Error\t' + err);
         res.status(416).send({

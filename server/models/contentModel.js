@@ -189,7 +189,8 @@ const Memo = {
         const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA)' +
         'VALUES(?,?)';
         const date = new Date();
-        const params = [date,body.buffer];
+        // const params = [date,body.buffer];
+        const params = [date,body.blob];
         console.log('TEST Blob');
         console.log(body);
         db.getQuery(sql,params,function onMessage(err,rows) {
