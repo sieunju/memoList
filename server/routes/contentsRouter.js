@@ -296,7 +296,7 @@ router.post('/api/test', (req, res) => {
     }
 })
 
-router.post('/api/blob', upload.any() ,(req, res) => {
+router.post('/api/blob', multer.any() ,(req, res) => {
     try {
         console.log("Blob 여기 들어옴.");
         dataModel.blobTest(req.files[0], function onMessage(err, rows) {
@@ -313,6 +313,19 @@ router.post('/api/blob', upload.any() ,(req, res) => {
             }
         })
     } catch (err) {
+        res.status(416).send({
+            status: false,
+            errMsg: err
+        }).end();
+    }
+})
+
+router.post('/api/blobTT',(req,res) => {
+    try{
+        console.log("Blob 여기 들어옴 TT");
+        req.setEncoding('utf8');
+        console.log(req.body);
+    }catch(err){
         res.status(416).send({
             status: false,
             errMsg: err
