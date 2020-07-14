@@ -8,6 +8,7 @@ const dataModel = require('../models/contentModel');
 const utils = require('../utils/commandUtil');
 const fs = require('fs');
 const multer = require('multer');
+const upload = multer();
 
 // [s] Page
 
@@ -295,7 +296,7 @@ router.post('/api/test', (req, res) => {
     }
 })
 
-router.post('/api/blob', multer.any() ,(req, res) => {
+router.post('/api/blob', upload.any() ,(req, res) => {
     try {
         console.log("Blob 여기 들어옴.");
         dataModel.blobTest(req.files[0], function onMessage(err, rows) {
