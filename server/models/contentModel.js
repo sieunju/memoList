@@ -204,7 +204,8 @@ const Memo = {
                         console.log('Blob 받고 난후 SQL Error ' + err);
                         callBack(err,null);
                     } else {
-                        callBack(err,rows);
+                        console.log('성공 성공!' + rows[0]);
+                        callBack(err,rows[0]);
                     }
                 })
             }
