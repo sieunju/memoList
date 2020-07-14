@@ -324,10 +324,9 @@ router.post('/api/blobTT',(req,res) => {
     try{
         console.log("Blob 여기 들어옴 TT");
         req.setEncoding('utf8');
-        console.log(req.files);
-        res.status(206).send({
-            status: true,
-            req: req
+        console.log(req.body);
+        res.status(400).send({
+            status: false
         }).end();
     }catch(err){
         console.log('Error\t' + err);
