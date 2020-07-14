@@ -38,6 +38,7 @@ app.engine('html', require('ejs').renderFile);
 // Json Body Parser
 app.use(bodyParser.urlencoded({ extended: true })); // 웹에서 API Call
 app.use(express.json());                            // API Call 할때.
+app.use(express.text());
 app.use('/', api);                                  // 라우터 경로 세팅
 app.use(cookieParser(process.env.COOKIE_KEY));      // 쿠키 세팅
 
