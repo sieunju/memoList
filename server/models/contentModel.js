@@ -182,6 +182,31 @@ const Memo = {
             'ORDER BY TAG, TITLE ASC LIMIT ?,?';
         const params = [userId, pageIndex, pageSize];
         db.getQuery(sql, params, callBack);
+    },
+
+    blobTest : function(body,callBack) {
+
+        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB)' +
+        'VALUES(?,?)';
+        const date = new Date();
+        const params = [date,body.blob];
+        db.getQuery(sql,params,function onMessage(err,rows) {
+            if(err){
+                console.log("SQL Error " + err);
+                callBack(err,null);
+            } else {
+                const retrunSql = 'SELECT REGISTER_DATE, BLOB FROM TEST_TB WHERE REGISTER_DATE=?';
+                const retrunParams = [date];
+                db.getQuery(retrunSql,retrunParams,function onMessage(err,rows){
+                    if(err){
+                        console.log('Blob 받고 난후 SQL Error ' + err);
+                        callBack(err,null);
+                    } else {
+                        callBack(err,rows);
+                    }
+                })
+            }
+        })
     }
 };
 

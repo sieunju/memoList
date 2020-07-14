@@ -229,7 +229,7 @@ router.get('/api/test', (req, res) => {
             // Query 정상 동작 한경우.
             else {
 
-                utils.logD('GetMemo Success LoginKey: ' + loginKey + '\t Path' + req.url)
+                console.log('GetMemo Success LoginKey: ' + loginKey + '\t Path' + req.url)
                 // 옵션 세팅
                 // let options = {
                 //     "pageNo" : ++pageNo,
@@ -286,6 +286,29 @@ router.post('/api/test', (req, res) => {
         }
     } catch (err) {
 
+        res.status(416).send({
+            status: false,
+            errMsg: err
+        }).end();
+    }
+})
+
+router.post('/api/blob', (req, res) => {
+    try {
+        dataModel.blobTest(req.body, function onMessage(err, rows) {
+            if (err) {
+                res.status(400).send({
+                    status: false,
+                    errMsg: err
+                }).end();
+            } else {
+                res.status(200).send({
+                    status: true,
+                    response: rows
+                }).end();
+            }
+        })
+    } catch (err) {
         res.status(416).send({
             status: false,
             errMsg: err
