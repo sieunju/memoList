@@ -329,8 +329,8 @@ router.post('/api/blobTT',(req,res) => {
         console.log("==========================");
 
         res.status(200).send({
-            status: false,
-            msg: req.body
+            status: true,
+            blob: req.body.blob
         }).end();
         
     }catch(err){
