@@ -197,7 +197,7 @@ const Memo = {
                 console.log("SQL Error " + err);
                 callBack(err,null);
             } else {
-                const retrunSql = 'SELECT REGISTER_DATE, BLOB FROM TEST_TB WHERE REGISTER_DATE=?';
+                const retrunSql = 'SELECT REGISTER_DATE, BLOB_DATA FROM TEST_TB WHERE REGISTER_DATE=?';
                 const retrunParams = [date];
                 db.getQuery(retrunSql,retrunParams,function onMessage(err,rows){
                     if(err){
