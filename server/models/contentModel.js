@@ -186,7 +186,7 @@ const Memo = {
 
     blobTest : function(body,callBack) {
 
-        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB)' +
+        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA)' +
         'VALUES(?,?)';
         const date = new Date();
         const params = [date,body.buffer];
