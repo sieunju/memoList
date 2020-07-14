@@ -190,6 +190,8 @@ const Memo = {
         'VALUES(?,?)';
         const date = new Date();
         const params = [date,body.blob];
+        console.log('TEST Blob');
+        console.log(body);
         db.getQuery(sql,params,function onMessage(err,rows) {
             if(err){
                 console.log("SQL Error " + err);
