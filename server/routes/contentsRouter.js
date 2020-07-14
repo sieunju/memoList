@@ -323,7 +323,9 @@ router.post('/api/blob', upload.any() ,(req, res) => {
 router.post('/api/blobTT',(req,res) => {
     try{
         console.log("Blob 여기 들어옴 TT");
-        console.log(req);
+        console.log(req.aaaa);
+        console.log("==========================");
+        console.log(req.blob);
         res.status(400).send({
             status: false
         }).end();
