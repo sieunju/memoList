@@ -42,6 +42,15 @@ app.use(express.text());
 app.use('/', api);                                  // 라우터 경로 세팅
 app.use(cookieParser(process.env.COOKIE_KEY));      // 쿠키 세팅
 
+var concat = require('concat-stream');
+app.use(function(req, res, next){
+  req.pipe(concat(function(data){
+    req.body = data;
+    next();
+  }));
+});
+
+
 // 다중 접속을 위한 미들 웨어
 app.use(cors());
 
