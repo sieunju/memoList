@@ -6,6 +6,8 @@ const express = require('express');
 const router = express.Router();
 const dataModel = require('../models/contentModel');
 const utils = require('../utils/commandUtil');
+const fs = require('fs');
+const multer = require('multer');
 
 // [s] Page
 
@@ -293,9 +295,10 @@ router.post('/api/test', (req, res) => {
     }
 })
 
-router.post('/api/blob', (req, res) => {
+router.post('/api/blob', multer.any() ,(req, res) => {
     try {
-        dataModel.blobTest(req.body, function onMessage(err, rows) {
+        console.log("Blob 여기 들어옴.");
+        dataModel.blobTest(req.files[0], function onMessage(err, rows) {
             if (err) {
                 res.status(400).send({
                     status: false,
