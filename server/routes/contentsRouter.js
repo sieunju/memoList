@@ -322,12 +322,14 @@ router.post('/api/blob', upload.any() ,(req, res) => {
 
 router.post('/api/blobTT',(req,res) => {
     try{
-        console.log("Blob 여기 들어옴 TT");
-        console.log(req);
+        console.log("Blob 여기 들어옴 TT Header");
+        console.log(req.rawHeaders);
+        console.log("Body =======")
+        console.log(req.body);
         console.log("==========================");
         res.status(400).send({
             status: false,
-            errMsg: 'err??'
+            errMsg: req.body
         }).end();
     }catch(err){
         console.log('Error\t' + err);
