@@ -1,7 +1,8 @@
 const db = require('../db/db_config');
 const utils = require('../utils/commandUtil');
 const StringBuffer = require('stringbuffer');
-const Blob = require('blob');
+const Blob = require('cross-blob');
+globalThis.Blob = Blob;
 
 /**
  * 메모 Module
@@ -190,8 +191,10 @@ const Memo = {
         const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA) VALUES(?,?)';
 
         // string to Blob Converter
-        let buffer = Buffer.from(body.blob);
-        let blob = new Blob([buffer],{type:body.fileType});
+        let blob = new Blob([body.blob], {
+            type: body.fileType,
+            size: body.fileSize
+        });
         console.log(blob);
         const date = new Date();
         const params = [date, blob];
