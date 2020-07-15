@@ -366,10 +366,10 @@ router.get('/api/blob', (req, res) => {
                 }).end();
             } else {
                 console.log("Fetch Blob Data");
-                console.log(rows[0].BLOB_DATA);
+                // console.log(rows[0].BLOB_DATA);
                 res.status(200).send({
                     status: true,
-                    msg: '성공은 했으나 잠시 로그 확인만 하고 데이터 보내겠습니다.'
+                    data: rows[0].BLOB_DATA
                 }).end();
             }
         })
