@@ -296,23 +296,56 @@ router.post('/api/test', (req, res) => {
     }
 })
 
-router.post('/api/blob', upload.any() ,(req, res) => {
+// router.post('/api/blob', upload.any(), (req, res) => {
+//     try {
+//         console.log("Blob 여기 들어옴.");
+//         dataModel.addBlobTest(req.files[0], function onMessage(err, rows) {
+//             if (err) {
+//                 res.status(400).send({
+//                     status: false,
+//                     errMsg: err
+//                 }).end();
+//             } else {
+//                 res.status(200).send({
+//                     status: true,
+//                     response: rows
+//                 }).end();
+//             }
+//         })
+//     } catch (err) {
+//         res.status(416).send({
+//             status: false,
+//             errMsg: err
+//         }).end();
+//     }
+// })
+
+// Blob Add 
+router.post('/api/blob', (req, res) => {
     try {
-        console.log("Blob 여기 들어옴.");
-        dataModel.blobTest(req.files[0], function onMessage(err, rows) {
+        console.log("API Blob TEST Blob Size " + req.body.blob.length);
+        dataModel.addBlobTest(req.body, function onMessage(err, rows) {
             if (err) {
-                res.status(400).send({
+                console.log("Sql Error\t" + err);
+                res.status(500).send({
                     status: false,
                     errMsg: err
                 }).end();
             } else {
+                console.log("Add Blob Success\t");
                 res.status(200).send({
                     status: true,
-                    response: rows
+                    msg: "Db Add Blob Success"
                 }).end();
             }
         })
+        // res.status(200).send({
+        //     status: true,
+        //     blob: req.body.blob
+        // }).end();
+
     } catch (err) {
+        console.log('Error\t' + err);
         res.status(416).send({
             status: false,
             errMsg: err
@@ -320,20 +353,27 @@ router.post('/api/blob', upload.any() ,(req, res) => {
     }
 })
 
-router.post('/api/blobTT',(req,res) => {
-    try{
-        console.log("Blob 여기 들어옴 TT Header");
-        console.log(req.rawHeaders);
-        console.log("Body =======")
-        console.log(req.body);
-        console.log("==========================");
-
-        res.status(200).send({
-            status: true,
-            blob: req.body.blob
-        }).end();
-        
-    }catch(err){
+// Blob Get
+router.get('/api/blob', (req, res) => {
+    try {
+        console.log("API Blob TEST Get" + req.query);
+        dataModel.fetchBlobTest(req.query, function onMessage(err, rows) {
+            if (err) {
+                console.log("Sql Error\t" + err);
+                res.status(500).send({
+                    status: false,
+                    errMsg: err
+                }).end();
+            } else {
+                console.log("Fetch Blob Data");
+                console.log(rows);
+                res.status(200).send({
+                    status: true,
+                    msg: '성공은 했으나 잠시 로그 확인만 하고 데이터 보내겠습니다.'
+                }).end();
+            }
+        })
+    } catch (err) {
         console.log('Error\t' + err);
         res.status(416).send({
             status: false,

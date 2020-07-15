@@ -170,6 +170,7 @@ const Memo = {
         const userId = utils.dec(loginKey);
     },
 
+    //========TEST Code========
     getMemoTest: function (loginKey, query, callBack) {
         const userId = utils.dec(loginKey);
         const pageSize = 10; // 한번 불러올 데이터 양 고정
@@ -184,34 +185,23 @@ const Memo = {
         db.getQuery(sql, params, callBack);
     },
 
-    blobTest : function(body,callBack) {
+    addBlobTest: function (body, callBack) {
 
         const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA)' +
-        'VALUES(?,?)';
+            'VALUES(?,?)';
         const date = new Date();
-        // const params = [date,body.buffer];
-        const params = [date,body.blob];
-        console.log('TEST Blob');
-        console.log(body);
-        db.getQuery(sql,params,function onMessage(err,rows) {
-            if(err){
-                console.log("SQL Error " + err);
-                callBack(err,null);
-            } else {
-                const retrunSql = 'SELECT REGISTER_DATE, BLOB_DATA FROM TEST_TB WHERE REGISTER_DATE=?';
-                const retrunParams = [date];
-                db.getQuery(retrunSql,retrunParams,function onMessage(err,rows){
-                    if(err){
-                        console.log('Blob 받고 난후 SQL Error ' + err);
-                        callBack(err,null);
-                    } else {
-                        console.log('성공 성공!' + rows[0]);
-                        callBack(err,rows[0]);
-                    }
-                })
-            }
-        })
+        const params = [date, body.blob];
+        db.getQuery(sql, params, callBack);
+    },
+
+    fetchBlobTest: function(query,callBack){
+        const sql = 'SELECT BLOB_DATA FROM TEST_TB WHERE BLOB_ID=?';
+        const params = [query.id];
+        db.getQuery(sql,params,callBack);
     }
+
+
+    //========TEST Code========
 };
 
 module.exports = Memo;
