@@ -36,15 +36,19 @@ app.engine('html', require('ejs').renderFile);
 // app.use(morgan('combined', { stream: winston.stream }));
 
 // Json Body Parser
-app.use(bodyParser.urlencoded({ extended: true })); // 웹에서 API Call
-app.use(express.json());                            // API Call 할때.
-app.use(express.text());
+app.use(bodyParser.urlencoded({ 
+  limit : "50mb",
+  extended: true 
+})); // 웹에서 API Call
+app.use(express.json({
+  limit: "50mb"
+})); // API Call 할때.                            
 app.use('/', api);                                  // 라우터 경로 세팅
 app.use(cookieParser(process.env.COOKIE_KEY));      // 쿠키 세팅
 
 var concat = require('concat-stream');
-app.use(function(req, res, next){
-  req.pipe(concat(function(data){
+app.use(function (req, res, next) {
+  req.pipe(concat(function (data) {
     req.body = data;
     next();
   }));
