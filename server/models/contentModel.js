@@ -190,14 +190,11 @@ const Memo = {
     addBlobTest: function (body, callBack) {
         const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA) VALUES(?,?)';
 
-        // string to Blob Converter
-        let blob = new Blob([body.blob], {
-            type: body.fileType,
-            size: body.fileSize
-        });
-        console.log(blob);
         const date = new Date();
-        const params = [date, blob];
+        // string to Blob Converter
+        let file = new File([body.blob], date + "tmp", { type: body.fileType })
+        console.log(file);
+        const params = [date, file];
         db.getQuery(sql, params, callBack);
     },
 
