@@ -186,18 +186,20 @@ const Memo = {
     },
 
     addBlobTest: function (body, callBack) {
+        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA) VALUES(?,?)';
 
-        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA)' +
-            'VALUES(?,?)';
+        // string to Blob Converter
+        let blob = new Blob([body.blob],{type:body.fileType});
+        
         const date = new Date();
-        const params = [date, body.blob];
+        const params = [date, blob];
         db.getQuery(sql, params, callBack);
     },
 
-    fetchBlobTest: function(query,callBack){
+    fetchBlobTest: function (query, callBack) {
         const sql = 'SELECT BLOB_DATA FROM TEST_TB WHERE BLOB_ID=?';
         const params = [query.id];
-        db.getQuery(sql,params,callBack);
+        db.getQuery(sql, params, callBack);
     }
 
 
