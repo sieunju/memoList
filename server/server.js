@@ -30,10 +30,10 @@ app.use('/resource', serveStatic(path.join(__dirname, 'resource')));  // Upload 
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-// const morgan = require('morgan')
-// const winston = require('./utils/winston')
+const morgan = require('morgan')
+const winston = require('./utils/winston')
 
-// app.use(morgan('combined', { stream: winston.stream }));
+app.use(morgan('combined', { stream: winston.stream }));
 
 // Json Body Parser
 app.use(bodyParser.urlencoded({ extended: true })); // 웹에서 API Call
@@ -66,14 +66,14 @@ app.use(session({
 mysql.init();
 
 // Handle Error Setting
-app.use(function (err, req, res, next) {
-  console.log('Handle Error\t' + err + '\n\turl\t' + req.url);
-  next(err);
-});
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.send(err || 'Error!!');
-});
+// app.use(function (err, req, res, next) {
+//   console.log('Handle Error\t' + err + '\n\turl\t' + req.url);
+//   next(err);
+// });
+// app.use(function (err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.send(err || 'Error!!');
+// });
 
 // 업로드 용 디렉토리 생성 로직.
 utils.checkDir(fs, process.env.UPLOAD_ROOT, function (isSuccess, msg) {
