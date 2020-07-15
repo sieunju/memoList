@@ -1,7 +1,7 @@
 const db = require('../db/db_config');
 const utils = require('../utils/commandUtil');
 const StringBuffer = require('stringbuffer');
-const Blob = require('cross-blob')
+const Blob = require('blob');
 
 /**
  * 메모 Module
