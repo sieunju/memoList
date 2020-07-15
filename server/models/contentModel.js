@@ -1,6 +1,7 @@
 const db = require('../db/db_config');
 const utils = require('../utils/commandUtil');
 const StringBuffer = require('stringbuffer');
+const Blob = require('cross-blob')
 
 /**
  * 메모 Module
@@ -190,7 +191,7 @@ const Memo = {
 
         // string to Blob Converter
         let blob = new Blob([body.blob],{type:body.fileType});
-        
+
         const date = new Date();
         const params = [date, blob];
         db.getQuery(sql, params, callBack);
