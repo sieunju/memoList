@@ -191,7 +191,7 @@ const Memo = {
 
         // string to Blob Converter
         let blob = new Blob([body.blob],{type:body.fileType});
-
+        console.log(blob);
         const date = new Date();
         const params = [date, blob];
         db.getQuery(sql, params, callBack);
