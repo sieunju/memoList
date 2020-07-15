@@ -1,8 +1,7 @@
 const db = require('../db/db_config');
 const utils = require('../utils/commandUtil');
 const StringBuffer = require('stringbuffer');
-const Blob = require('cross-blob');
-globalThis.Blob = Blob;
+const fs = require('fs');
 
 /**
  * 메모 Module
@@ -192,7 +191,13 @@ const Memo = {
 
         const date = new Date();
         // string to Blob Converter
-        let file = new File([body.blob], date + "tmp", { type: body.fileType })
+        let file = fs.writeFileSync(date + '_tmp',body.blob,{encoding: 'base64'},function(err){
+            if(err){
+                console.log("file error " + err);
+            } else {
+                console.log("File Success ");
+            }
+        });
         console.log(file);
         const params = [date, file];
         db.getQuery(sql, params, callBack);
