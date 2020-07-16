@@ -1,8 +1,4 @@
-/**
- * 파일 업로드 관련 라우터
- * Visual Studio 줄 정렬 -> Shift + Option + F
- * Created by hmju
- */
+// 테스트용 라우터 작업 완료된 후 삭제 예정.
 const express = require('express');
 const multer = require('multer');
 const utils = require('../utils/commandUtil');
@@ -14,7 +10,7 @@ const storage = multer.diskStorage({
     destination: function (req, file, callback) {
         console.log('File 타입' + file.mimetype)
         if (file.mimetype.startsWith('image')) {
-            callback(null, process.env.UPLOAD_IMG);
+            callback(null, './resource/test');
         } else {
             // 기타 파일..움..이거는 추후 개발 예정. 하지만 안할수도 있음. 굳이 할필요가 없어 보임.
             console.log('잘못된 파일 타입입니다.!');
@@ -47,17 +43,8 @@ const upload = multer({
 const router = express.Router();
 
 // [s] API Start
-router.get('/upload', (req, res) => {
-    res.render('dummyUpload.html');
-})
-
-/**
- * 파일 업로드
- * @param {MultiPart} file
- */
-router.post('/api/uploads', upload.single('file'), (req, res) => {
-
-    let file = req.file;
+router.post('/api/uploadsTest',upload.array('file'),(req,res) => {
+    let fileArr = req.files;
     // 이미지 파일 업로드 성공시 리턴
     console.log('Image File Upload Success');
     console.log(file);
@@ -66,38 +53,6 @@ router.post('/api/uploads', upload.single('file'), (req, res) => {
         mimeType: file.mimetype,
         imgPath: file.path
     }).end();
-})
-
-/**
- * 파일 삭제
- * @param imgPath 이미지 경로 및 파일 명.
- */
-router.delete('/api/uploads',(req,res) => {
-    console.log(req.body);
-    // 제대로 된 이미지 경로인지 확인. TODO 추후 아이디 유무 조건문 추가해야함.
-    if(req.body.imgPath.startsWith('resource/img/')){
-        fs.unlink(req.body.imgPath,(err) =>{
-            if(err){
-                res.status(404).send({
-                    status: false,
-                    msg : 'File Remove Fail..'
-                }).end();
-            } else {
-                res.status(200).send({
-                    status: true,
-                    path: req.body.imgPath,
-                    msg : 'File Remove Success'
-                })
-            }
-        })
-    } else {
-        // 잘못된 이미지 경로인경우 에러 리턴.
-        res.status(416).send({
-            status: false,
-            msg : 'Wrong img path..'
-        })
-    }
-    
 })
 // [e] API Start
 
