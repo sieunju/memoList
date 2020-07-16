@@ -323,26 +323,32 @@ router.post('/api/test', (req, res) => {
 // Blob Add 
 router.post('/api/blob', (req, res) => {
     try {
-        console.log("API Blob TEST Blob Size " + req.body.blob.length);
-        dataModel.addBlobTest(req.body, function onMessage(err, rows) {
-            if (err) {
-                console.log("Sql Error\t" + err);
-                res.status(500).send({
-                    status: false,
-                    errMsg: err
-                }).end();
-            } else {
-                console.log("Add Blob Success\t");
-                res.status(200).send({
-                    status: true,
-                    msg: "Db Add Blob Success"
-                }).end();
-            }
-        })
+        console.log('=============API Blob=============');
+        console.log(req.body.blob);
+        // dataModel.addBlobTest(req.body, function onMessage(err, rows) {
+        //     if (err) {
+        //         console.log("Sql Error\t" + err);
+        //         res.status(500).send({
+        //             status: false,
+        //             errMsg: err
+        //         }).end();
+        //     } else {
+        //         console.log("Add Blob Success\t");
+        //         res.status(200).send({
+        //             status: true,
+        //             msg: "Db Add Blob Success"
+        //         }).end();
+        //     }
+        // })
         // res.status(200).send({
         //     status: true,
         //     blob: req.body.blob
         // }).end();
+
+        res.status(404).sned({
+            status: false,
+            errMsg: '공사중입니다.'
+        }).end();
 
     } catch (err) {
         console.log('Error\t' + err);
