@@ -63,7 +63,7 @@ router.post('/api/uploadsTest', upload.array('file'), (req, res) => {
             // 파일 삭제 로직 추가.
             fileArr.forEach(function(file){
                 console.log('File Path\t' + file.path);
-                fs.unlink(file.path,null);
+                fs.unlinkSync(file.path);
             })
         }
     })
