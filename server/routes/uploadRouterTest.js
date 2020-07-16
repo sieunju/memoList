@@ -85,6 +85,7 @@ router.get('/api/uploadsTest', (req, res) => {
 
                 res.status(200).send({
                     status:true,
+                    test: 'test text',
                     data: rows[0].BLOB_DATA_2
                 }).end();
             }
