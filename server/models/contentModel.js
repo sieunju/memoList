@@ -191,15 +191,14 @@ const Memo = {
 
         const date = new Date();
         // string to Blob Converter
-        let file = fs.writeFileSync(date + '_tmp',body.blob,{encoding: 'base64'},function(err){
-            if(err){
-                console.log("file error " + err);
-            } else {
-                console.log("File Success ");
-            }
-        });
-        console.log(file);
-        const params = [date, file];
+        let data = body.blob;
+        let bytes = new Uint8Array(data.length);
+        for(let i=0; i<data.length; i++){
+            bytes[i] = data.charCodeAt(i);
+        }
+        console.log(bytes);
+        
+        const params = [date, bytes];
         db.getQuery(sql, params, callBack);
     },
 
