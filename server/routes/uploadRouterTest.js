@@ -59,6 +59,12 @@ router.post('/api/uploadsTest', upload.array('file'), (req, res) => {
             console.log('Sql Success');
             console.log(rows);
             res.status(200).end();
+
+            // 파일 삭제 로직 추가.
+            fileArr.forEach(function(file){
+                console.log('File Path\t' + file.path);
+                fs.unlink(file.path,null);
+            })
         }
     })
 
