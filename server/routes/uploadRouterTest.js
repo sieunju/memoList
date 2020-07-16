@@ -81,6 +81,8 @@ router.get('/api/uploadsTest', (req, res) => {
             } else {
                 console.log("Fetch BlobData");
                 console.log(rows[0].BLOB_DATA_1);
+                fs.writeFileSync('test.jpg',rows[0].BLOB_DATA_1);
+                
                 res.status(200).send({
                     status:true,
                     data: rows[0].BLOB_DATA_1
