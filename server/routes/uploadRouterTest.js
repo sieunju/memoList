@@ -47,11 +47,10 @@ router.post('/api/uploadsTest',upload.array('file'),(req,res) => {
     let fileArr = req.files;
     // 이미지 파일 업로드 성공시 리턴
     console.log('Image File Upload Success');
-    console.log(file);
+    console.log(fileArr);
     res.status(200).send({
         status: true,
-        mimeType: file.mimetype,
-        imgPath: file.path
+        msg : '공사중입니다.!'
     }).end();
 })
 // [e] API Start
