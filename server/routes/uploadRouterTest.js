@@ -4,6 +4,7 @@ const multer = require('multer');
 const utils = require('../utils/commandUtil');
 const path = require('path');
 const fs = require('fs');
+const dataModel = require('../models/uploadModelTest');
 
 const storage = multer.diskStorage({
     // 서버에 저장할 폴더 생성.
@@ -49,10 +50,22 @@ router.post('/api/uploadsTest',upload.array('file'),(req,res) => {
     console.log('Image File Upload Success');
     console.log(fileArr);
     console.log(req.body.test);
-    res.status(200).send({
-        status: true,
-        msg : '공사중입니다.!'
-    }).end();
+
+    dataModel.addBlob(fileArr,function onMessage(err,rows){
+        if(err){
+            console.log('Sql Err\t' + err);
+            res.status(416).end();
+        } else {
+            console.log('Sql Success');
+            console.log(rows);
+            res.status(200).end();
+        }
+    })
+    
+    // res.status(200).send({
+    //     status: true,
+    //     msg : '공사중입니다.!'
+    // }).end();
 })
 // [e] API Start
 
