@@ -53,7 +53,8 @@ router.post('/api/uploadsTest',upload.array('file'),(req,res) => {
 
     dataModel.addBlob(fileArr,function onMessage(err,rows){
         if(err){
-            console.log('Sql Err\t' + err);
+            console.log('Sql Err');
+            console.log(err);
             res.status(416).end();
         } else {
             console.log('Sql Success');
