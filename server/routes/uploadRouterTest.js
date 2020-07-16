@@ -48,6 +48,7 @@ router.post('/api/uploadsTest',upload.array('file'),(req,res) => {
     // 이미지 파일 업로드 성공시 리턴
     console.log('Image File Upload Success');
     console.log(fileArr);
+    console.log(req.body.test);
     res.status(200).send({
         status: true,
         msg : '공사중입니다.!'
