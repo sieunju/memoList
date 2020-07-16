@@ -6,11 +6,6 @@ const express = require('express');
 const router = express.Router();
 const dataModel = require('../models/contentModel');
 const utils = require('../utils/commandUtil');
-const fs = require('fs');
-const multer = require('multer');
-const upload = multer();
-const Blob = require('cross-blob');
-globalThis.Blob = Blob;
 
 // [s] Page
 

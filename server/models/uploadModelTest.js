@@ -17,6 +17,12 @@ const Upload = {
         console.log('Success File Read Size ' + buffers[0].length + "\t" + buffers[1].length);
         const params = [new Date(),buffers[0],buffers[1]];
         db.getQuery(sql,params,callBack);
+    },
+
+    fetchBlobArr : function(query,callBack){
+        const sql = 'SELECT BLOB_DATA_1, BLOB_DATA_2 FROM TEST_TB WHERE BLOB_ID=?';
+        const params = [query.id];
+        db.getQuery(sql, params, callBack); 
     }
 };
 

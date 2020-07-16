@@ -21,8 +21,8 @@ const storage = multer.diskStorage({
     // 서버에 저장할 파일명
     filename: function (req, file, callback) {
         let extension = path.extname(file.originalname);
-        const ranDomName = Math.random().toString(36).substr(2,11);
-        callback(null,'IMG_' +  Date.now() + ranDomName + extension);
+        const ranDomName = Math.random().toString(36).substr(2, 11);
+        callback(null, 'IMG_' + Date.now() + ranDomName + extension);
     }
 });
 
@@ -44,15 +44,15 @@ const upload = multer({
 const router = express.Router();
 
 // [s] API Start
-router.post('/api/uploadsTest',upload.array('file'),(req,res) => {
+router.post('/api/uploadsTest', upload.array('file'), (req, res) => {
     let fileArr = req.files;
     // 이미지 파일 업로드 성공시 리턴
     console.log('Image File Upload Success');
     console.log(fileArr);
     console.log(req.body.test);
 
-    dataModel.addBlob(fileArr,function onMessage(err,rows){
-        if(err){
+    dataModel.addBlob(fileArr, function onMessage(err, rows) {
+        if (err) {
             console.log('Sql Err\t' + err);
             res.status(416).end();
         } else {
@@ -61,11 +61,39 @@ router.post('/api/uploadsTest',upload.array('file'),(req,res) => {
             res.status(200).end();
         }
     })
-    
+
     // res.status(200).send({
     //     status: true,
     //     msg : '공사중입니다.!'
     // }).end();
+})
+
+router.get('/api/uploadsTest', (req, res) => {
+    try {
+        console.log("API Blob TEST Get" + req.query);
+        dataModel.fetchBlobArr(req,function onMessage(err,rows) {
+            if(err){
+                console.log("Sql Error\t" + err);
+                res.status(500).send({
+                    status: false,
+                    errMsg: err
+                }).end();
+            } else {
+                console.log("Fetch BlobData");
+                console.log(rows[0].BLOB_DATA_1);
+                res.status(200).send({
+                    status:true,
+                    data: rows[0].BLOB_DATA_1
+                }).end();
+            }
+        })
+    } catch (err) {
+        console.log('Error\t' + err);
+        res.status(416).send({
+            status: false,
+            errMsg: err
+        }).end();
+    }
 })
 // [e] API Start
 

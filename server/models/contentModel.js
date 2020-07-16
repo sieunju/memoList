@@ -187,7 +187,7 @@ const Memo = {
     },
 
     addBlobTest: function (body, callBack) {
-        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA) VALUES(?,?)';
+        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA_1) VALUES(?,?)';
 
         const date = new Date();
         // string to Blob Converter
