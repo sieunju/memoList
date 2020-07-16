@@ -71,7 +71,7 @@ router.post('/api/uploadsTest', upload.array('file'), (req, res) => {
 router.get('/api/uploadsTest', (req, res) => {
     try {
         console.log("API Blob TEST Get" + req.query);
-        dataModel.fetchBlobArr(req,function onMessage(err,rows) {
+        dataModel.fetchBlobArr(req.query,function onMessage(err,rows) {
             if(err){
                 console.log("Sql Error\t" + err);
                 res.status(500).send({
