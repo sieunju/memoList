@@ -14,7 +14,7 @@ const Upload = {
         for(let i=0; i< buffers.length; i++){
             buffers[i] = fs.readFileSync(fileArr[i].path);
         }
-        console.log('Success File Read');
+        console.log('Success File Read Size ' + buffers[0].length + "\t" + buffers[1].length);
         const params = [new Date(),buffers[0],buffers[1]];
         db.getQuery(sql,params,callBack);
     }
