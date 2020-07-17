@@ -197,11 +197,12 @@ router.get('/api/test', (req, res) => {
         // 로그인 키값 get
         const loginKey = 'U2FsdGVkX1+gh+kWnPG3nmTF2kPKuEC3XYT3b87YsvQ=';
         let currentPage;
+        console.log("Get Test ");
+        console.log(req.query);
 
         // PageNo Null 인경우 기본값  1로 세팅.
         if (req.query.pageNo == null) {
             req.query.pageNo = 1;
-            console.log('')
             currentPage = 1;
         } else {
             currentPage = Number(req.query.pageNo);
@@ -256,8 +257,7 @@ router.get('/api/test', (req, res) => {
             }
         })
     } catch (err) {
-
-        utils.logE('GetMemo Error LoginKey: ' + loginKey + '\t' + err);
+        console.log('GetMemo Error LoginKey: ' + loginKey + '\t' + err);
         res.status(416).send({
             status: false,
             errMsg: 'Error ' + err
@@ -267,6 +267,9 @@ router.get('/api/test', (req, res) => {
 
 router.post('/api/test', (req, res) => {
     try {
+        console.log("Post Test ");
+        console.log(req.body);
+
         const body = req.body;
         if (body.user_id == null) {
             res.status(400).send({
@@ -285,7 +288,7 @@ router.post('/api/test', (req, res) => {
             }).end();
         }
     } catch (err) {
-
+        console.log("Error" + err);
         res.status(416).send({
             status: false,
             errMsg: err
