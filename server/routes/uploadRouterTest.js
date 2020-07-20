@@ -48,8 +48,9 @@ router.post('/api/uploadsTest', upload.array('file'), (req, res) => {
     let fileArr = req.files;
     // 이미지 파일 업로드 성공시 리턴
     console.log('Image File Upload Success');
+    console.log(req.headers);
     console.log(fileArr);
-    console.log(req.body.test);
+    console.log(req.body);
 
     dataModel.addBlob(fileArr, function onMessage(err, rows) {
         if (err) {
