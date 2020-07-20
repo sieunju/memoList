@@ -20,6 +20,9 @@ const storage = multer.diskStorage({
     },
     // 서버에 저장할 파일명
     filename: function (req, file, callback) {
+        console.log('===================================');
+        console.log(req.body);
+                console.log('===================================');
         let extension = path.extname(file.originalname);
         const ranDomName = Math.random().toString(36).substr(2, 11);
         callback(null, 'IMG_' + Date.now() + ranDomName + extension);
