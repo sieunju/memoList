@@ -10,6 +10,10 @@ const storage = multer.diskStorage({
     // 서버에 저장할 폴더 생성.
     destination: function (req, file, callback) {
         console.log('File 타입' + file.mimetype)
+
+        console.log('===================================');
+        console.log(file);
+                console.log('===================================');
         if (file.mimetype.startsWith('image')) {
             callback(null, './resource/test');
         } else {
@@ -20,9 +24,6 @@ const storage = multer.diskStorage({
     },
     // 서버에 저장할 파일명
     filename: function (req, file, callback) {
-        console.log('===================================');
-        console.log(req.body);
-                console.log('===================================');
         let extension = path.extname(file.originalname);
         const ranDomName = Math.random().toString(36).substr(2, 11);
         callback(null, 'IMG_' + Date.now() + ranDomName + extension);
