@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
 
         console.log('===================================');
         console.log(file);
+        console.log(req);
                 console.log('===================================');
         if (file.mimetype.startsWith('image')) {
             callback(null, './resource/test');
