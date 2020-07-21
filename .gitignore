@@ -17,3 +17,6 @@ sessions/
 server/resource/
 
 logs/
+
+# node modules 제외.
+node_modules/
