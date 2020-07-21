@@ -10,11 +10,6 @@ const storage = multer.diskStorage({
     // 서버에 저장할 폴더 생성.
     destination: function (req, file, callback) {
         console.log('File 타입' + file.mimetype)
-
-        console.log('===================================');
-        console.log(file);
-        console.log(req);
-                console.log('===================================');
         if (file.mimetype.startsWith('image')) {
             callback(null, './resource/test');
         } else {
