@@ -273,114 +273,35 @@ router.post('/api/test', (req, res) => {
         const body = req.body;
         if (body.user_id == null) {
             res.status(400).send({
-                status: false,
-                errMsg: 'user_id 값이 없습니다.'
+                status: "fail",
+                message: 'user_id 값이 없습니다.'
             }).end();
         } else if (body.user_pw == null) {
             res.status(400).send({
-                status: false,
-                errMsg: 'user_pw 값이 없습니다.'
+                status: "fail",
+                message: 'user_pw 값이 없습니다.'
             }).end();
         } else {
             res.status(200).send({
-                status: true,
-                msg: 'Success YapYap!'
+                status: "succ",
+                message: 'Success YapYap!',
+                object : {
+                    result: {
+                        record_cnt : "3"
+                    },
+                    result_cust_no_list : [
+                        {
+                            apos_cust_dgns_rslt_no : "174138"
+                        },
+                        {
+                            apos_cust_dgns_rslt_no : "1592"
+                        }
+                    ]
+                }
             }).end();
         }
     } catch (err) {
         console.log("Error" + err);
-        res.status(416).send({
-            status: false,
-            errMsg: err
-        }).end();
-    }
-})
-
-// router.post('/api/blob', upload.any(), (req, res) => {
-//     try {
-//         console.log("Blob 여기 들어옴.");
-//         dataModel.addBlobTest(req.files[0], function onMessage(err, rows) {
-//             if (err) {
-//                 res.status(400).send({
-//                     status: false,
-//                     errMsg: err
-//                 }).end();
-//             } else {
-//                 res.status(200).send({
-//                     status: true,
-//                     response: rows
-//                 }).end();
-//             }
-//         })
-//     } catch (err) {
-//         res.status(416).send({
-//             status: false,
-//             errMsg: err
-//         }).end();
-//     }
-// })
-
-// Blob Add 
-router.post('/api/blob', (req, res) => {
-    try {
-        console.log('=============API Blob=============');
-        // console.log(req.body.blob);
-        dataModel.addBlobTest(req.body, function onMessage(err, rows) {
-            if (err) {
-                console.log("Sql Error\t" + err);
-                res.status(500).send({
-                    status: false,
-                    errMsg: err
-                }).end();
-            } else {
-                console.log("Add Blob Success\t");
-                res.status(200).send({
-                    status: true,
-                    msg: "Db Add Blob Success"
-                }).end();
-            }
-        })
-        // res.status(200).send({
-        //     status: true,
-        //     blob: req.body.blob
-        // }).end();
-
-        // res.status(404).send({
-        //     status: false,
-        //     errMsg: '공사중입니다.'
-        // }).end();
-
-    } catch (err) {
-        console.log('Error\t' + err);
-        res.status(416).send({
-            status: false,
-            errMsg: err
-        }).end();
-    }
-})
-
-// Blob Get
-router.get('/api/blob', (req, res) => {
-    try {
-        console.log("API Blob TEST Get" + req.query);
-        dataModel.fetchBlobTest(req.query, function onMessage(err, rows) {
-            if (err) {
-                console.log("Sql Error\t" + err);
-                res.status(500).send({
-                    status: false,
-                    errMsg: err
-                }).end();
-            } else {
-                console.log("Fetch Blob Data");
-                // console.log(rows[0].BLOB_DATA);
-                res.status(200).send({
-                    status: true,
-                    data: rows[0].BLOB_DATA
-                }).end();
-            }
-        })
-    } catch (err) {
-        console.log('Error\t' + err);
         res.status(416).send({
             status: false,
             errMsg: err
