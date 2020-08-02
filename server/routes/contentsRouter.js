@@ -116,7 +116,7 @@ router.get('/api/memo', (req, res) => {
                 //     hasMore = false;
                 // }
 
-                if (rows[9] == null) {
+                if (rows[19] == null) {
                     hasMore = false;
                 }
 
