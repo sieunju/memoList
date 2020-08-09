@@ -61,6 +61,7 @@ const Memo = {
         // [s] SQL Query
         const queryBuf = new StringBuffer();
         const paramsArr = new Array();
+
         queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS, IMAGES FROM MEMO_TB ');
         queryBuf.append('WHERE USER_ID=? ');
         paramsArr.push(userId);
@@ -193,11 +194,11 @@ const Memo = {
         // string to Blob Converter
         let data = body.blob;
         let bytes = new Uint8Array(data.length);
-        for(let i=0; i<data.length; i++){
+        for (let i = 0; i < data.length; i++) {
             bytes[i] = data.charCodeAt(i);
         }
         console.log(bytes);
-        
+
         const params = [date, bytes];
         db.getQuery(sql, params, callBack);
     },

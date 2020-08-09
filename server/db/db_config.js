@@ -98,6 +98,8 @@ module.exports = (function () {
                     }
                 });
 
+                // randomMemo(con)
+
                 /**
                  * 데이터 베이스 기본 언어 변경
                  */
@@ -166,12 +168,16 @@ function keepAlive() {
     // redis client 사용중이라면 여기서 client.ping(); 하여 연결을 유지한다.
 }
 
+/// [S] TEST CODE ====================================================================================
 function randomMemo(con) {
-    const sqlQuery = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,REGISTER_DATE)' +
-        'VALUES(?,?,?,?,?)';
+    const sqlQuery = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,IMAGES,REGISTER_DATE)' +
+        'VALUES (?,?,?,?,?,?)';
     for (let i = 0; i < 100; i++) {
-        const params = ['qtzz1', (Math.random() * 7 + 1),
-            makeid(), 'Message\t' + makeid(),
+        const params = ['test', 
+        (Math.random() * 7 + 1),
+            makeid(), 
+            'Message\t' + makeid(),
+            makeImage(),
             new Date()];
         con.query(sqlQuery, params, function (err, rows) {
             if (err) {
@@ -180,6 +186,45 @@ function randomMemo(con) {
                 console.log('Dump Success ' + rows.insertId);
             }
         })
+    }
+}
+
+function makeImage (){
+    let text = "";
+    const ran = Math.floor(Math.random() * 100)
+
+    if(ran % 2 == 0 ) {
+        return null
+    } else {
+        const arr = [];
+        arr.push("IMG_1594645069528uibrhjcizvf.jpeg")
+        arr.push("IMG_1594645115336nywr85bdph.jpeg")
+        arr.push("IMG_1595895721787p0rnmvea02i.jpeg")
+        arr.push("IMG_1595897676051afk1j1b40cc.jpeg")
+        arr.push("IMG_15946450230737kkbsc1gw6f.jpeg")
+        arr.push("IMG_15946451114253y84tk1t2cu.jpeg")
+        arr.push("IMG_15947989553665us6sahoh98.jpeg")
+
+        const tmpArr = [];
+
+        for(let i = 0; i < getRanRange(3,false); i++) {
+            tmpArr.push(arr[getRanRange(arr.length)])
+        }
+
+        console.log(JSON.stringify(tmpArr))
+        return JSON.stringify(tmpArr)
+    }
+}
+
+function getRanRange(range) {
+    return getRanRange(range,true)
+}
+
+function getRanRange(range,isZero) {
+    if(isZero) {
+        return Math.floor(Math.random() * range)
+    } else {
+        return Math.floor(Math.random() * range + 1)
     }
 }
 
@@ -196,3 +241,4 @@ function makeid() {
 
     return text;
 }
+/// [E] TEST CODE ====================================================================================

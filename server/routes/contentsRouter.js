@@ -112,13 +112,12 @@ router.get('/api/memo', (req, res) => {
 
                 // 데이터 더이상 부를것인지 체크.
                 let hasMore = true;
-                // if(rows[19] == null){
-                //     hasMore = false;
-                // }
 
                 if (rows[19] == null) {
                     hasMore = false;
                 }
+                
+                console.log(rows);
 
                 res.status(200).send({
                     status: true,
