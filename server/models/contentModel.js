@@ -62,7 +62,7 @@ const Memo = {
         const queryBuf = new StringBuffer();
         const paramsArr = new Array();
 
-        queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS, IMAGES FROM MEMO_TB ');
+        queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS, IMAGES, REGISTER_DATE FROM MEMO_TB ');
         queryBuf.append('WHERE USER_ID=? ');
         paramsArr.push(userId);
 
