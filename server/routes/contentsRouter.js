@@ -117,7 +117,9 @@ router.get('/api/memo', (req, res) => {
                     hasMore = false;
                 }
                 
-                console.log(rows);
+                if(process.env.BUILD_TYPE == 'DEV') {
+                    console.log(rows);
+                }
 
                 res.status(200).send({
                     status: true,
