@@ -6,7 +6,8 @@ const mysqlConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PW,
     database: process.env.DB_NAME,
-    connectionLimit: 10
+    connectionLimit: 10,
+    dateStrings: 'date'
 }
 
 const pool = mysql.createPool(mysqlConfig);
