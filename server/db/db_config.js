@@ -103,22 +103,22 @@ module.exports = (function () {
                 * RES_URL              -> 이미지 / 파일 경로
                 * REGISTER_DATE      -> 등록 날짜
                 */
-                sqlQuery = "CREATE TABLE MEMO_FILE_TB ( " +
-                    "MEMO_ID SMALLINT NOT NULL, " +
-                    "UID SMALLINT NOT NULL AUTO_INCREMENT, " +
-                    "RES_URL VARCHAR(80), " +
-                    "REGISTER_DATE DATETIME, " +
-                    "PRIMARY KEY (UID)," +
-                    "FOREIGN KEY (MEMO_ID) REFERENCES MEMO_TB(MEMO_ID)" +
-                    ")";
-                // File Table Create
-                con.query(sqlQuery, function (err, result) {
-                    if (err) {
-                        console.log("Create MEMO File Table Error " + err)
-                    } else {
-                        console.log("MEMO File Created")
-                    }
-                })
+                // sqlQuery = "CREATE TABLE MEMO_FILE_TB ( " +
+                //     "MEMO_ID SMALLINT NOT NULL, " +
+                //     "UID SMALLINT NOT NULL AUTO_INCREMENT, " +
+                //     "RES_URL VARCHAR(80), " +
+                //     "REGISTER_DATE DATETIME, " +
+                //     "PRIMARY KEY (UID)," +
+                //     "FOREIGN KEY (MEMO_ID) REFERENCES MEMO_TB(MEMO_ID)" +
+                //     ")";
+                // // File Table Create
+                // con.query(sqlQuery, function (err, result) {
+                //     if (err) {
+                //         console.log("Create MEMO File Table Error " + err)
+                //     } else {
+                //         console.log("MEMO File Created")
+                //     }
+                // })
 
                 // Dump Data START TEST 용
                 // randomMemo(con)
