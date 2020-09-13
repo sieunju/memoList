@@ -72,7 +72,7 @@ const Memo = {
         const paramsArr = new Array();
 
         queryBuf.append('SELECT M.MEMO_ID, M.TAG, M.TITLE, M.CONTENTS, ')
-        queryBuf.append('F.RES_URL, M.REGISTER_DATE ')
+        queryBuf.append('F.UID, F.RESOURCE_PATH, M.REGISTER_DATE ')
         queryBuf.append('FROM (')
         queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS, REGISTER_DATE ')
         queryBuf.append('FROM MEMO_TB WHERE USER_ID=? ')
