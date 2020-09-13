@@ -126,7 +126,7 @@ router.get('/api/memo', (req, res) => {
                                 tag: e.TAG,
                                 title: e.TITLE,
                                 contents: e.CONTENTS,
-                                fileList: (e.RES_URL == null) ? [] : [
+                                fileList: (e.RESOURCE_PATH == null) ? [] : [
                                     {
                                         manageNo: e.UID,
                                         path: e.RESOURCE_PATH
