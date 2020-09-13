@@ -110,44 +110,52 @@ router.get('/api/memo', (req, res) => {
                 //     "pageNo" : ++pageNo,
                 //     "sortOpt" : sortOpt,
                 // }
-
-                const map = new Map()
-                rows.forEach(e => {
-                    const key = e.MEMO_ID
-                    if (map.has(e.MEMO_ID)) {
-                        map.get(e.MEMO_ID).fileList.push(e.RES_URL)
-                    } else {
-                        let item = {
-                            manageNo: e.MEMO_ID,
-                            tag: e.TAG,
-                            title: e.TITLE,
-                            contents: e.CONTENTS,
-                            fileList: [e.RES_URL],
-                            regDtm: e.REGISTER_DATE
+                
+                try{
+                    const map = new Map()
+                    rows.forEach(e => {
+                        const key = e.MEMO_ID
+                        if (map.has(e.MEMO_ID)) {
+                            map.get(e.MEMO_ID).fileList.push(e.RES_URL)
+                        } else {
+                            let item = {
+                                manageNo: e.MEMO_ID,
+                                tag: e.TAG,
+                                title: e.TITLE,
+                                contents: e.CONTENTS,
+                                fileList: (e.RES_URL == null) ? [] : [e.RES_URL],
+                                regDtm: e.REGISTER_DATE
+                            }
+    
+                            map.set(e.MEMO_ID, item)
                         }
-
-                        map.set(e.MEMO_ID, item)
+                    })
+    
+                    // let values = Array.from(map.values())
+    
+                    let hasMore = true
+                    if (map.size < 20) {
+                        hasMore = false
                     }
-                })
-
-                // let values = Array.from(map.values())
-
-                let hasMore = true
-                if (map.size < 20) {
-                    hasMore = false
+    
+                    res.status(200).send({
+                        status: true,
+                        dataList: Array.from(map.values()),
+                        pageNo: currentPage,
+                        hasMore: hasMore
+                    }).end()
+                    
+                } catch(err) {
+                    res.status(416).send({
+                        status: false,
+                        errMsg: 'Error ' + err
+                    }).end();
                 }
-
-                res.status(200).send({
-                    status: true,
-                    dataList: Array.from(map.values()),
-                    pageNo: currentPage,
-                    hasMore: hasMore
-                }).end()
             }
         })
     } catch (err) {
 
-        utils.logE('GetMemo Error LoginKey: ' + loginKey + '\t' + err);
+        utils.logE('FetchMemo Error LoginKey: ' + loginKey + '\t' + err);
         res.status(416).send({
             status: false,
             errMsg: 'Error ' + err
