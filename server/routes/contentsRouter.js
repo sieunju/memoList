@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 const dataModel = require('../models/contentModel');
 const utils = require('../utils/commandUtil');
+const { json } = require('express');
 
 // [s] Page
 
@@ -91,7 +92,7 @@ router.get('/api/memo', (req, res) => {
             currentPage = Number(req.query.pageNo);
         }
 
-        dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
+        dataModel.fetchMemo(loginKey, req.query, function onMessage(err, rows) {
             if (err) {
                 utils.logE('GetMemo Sql Error LoginKey: ' + loginKey + '\t' + err)
 
@@ -110,24 +111,38 @@ router.get('/api/memo', (req, res) => {
                 //     "sortOpt" : sortOpt,
                 // }
 
-                // 데이터 더이상 부를것인지 체크.
-                let hasMore = true;
+                const map = new Map()
+                rows.forEach(e => {
+                    const key = e.MEMO_ID
+                    if (map.has(e.MEMO_ID)) {
+                        map.get(e.MEMO_ID).fileList.push(e.RES_URL)
+                    } else {
+                        let item = {
+                            manageNo: e.MEMO_ID,
+                            tag: e.TAG,
+                            title: e.TITLE,
+                            contents: e.CONTENTS,
+                            fileList: [e.RES_URL],
+                            regDtm: e.REGISTER_DATE
+                        }
 
-                if (rows[19] == null) {
-                    hasMore = false;
-                }
-                
-                if(process.env.BUILD_TYPE == 'DEV') {
-                    console.log(rows);
+                        map.set(e.MEMO_ID, item)
+                    }
+                })
+
+                // let values = Array.from(map.values())
+
+                let hasMore = true
+                if (map.size < 20) {
+                    hasMore = false
                 }
 
                 res.status(200).send({
                     status: true,
-                    dataList: rows,
+                    dataList: Array.from(map.values()),
                     pageNo: currentPage,
                     hasMore: hasMore
-                }).end();
-
+                }).end()
             }
         })
     } catch (err) {
@@ -219,7 +234,7 @@ router.get('/api/test', (req, res) => {
             return;
         }
 
-        dataModel.getMemo(loginKey, req.query, function onMessage(err, rows) {
+        dataModel.fetchMemo(loginKey, req.query, function onMessage(err, rows) {
             if (err) {
                 console.log('GetMemo Sql Error LoginKey: ' + loginKey + '\t' + err)
 
@@ -286,16 +301,16 @@ router.post('/api/test', (req, res) => {
             res.status(200).send({
                 status: "succ",
                 message: 'Success YapYap!',
-                object : {
+                object: {
                     result: {
-                        record_cnt : "3"
+                        record_cnt: "3"
                     },
-                    result_cust_no_list : [
+                    result_cust_no_list: [
                         {
-                            apos_cust_dgns_rslt_no : "174138"
+                            apos_cust_dgns_rslt_no: "174138"
                         },
                         {
-                            apos_cust_dgns_rslt_no : "1592"
+                            apos_cust_dgns_rslt_no: "1592"
                         }
                     ]
                 }

@@ -31,75 +31,99 @@ module.exports = (function () {
                  * USER_PW          -> 사용자 비밀 번호
                  * REGISTER_DATE    -> 사용자 등록 날짜 
                  */
-                sqlQuery = "CREATE TABLE ACT_USERS_TB (" +
-                    "USER_ID VARCHAR(30) PRIMARY KEY," +
-                    "LOGIN_KEY VARCHAR(200) NOT NULL," +
-                    "USER_PW VARCHAR(40)," +
-                    "REGISTER_DATE DATETIME" +
-                    ")";
-                // Account Table Create
-                con.query(sqlQuery, function (err, rows) {
+                // sqlQuery = "CREATE TABLE ACT_USERS_TB (" +
+                //     "USER_ID VARCHAR(30) PRIMARY KEY," +
+                //     "LOGIN_KEY VARCHAR(200) NOT NULL," +
+                //     "USER_PW VARCHAR(40)," +
+                //     "REGISTER_DATE DATETIME" +
+                //     ")";
+                // // Account Table Create
+                // con.query(sqlQuery, function (err, rows) {
 
-                    if (err) {
-                        console.log("Create Account Table Error " + err);
-                    } else {
-                        console.log("Account Table Created");
-                    }
-                });
+                //     if (err) {
+                //         console.log("Create Account Table Error " + err);
+                //     } else {
+                //         console.log("Account Table Created");
+                //     }
+                // });
+
+                // /**
+                //  * USER_ID          -> 사용자 아이디
+                //  * MEMO_ID          -> 메모 아이디 (AUTO_INCREMENT)
+                //  * TAG              -> 우선 순위에 대한 테그
+                //  * INDEX            -> 같은 태그에서도 순서를 정하기 위한 값(추후 값 세팅할 예정)
+                //  * TITLE            -> 제목
+                //  * CONTENTS         -> 내용
+                //  * REGISTER_DATE    -> 등록 날짜 DATETIME
+                //  */
+                // sqlQuery = "CREATE TABLE MEMO_TB (" +
+                //     "USER_ID VARCHAR(30) NOT NULL," +
+                //     "MEMO_ID SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
+                //     "TAG SMALLINT," +
+                //     "NUM SMALLINT," +
+                //     "TITLE VARCHAR(200) NOT NULL," +
+                //     "CONTENTS VARCHAR(800) NOT NULL," +
+                //     "REGISTER_DATE DATETIME" +
+                //     ")";
+                // // Memo Table Create
+                // con.query(sqlQuery, function (err, result) {
+                //     if (err) {
+                //         console.log("Create Memo Table Error " + err);
+                //     } else {
+                //         console.log("Memo Table Created");
+                //     }
+                // });
+
+                // /**
+                //  * OS_TYPE              -> APP OS 정보
+                //  * CURRENT_VERSION_NM   -> 현재 버전 (이름)
+                //  * CURRENT_VERSION_CD   -> 현재 버전 (코드)
+                //  * LATE_VERSION_NM      -> 최신 버전 (이름)
+                //  * LATE_VERSION_CD      -> 최신 버전 (코드)
+                //  */
+                // sqlQuery = "CREATE TABLE APP_VERSION_TB (" +
+                //     "OS_TYPE VARCHAR(10) NOT NULL," +
+                //     "CURRENT_VERSION_NM VARCHAR(20)," +
+                //     "CURRENT_VERSION_CD SMALLINT," +
+                //     "LATE_VERSION_NM VARChAR(20)," +
+                //     "LATE_VERSION_CD SMALLINT" +
+                //     ")";
+                // // APP Info Table Create
+                // con.query(sqlQuery, function (err, result) {
+                //     if (err) {
+                //         console.log("Create App Version Table Error " + err)
+                //     } else {
+                //         console.log("App Version Created")
+                //     }
+                // });
 
                 /**
-                 * USER_ID          -> 사용자 아이디
-                 * MEMO_ID          -> 메모 아이디 (AUTO_INCREMENT)
-                 * TAG              -> 우선 순위에 대한 테그
-                 * INDEX            -> 같은 태그에서도 순서를 정하기 위한 값(추후 값 세팅할 예정)
-                 * TITLE            -> 제목
-                 * CONTENTS         -> 내용
-                 * IMAGES           -> 메모 이미지 최대 4장
-                 * REGISTER_DATE    -> 등록 날짜 DATETIME
-                 */
-                sqlQuery = "CREATE TABLE MEMO_TB (" +
-                    "USER_ID VARCHAR(30) NOT NULL," +
-                    "MEMO_ID SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
-                    "TAG SMALLINT," +
-                    "NUM SMALLINT," +
-                    "TITLE VARCHAR(200) NOT NULL," +
-                    "CONTENTS VARCHAR(800) NOT NULL," +
-                    "IMAGES VARCHAR(500) NULL," +
-                    "REGISTER_DATE DATETIME" +
+                * MEMO_ID              -> FK( MEMO_TB MEMO_ID )
+                * UID                  -> PK ( A.I )
+                * RES_URL              -> 이미지 / 파일 경로
+                * REGISTER_DATE      -> 등록 날짜
+                */
+                sqlQuery = "CREATE TABLE MEMO_FILE_TB ( " +
+                    "MEMO_ID SMALLINT NOT NULL, " +
+                    "UID SMALLINT NOT NULL AUTO_INCREMENT, " +
+                    "RES_URL VARCHAR(80), " +
+                    "REGISTER_DATE DATETIME, " +
+                    "PRIMARY KEY (UID)," +
+                    "FOREIGN KEY (MEMO_ID) REFERENCES MEMO_TB(MEMO_ID)" +
                     ")";
-                // Memo Table Create
+                // File Table Create
                 con.query(sqlQuery, function (err, result) {
                     if (err) {
-                        console.log("Create Memo Table Error " + err);
+                        console.log("Create MEMO File Table Error " + err)
                     } else {
-                        console.log("Memo Table Created");
+                        console.log("MEMO File Created")
                     }
-                });
+                })
 
-                /**
-                 * OS_TYPE              -> APP OS 정보
-                 * CURRENT_VERSION_NM   -> 현재 버전 (이름)
-                 * CURRENT_VERSION_CD   -> 현재 버전 (코드)
-                 * LATE_VERSION_NM      -> 최신 버전 (이름)
-                 * LATE_VERSION_CD      -> 최신 버전 (코드)
-                 */
-                sqlQuery = "CREATE TABLE APP_VERSION_TB (" +
-                    "OS_TYPE VARCHAR(10) NOT NULL," +
-                    "CURRENT_VERSION_NM VARCHAR(20)," +
-                    "CURRENT_VERSION_CD SMALLINT," +
-                    "LATE_VERSION_NM VARChAR(20)," +
-                    "LATE_VERSION_CD SMALLINT" +
-                    ")";
-                // APP Info Table Create
-                con.query(sqlQuery, function (err, result) {
-                    if (err) {
-                        console.log("Create App Version Table Error " + err);
-                    } else {
-                        console.log("App Version Created");
-                    }
-                });
-
+                // Dump Data START TEST 용
                 // randomMemo(con)
+                // randomFile(con)
+                // Dump Data END TEST 용
 
                 /**
                  * 데이터 베이스 기본 언어 변경
@@ -171,12 +195,12 @@ function keepAlive() {
 
 /// [S] TEST CODE ====================================================================================
 function randomMemo(con) {
-    const sqlQuery = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,IMAGES,REGISTER_DATE)' +
-        'VALUES (?,?,?,?,?,?)';
+    const sqlQuery = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,REGISTER_DATE)' +
+        'VALUES (?,?,?,?,?)';
     for (let i = 0; i < 100; i++) {
-        const params = ['test', 
-        (Math.random() * 7 + 1),
-            makeid(), 
+        const params = ['test',
+            (Math.random() * 7 + 1),
+            makeid(),
             'Message\t' + makeid(),
             makeImage(),
             new Date()];
@@ -190,11 +214,40 @@ function randomMemo(con) {
     }
 }
 
-function makeImage (){
+function randomFile(con) {
+    const arr = []
+    arr.push("IMG_1594645069528uibrhjcizvf.jpeg")
+    arr.push("IMG_1594645115336nywr85bdph.jpeg")
+    arr.push("IMG_1595895721787p0rnmvea02i.jpeg")
+    arr.push("IMG_1595897676051afk1j1b40cc.jpeg")
+    arr.push("IMG_15946450230737kkbsc1gw6f.jpeg")
+    arr.push("IMG_15946451114253y84tk1t2cu.jpeg")
+    arr.push("IMG_15947989553665us6sahoh98.jpeg")
+
+    const sqlQuery = 'INSERT INTO MEMO_FILE_TB ' +
+        '(MEMO_ID, RES_URL, REGISTER_DATE)' +
+        'VALUES (?,?,?)'
+
+    for (let i = 0; i < 100; i++) {
+        const params = [(Math.random() * 100 + 52),
+        arr[getRanRange(arr.length -1)],
+        new Date()]
+
+        con.query(sqlQuery, params, function (err, rows) {
+            if (err) {
+                console.log('Dump Err' + err);
+            } else {
+                console.log('Dump Success ' + rows.insertId);
+            }
+        })
+    }
+}
+
+function makeImage() {
     let text = "";
     const ran = Math.floor(Math.random() * 100)
 
-    if(ran % 2 == 0 ) {
+    if (ran % 2 == 0) {
         return null
     } else {
         const arr = [];
@@ -208,7 +261,7 @@ function makeImage (){
 
         const tmpArr = [];
 
-        for(let i = 0; i < getRanRange(3,false); i++) {
+        for (let i = 0; i < getRanRange(3, false); i++) {
             tmpArr.push(arr[getRanRange(arr.length)])
         }
 
@@ -218,11 +271,11 @@ function makeImage (){
 }
 
 function getRanRange(range) {
-    return getRanRange(range,true)
+    return getRanRange(range, true)
 }
 
-function getRanRange(range,isZero) {
-    if(isZero) {
+function getRanRange(range, isZero) {
+    if (isZero) {
         return Math.floor(Math.random() * range)
     } else {
         return Math.floor(Math.random() * range + 1)

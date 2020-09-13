@@ -50,8 +50,17 @@ const Memo = {
      * 
      * @param {Listener} callBack DB Query 호출후 Listener
      * @author hmju
-     */
-    getMemo: function (loginKey, query, callBack) {
+     * @example 
+     * SELECT M.USER_ID, M.TAG, M.MEMO_ID, M.TITLE, M.CONTENTS, F.RES_URL, M.REGISTER_DATE
+     * FROM (
+     * SELECT USER_ID, TAG, MEMO_ID, TITLE, CONTENTS, REGISTER_DATE 
+     * FROM MEMO_TB
+     * WHERE USER_ID='test' AND TAG=3 AND TITLE LIKE '%추%'
+     * ORDER BY TAG, TITLE ASC LIMIT 0,20)
+     * AS M
+     * LEFT JOIN MEMO_FILE_TB AS F ON (M.MEMO_ID = F.MEMO_ID)
+    */
+    fetchMemo: function (loginKey, query, callBack) {
         const userId = utils.dec(loginKey);
         const pageSize = 20; // 한번 불러올 데이터 양 고정
 
@@ -62,8 +71,12 @@ const Memo = {
         const queryBuf = new StringBuffer();
         const paramsArr = new Array();
 
-        queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS, IMAGES, REGISTER_DATE FROM MEMO_TB ');
-        queryBuf.append('WHERE USER_ID=? ');
+        queryBuf.append('SELECT M.MEMO_ID, M.TAG, M.TITLE, M.CONTENTS, ')
+        queryBuf.append('F.RES_URL, M.REGISTER_DATE ')
+        queryBuf.append('FROM (')
+        queryBuf.append('SELECT TAG, MEMO_ID, TITLE, CONTENTS, REGISTER_DATE ')
+        queryBuf.append('FROM MEMO_TB WHERE USER_ID=? ')
+
         paramsArr.push(userId);
 
         // 필터 옵션이 있는 경우
@@ -115,15 +128,13 @@ const Memo = {
         }
 
         // 범위 설정
-        queryBuf.append('LIMIT ?,?');
+        queryBuf.append('LIMIT ?,? )');
         paramsArr.push(pageIndex);
         paramsArr.push(pageSize);
 
+        queryBuf.append('AS M ')
+        queryBuf.append('LEFT JOIN MEMO_FILE_TB AS F ON (M.MEMO_ID = F.MEMO_ID)')
         // [e] SQL Query
-
-        // ASC 오름차순 오른쪽으로 갈수록 커진다.   
-        // const sql = 'SELECT TAG, MEMO_ID, TITLE, CONTENTS FROM MEMO_TB WHERE USER_ID=? ' +
-        //     'ORDER BY TAG, TITLE ASC LIMIT ?,?';
 
         db.getQuery(queryBuf.toString(), paramsArr, callBack);
     },
