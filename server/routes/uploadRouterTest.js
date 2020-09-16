@@ -50,6 +50,7 @@ router.post('/api/uploadsTest', upload.array('file'), (req, res) => {
     console.log('Image File Upload Success');
     console.log(req.headers);
     console.log(fileArr);
+    fileArr.length
 
     dataModel.addBlob(fileArr, function onMessage(err, rows) {
         if (err) {
