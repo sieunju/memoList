@@ -8,6 +8,7 @@ const multer = require('multer');
 const utils = require('../utils/commandUtil');
 const path = require('path');
 const fs = require('fs');
+const dataModel = require('../models/uploadModel');
 
 const storage = multer.diskStorage({
     // 서버에 저장할 폴더 생성.
@@ -24,8 +25,8 @@ const storage = multer.diskStorage({
     // 서버에 저장할 파일명
     filename: function (req, file, callback) {
         let extension = path.extname(file.originalname);
-        const ranDomName = Math.random().toString(36).substr(2,11);
-        callback(null,'IMG_' +  Date.now() + ranDomName + extension);
+        const ranDomName = Math.random().toString(36).substr(2, 11);
+        callback(null, 'IMG_' + Date.now() + ranDomName + extension);
     }
 });
 
@@ -55,50 +56,124 @@ router.get('/upload', (req, res) => {
  * 파일 업로드
  * @param {MultiPart} file
  */
-router.post('/api/uploads', upload.single('file'), (req, res) => {
+// router.post('/api/uploads', upload.single('file'), (req, res) => {
 
-    let file = req.file;
-    // 이미지 파일 업로드 성공시 리턴
-    console.log('Image File Upload Success');
-    console.log(file);
-    res.status(200).send({
-        status: true,
-        mimeType: file.mimetype,
-        imgPath: file.path
-    }).end();
+//     let file = req.file;
+//     // 이미지 파일 업로드 성공시 리턴
+//     console.log('Image File Upload Success');
+//     console.log(file);
+//     res.status(200).send({
+//         status: true,
+//         mimeType: file.mimetype,
+//         imgPath: file.path
+//     }).end();
+// })
+
+/**
+ * 파일 업로드
+ * @param {MultiPart} file
+ */
+router.post('/api/uploads', upload.array('files'), (req, res) => {
+    try {
+        // 필수값 유효성 검사.
+        if (utils.isValidString(req.body.memoId)) {
+
+            dataModel.addFiles(req.files, req.body, function onMessage(err, rows) {
+                if (err) {
+                    console.log('Sql Error ' + err)
+                    res.status(416).send({
+                        status: false,
+                        errMsg: err
+                    }).end()
+                } else {
+                    console.log('Sql Success')
+                    res.status(200).send({
+                        status: true
+                    }).end()
+                }
+            })
+        } else {
+            res.status(416).send({
+                status: false,
+                errMsg: '필수 키값이 없습니다..'
+            }).end()
+        }
+    } catch (err) {
+        console.log('Add File Error ' + err)
+        res.status(416).send({
+            status: false,
+            errMsg: err
+        }).end()
+    }
 })
 
 /**
- * 파일 삭제
- * @param imgPath 이미지 경로 및 파일 명.
+ * 해당 파일 삭제.
  */
-router.delete('/api/uploads',(req,res) => {
-    console.log(req.body);
-    // 제대로 된 이미지 경로인지 확인. TODO 추후 아이디 유무 조건문 추가해야함.
-    if(req.body.imgPath.startsWith('resource/img/')){
-        fs.unlink(req.body.imgPath,(err) =>{
-            if(err){
-                res.status(404).send({
+router.delete('/api/uploads', (req, res) => {
+    try {
+        dataModel.deleteFile(req.body, function onMesage(err, rows) {
+            if (err) {
+                res.status(416).send({
                     status: false,
-                    msg : 'File Remove Fail..'
-                }).end();
+                    errMsg: err
+                }).end()
             } else {
+                console.log('SQL Success')
                 res.status(200).send({
-                    status: true,
-                    path: req.body.imgPath,
-                    msg : 'File Remove Success'
-                })
+                    status: true
+                }).end()
+
+                // 파일 삭제
+                if(utils.isValidString(req.body.resPath)) {
+                    try {
+                        fs.unlinkSync(req.body.resPath)
+                    }catch(err) {
+                        console.log(err)
+                    }
+                }
             }
         })
-    } else {
-        // 잘못된 이미지 경로인경우 에러 리턴.
+    } catch (err) {
+        console.log('Delete File Error ' + err)
         res.status(416).send({
             status: false,
-            msg : 'Wrong img path..'
-        })
+            errMsg: err
+        }).end()
     }
-    
 })
+
+// /**
+//  * 파일 삭제
+//  * @param imgPath 이미지 경로 및 파일 명.
+//  */
+// router.delete('/api/uploads', (req, res) => {
+//     console.log(req.body);
+//     // 제대로 된 이미지 경로인지 확인. TODO 추후 아이디 유무 조건문 추가해야함.
+//     if (req.body.imgPath.startsWith('resource/img/')) {
+//         fs.unlink(req.body.imgPath, (err) => {
+//             if (err) {
+//                 res.status(404).send({
+//                     status: false,
+//                     msg: 'File Remove Fail..'
+//                 }).end();
+//             } else {
+//                 res.status(200).send({
+//                     status: true,
+//                     path: req.body.imgPath,
+//                     msg: 'File Remove Success'
+//                 })
+//             }
+//         })
+//     } else {
+//         // 잘못된 이미지 경로인경우 에러 리턴.
+//         res.status(416).send({
+//             status: false,
+//             msg: 'Wrong img path..'
+//         })
+//     }
+
+// })
 // [e] API Start
 
 module.exports = router

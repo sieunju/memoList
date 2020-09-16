@@ -18,19 +18,9 @@ const Memo = {
         const userId = utils.dec(loginKey);
         const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-        let imgArr = null;
-        // 이미지 데이터 있는 경우.
-        if (body.images != null) {
-            imgArr = JSON.parse(JSON.stringify(body.images));
-
-            // 이미지 최대 4장.
-            imgArr = imgArr.splice(0, 4);
-            imgArr = JSON.stringify(imgArr);
-        }
-
-        const sql = 'INSERT INTO MEMO_TB (USER_ID,TAG,TITLE,CONTENTS,IMAGES,REGISTER_DATE)' +
-            'VALUES(?,?,?,?,?,?)';
-        const params = [userId, body.tag, body.title, contents, imgArr, new Date()];
+        const sql = 'INSERT INTO MEMO_TB (USER_ID, TAG, TITLE, CONTENTS, REGISTER_DATE)' +
+            'VALUES(?,?,?,?,?)';
+        const params = [userId, body.tag, body.title, contents, new Date()];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
@@ -157,18 +147,8 @@ const Memo = {
 
         const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-        let imgArr = null;
-        // 이미지 데이터 있는 경우.
-        if (body.images != null) {
-            imgArr = JSON.parse(JSON.stringify(body.images));
-
-            // 이미지 최대 4장.
-            imgArr = imgArr.splice(0, 4);
-            imgArr = JSON.stringify(imgArr);
-        }
-
-        const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, IMAGES=?, REGISTER_DATE=? WHERE MEMO_ID=?';
-        const params = [body.tag, body.title, contents, imgArr, new Date(), body.memo_id];
+        const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, REGISTER_DATE=? WHERE MEMO_ID=?';
+        const params = [body.tag, body.title, contents, new Date(), body.memo_id];
         db.getQuery(sql, params, callBack);
     },
 
