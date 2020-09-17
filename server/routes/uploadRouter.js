@@ -77,7 +77,7 @@ router.post('/api/uploads', upload.array('files'), (req, res) => {
 
                         res.status(200).send({
                             status: true,
-                            patList: filePathList
+                            pathList: filePathList
                         }).end()
                     } catch (err) {
                         res.status(200).send({
