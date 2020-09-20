@@ -70,9 +70,14 @@ router.post('/api/uploads', upload.array('files'), (req, res) => {
                 } else {
                     console.log('Sql Success')
                     try {
+                        const manageNo = req.body.memoId
                         let filePathList = new Array()
                         req.files.forEach(e => {
-                            filePathList.push(e.path)
+                            
+                            filePathList.push({
+                                manageNo: manageNo,
+                                path: e.path
+                            })
                         })
 
                         res.status(200).send({
