@@ -153,6 +153,24 @@ const Memo = {
     },
 
     /**
+     * 메모장 삭제.
+     * @param {loginKey} loginKey 
+     * @param {Query} Query  memo_id
+     * @param {listener} callBack DB Query 호출후 Listener
+     */
+    deleteMemo: function(loginKey, query, callBack) {
+        // 데이터 유효성 검사.
+        if (query.memo_id == null) return
+        const userId = utils.dec(loginKey);
+
+        const sql = 'DELETE FROM MEMO_TB WHERE MEMO_ID=? AND USER_ID=?'
+        const paramsArr = new Array();
+        paramsArr.push(query.memo_id)
+        paramsArr.push(userId)
+        db.getQuery(sql,paramsArr,callBack)
+    },
+
+    /**
      * 검색 키워드 썸네일 값
      * @param {String} loginKey 사용자 로그인 키값. 
      * @param {Object} query  KeyWord

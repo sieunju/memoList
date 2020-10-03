@@ -70,13 +70,12 @@ router.post('/api/uploads', upload.array('files'), (req, res) => {
                 } else {
                     console.log('Sql Success')
                     try {
-                        const manageNo = req.body.memoId
                         let filePathList = new Array()
-                        req.files.forEach(e => {
-                            
+                        // 추가된 파일을 다시 검색해서 가져온다.
+                        rows.forEach(e => {
                             filePathList.push({
-                                manageNo: manageNo,
-                                path: e.path
+                                manageNo: e.UID,
+                                path: e.RESOURCE_PATH
                             })
                         })
 
@@ -85,7 +84,7 @@ router.post('/api/uploads', upload.array('files'), (req, res) => {
                             pathList: filePathList
                         }).end()
                     } catch (err) {
-                        res.status(200).send({
+                        res.status(400).send({
                             status: true,
                             msg: 'SqlSuccess And File Parsing Error'
                         }).end()
@@ -112,24 +111,56 @@ router.post('/api/uploads', upload.array('files'), (req, res) => {
  */
 router.delete('/api/uploads', (req, res) => {
     try {
-        dataModel.deleteFile(req.body, function onMesage(err, rows) {
+        let manageNoList
+        let pathList
+        if (Array.isArray(req.query.manageNoList)) {
+            manageNoList = req.query.manageNoList
+        } else {
+            manageNoList = new Array(req.query.manageNoList)
+        }
+
+        if (Array.isArray(req.query.pathList)) {
+            pathList = req.query.pathList
+        } else {
+            pathList = new Array(req.query.pathList)
+        }
+
+        console.log("=========FILE DELETE===========================")
+        console.log(manageNoList)
+        console.log(pathList)
+        console.log("=========FILE DELETE===========================")
+
+        // Query 유효성 검사.
+        
+        if (manageNoList.length != pathList.length) {
+            res.status(400).send({
+                status: false,
+                errMsg: '파라미터값이 유효하지 않습니다.'
+            })
+            return
+        }
+        dataModel.deleteFile(manageNoList, pathList, function onMesage(err, rows) {
+            console.log(err)
             if (err) {
-                res.status(416).send({
+                res.status(400).send({
                     status: false,
                     errMsg: err
                 }).end()
             } else {
-                console.log('SQL Success')
                 res.status(200).send({
-                    status: true
+                    status: true,
+                    msg: '파일이 정상적으로 삭제 되었습니다.'
                 }).end()
 
                 // 파일 삭제
-                if (utils.isValidString(req.body.resPath)) {
+                for (let i = 0; i < pathList.length; i++) {
                     try {
-                        fs.unlinkSync(req.body.resPath)
+                        console.log("PATH " + pathList[i])
+                        fs.unlinkSync('../' + pathList[i])
                     } catch (err) {
+                        console.log("===========파일 삭제 에러")
                         console.log(err)
+                        console.log("===========파일 삭제 에러")
                     }
                 }
             }

@@ -6,7 +6,6 @@ const express = require('express');
 const router = express.Router();
 const dataModel = require('../models/contentModel');
 const utils = require('../utils/commandUtil');
-const { json } = require('express');
 
 // [s] Page
 
@@ -217,6 +216,47 @@ router.put('/api/memo', (req, res) => {
         }).end();
     }
 });
+
+/**
+ * 메모 삭제.
+ * 메모 아이디만 가지고 삭제.
+ */
+router.delete('/api/memo', (req, res) => {
+    try {
+        const cmmInfo = utils.reqInfo(req)
+        dataModel.deleteMemo(cmmInfo.loginKey, req.query, function onMessage(err,rows) {
+            console.log("DELETE MEMO================RESULT")
+            console.log(err)
+            console.log("DELETE MEMO================RESULT")
+            if (err) {
+                // 앱인경우
+                if (utils.isApp(cmmInfo)) {
+                    res.status(400).send({
+                        status: false,
+                        errMsg: err
+                    }).end()
+                }
+                // 웹인경우.
+                else {
+                    res.status(404).send({
+                        status: false,
+                        errMsg: err
+                    }).end()
+                }
+            } else {
+                res.status(200).send({
+                    status: true,
+                    msg: '메모가 정상적으로 삭제 되었습니다.'
+                }).end();
+            }
+        })
+    } catch (err) {
+        res.status(400).send({
+            status: false,
+            errMsg: err
+        }).end();
+    }
+})
 
 router.get('/api/searchKeyword', (req, res) => {
     console.log(req.url, "Memo KeyWord ");
