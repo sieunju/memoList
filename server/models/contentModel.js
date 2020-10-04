@@ -13,21 +13,16 @@ const Memo = {
      * @param {String} loginKey 사용자 로그인 키 값.
      * @param {Ojbect} body     tag, num, title, contents, images
      */
-    addMemo: function (loginKey, body) {
+    addMemo: function (loginKey, body, callBack) {
         // 로그인 키로 사용자 아이디 값 복호화.
         const userId = utils.dec(loginKey);
         const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
+        const currentDate = new Date()
 
         const sql = 'INSERT INTO MEMO_TB (USER_ID, TAG, TITLE, CONTENTS, REGISTER_DATE)' +
             'VALUES(?,?,?,?,?)';
-        const params = [userId, body.tag, body.title, contents, new Date()];
-        db.getQuery(sql, params, function onMessage(err, rows) {
-            if (err) {
-                console.log('Error ' + err);
-            } else {
-                console.log('Success ' + rows.insertId);
-            }
-        })
+        const params = [userId, body.tag, body.title, contents, currentDate];
+        db.getQuery(sql, params, callBack)
     },
 
     /**
@@ -140,11 +135,6 @@ const Memo = {
         // 데이터 유효성 검사.
         if (body.memo_id == null) return;
 
-        console.log('Id ' + body.memo_id);
-        console.log('Tag ' + body.tag);
-        console.log('Title ' + body.title);
-        console.log('Contents ' + body.contents);
-
         const contents = body.contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
         const sql = 'UPDATE MEMO_TB SET TAG=?, TITLE=?, CONTENTS=?, REGISTER_DATE=? WHERE MEMO_ID=?';
@@ -158,7 +148,7 @@ const Memo = {
      * @param {Query} Query  memo_id
      * @param {listener} callBack DB Query 호출후 Listener
      */
-    deleteMemo: function(loginKey, query, callBack) {
+    deleteMemo: function (loginKey, query, callBack) {
         // 데이터 유효성 검사.
         if (query.memo_id == null) return
         const userId = utils.dec(loginKey);
@@ -167,7 +157,7 @@ const Memo = {
         const paramsArr = new Array();
         paramsArr.push(query.memo_id)
         paramsArr.push(userId)
-        db.getQuery(sql,paramsArr,callBack)
+        db.getQuery(sql, paramsArr, callBack)
     },
 
     /**
@@ -179,47 +169,7 @@ const Memo = {
      */
     getKeyWord: function (loginKey, query, callBack) {
         const userId = utils.dec(loginKey);
-    },
-
-    //========TEST Code========
-    getMemoTest: function (loginKey, query, callBack) {
-        const userId = utils.dec(loginKey);
-        const pageSize = 10; // 한번 불러올 데이터 양 고정
-
-        // PageIndex 계산 ex.) 0, 20, 40, 60...
-        let pageIndex = (query.pageNo - 1) * pageSize;
-
-        // ASC 오름차순 오른쪽으로 갈수록 커진다.   
-        const sql = 'SELECT TAG, MEMO_ID, TITLE, CONTENTS, IMAGES FROM MEMO_TB WHERE USER_ID=? ' +
-            'ORDER BY TAG, TITLE ASC LIMIT ?,?';
-        const params = [userId, pageIndex, pageSize];
-        db.getQuery(sql, params, callBack);
-    },
-
-    addBlobTest: function (body, callBack) {
-        const sql = 'INSERT INTO TEST_TB (REGISTER_DATE,BLOB_DATA_1) VALUES(?,?)';
-
-        const date = new Date();
-        // string to Blob Converter
-        let data = body.blob;
-        let bytes = new Uint8Array(data.length);
-        for (let i = 0; i < data.length; i++) {
-            bytes[i] = data.charCodeAt(i);
-        }
-        console.log(bytes);
-
-        const params = [date, bytes];
-        db.getQuery(sql, params, callBack);
-    },
-
-    fetchBlobTest: function (query, callBack) {
-        const sql = 'SELECT BLOB_DATA FROM TEST_TB WHERE BLOB_ID=?';
-        const params = [query.id];
-        db.getQuery(sql, params, callBack);
     }
-
-
-    //========TEST Code========
 };
 
 module.exports = Memo;

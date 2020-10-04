@@ -38,6 +38,10 @@ const Upload = {
             if (err) {
                 callBack.onMessage(err, -1)
             } else {
+                // 음...이렇게 안하고 다른 방법이 있을거 같은데..애매하네...좀더 공부하고 작업 예정.
+                console.log('File Add Sql=================================')
+                console.log(rows)
+                console.log('File Add Sql=================================')
                 // 추가된 파일을 다시 검색해서 가져온다.
                 const queryBuf = new StringBuffer()
                 const paramsArr = new Array()

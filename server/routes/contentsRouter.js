@@ -38,26 +38,37 @@ router.get('/addMemo', (req, res) => {
  * body {
  *  tag             {우선 순위 값}
  *  title           {제목}
- *  description     {내용}
+ *  contents        {내용}
  * }
  */
 router.post('/api/memo', (req, res) => {
     try {
         // 쿠키값 파싱.
+        console.log(req.body)
         const cmmInfo = utils.reqInfo(req);
-        console.log('AddMemo LoginKey: ' + cmmInfo.loginKey + '\tBody: ' + req.body);
-        dataModel.addMemo(cmmInfo.loginKey, req.body);
-
-        // 앱인경우.
-        if (utils.isApp(cmmInfo)) {
-            res.status(200).send({
-                status: true
-            }).end();
-        }
-        // 웹인경우.
-        else {
-            res.redirect('/memoList');
-        }
+        console.log('AddMemo LoginKey: ' + cmmInfo.loginKey)
+        dataModel.addMemo(cmmInfo.loginKey, req.body, function onMessage(err, rows) {
+            if (err) {
+                console.log('Sql Error ' + err)
+                res.status(416).send({
+                    status: false,
+                    errMsg: err
+                }).end()
+            } else {
+                // 앱인경우.
+                if (utils.isApp(cmmInfo)) {
+                    // insertId -> Memo Id이므로 전달.
+                    res.status(200).send({
+                        status: true,
+                        manageNo: rows.insertId 
+                    }).end();
+                }
+                // 웹인경우.
+                else {
+                    res.redirect('/memoList');
+                }
+            }
+        });
     } catch (err) {
         console.log('AddMemo Error ' + err);
         res.status(416).send({
@@ -224,7 +235,7 @@ router.put('/api/memo', (req, res) => {
 router.delete('/api/memo', (req, res) => {
     try {
         const cmmInfo = utils.reqInfo(req)
-        dataModel.deleteMemo(cmmInfo.loginKey, req.query, function onMessage(err,rows) {
+        dataModel.deleteMemo(cmmInfo.loginKey, req.query, function onMessage(err, rows) {
             console.log("DELETE MEMO================RESULT")
             console.log(err)
             console.log("DELETE MEMO================RESULT")
