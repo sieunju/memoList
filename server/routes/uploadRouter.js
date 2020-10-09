@@ -59,37 +59,37 @@ router.post('/api/uploads', upload.array('files'), (req, res) => {
     try {
         // 필수값 유효성 검사.
         if (utils.isValidString(req.body.memoId)) {
+            const memoId = req.body.memoId
 
-            dataModel.addFiles(req.files, req.body, function onMessage(err, rows) {
-                if (err) {
-                    console.log('Sql Error ' + err)
-                    res.status(416).send({
-                        status: false,
-                        errMsg: err
-                    }).end()
-                } else {
-                    console.log('Sql Success')
-                    try {
-                        let filePathList = new Array()
-                        // 추가된 파일을 다시 검색해서 가져온다.
-                        rows.forEach(e => {
-                            filePathList.push({
-                                manageNo: e.UID,
-                                path: e.RESOURCE_PATH
-                            })
+            let filePathList = new Array()
+            const fileSize = req.files.length
+            let callBackCnt = 0
+
+            req.files.forEach(e => {
+                dataModel.addFile(memoId, e.path, function onMessage(err, rows) {
+                    callBackCnt++
+                    // Sql Error
+                    if (err) {
+                    } else {
+                        // Sql Success
+                        filePathList.push({
+                            manageNo: rows.insertId,
+                            path: e.path
                         })
+                    }
+
+                    // 모든 CallBack 완료 했다면.
+                    if (callBackCnt == fileSize) {
+                        console.log('=================Query Success==============')
+                        console.log(filePathList)
 
                         res.status(200).send({
                             status: true,
                             pathList: filePathList
                         }).end()
-                    } catch (err) {
-                        res.status(400).send({
-                            status: true,
-                            msg: 'SqlSuccess And File Parsing Error'
-                        }).end()
                     }
-                }
+
+                })
             })
         } else {
             res.status(416).send({
@@ -125,13 +125,7 @@ router.delete('/api/uploads', (req, res) => {
             pathList = new Array(req.query.pathList)
         }
 
-        console.log("=========FILE DELETE===========================")
-        console.log(manageNoList)
-        console.log(pathList)
-        console.log("=========FILE DELETE===========================")
-
         // Query 유효성 검사.
-        
         if (manageNoList.length != pathList.length) {
             res.status(400).send({
                 status: false,
@@ -139,32 +133,42 @@ router.delete('/api/uploads', (req, res) => {
             })
             return
         }
-        dataModel.deleteFile(manageNoList, pathList, function onMesage(err, rows) {
-            console.log(err)
-            if (err) {
-                res.status(400).send({
-                    status: false,
-                    errMsg: err
-                }).end()
-            } else {
-                res.status(200).send({
-                    status: true,
-                    msg: '파일이 정상적으로 삭제 되었습니다.'
-                }).end()
 
-                // 파일 삭제
-                for (let i = 0; i < pathList.length; i++) {
-                    try {
-                        console.log("PATH " + pathList[i])
-                        fs.unlinkSync('../' + pathList[i])
-                    } catch (err) {
-                        console.log("===========파일 삭제 에러")
-                        console.log(err)
-                        console.log("===========파일 삭제 에러")
-                    }
+        // DB Query 실행 기준은 File Id 리스트 기준.
+        const callBackLength = manageNoList.length
+        let callBackCnt = 0
+        for (let i = 0; i < callBackLength; i++) {
+            dataModel.deleteFile(manageNoList[i], pathList[i], function onMessage(err, rows) {
+                callBackCnt++
+                // Sql Error 
+                if (err) {
+                    console.log('Sql Error')
+                    console.log(err)
+                } else {
+                    // Sql Success
+                    console.log('Sql Success')
+                    console.log(rows)
                 }
-            }
-        })
+
+                try {
+                    const deletePath = '' + pathList[i]
+                    console.log('Delete Path ' + deletePath)
+                    fs.unlinkSync(deletePath)
+                } catch (err) {
+                    console.log('File Delete Error')
+                    console.log(err)
+                }
+
+                // 모든 CallBack 완료 했다면.
+                if (callBackCnt == callBackLength) {
+                    console.log('Delete Query Successs')
+                    res.status(200).send({
+                        status: true,
+                        msg: '파일이 정상적으로 삭제 되었습니다.'
+                    }).end()
+                }
+            })
+        }
     } catch (err) {
         console.log('Delete File Error ' + err)
         res.status(416).send({

@@ -236,9 +236,6 @@ router.delete('/api/memo', (req, res) => {
     try {
         const cmmInfo = utils.reqInfo(req)
         dataModel.deleteMemo(cmmInfo.loginKey, req.query, function onMessage(err, rows) {
-            console.log("DELETE MEMO================RESULT")
-            console.log(err)
-            console.log("DELETE MEMO================RESULT")
             if (err) {
                 // 앱인경우
                 if (utils.isApp(cmmInfo)) {
@@ -273,125 +270,6 @@ router.get('/api/searchKeyword', (req, res) => {
     console.log(req.url, "Memo KeyWord ");
     const cmmInfo = utils.reqInfo(req);
 })
-
-// [s] TEST 코드
-router.get('/api/test', (req, res) => {
-    try {
-        // 로그인 키값 get
-        const loginKey = 'U2FsdGVkX1+gh+kWnPG3nmTF2kPKuEC3XYT3b87YsvQ=';
-        let currentPage;
-        console.log("Get Test ");
-        console.log(req.query);
-
-        // PageNo Null 인경우 기본값  1로 세팅.
-        if (req.query.pageNo == null) {
-            req.query.pageNo = 1;
-            currentPage = 1;
-        } else {
-            currentPage = Number(req.query.pageNo);
-        }
-
-        const cmmInfo = utils.reqInfo(req);
-
-        if (cmmInfo.osType == null) {
-            res.status(400).send({
-                status: false,
-                errMsg: 'OS Type이 없습니다. Os Type에 아무 값을 입력해주세요.'
-            }).end();
-            return;
-        }
-
-        dataModel.fetchMemo(loginKey, req.query, function onMessage(err, rows) {
-            if (err) {
-                console.log('GetMemo Sql Error LoginKey: ' + loginKey + '\t' + err)
-
-                res.status(416).send({
-                    status: false,
-                    errMsg: err
-                }).end()
-            }
-            // Query 정상 동작 한경우.
-            else {
-
-                console.log('GetMemo Success LoginKey: ' + loginKey + '\t Path' + req.url)
-                // 옵션 세팅
-                // let options = {
-                //     "pageNo" : ++pageNo,
-                //     "sortOpt" : sortOpt,
-                // }
-
-                // 데이터 더이상 부를것인지 체크.
-                let hasMore = true;
-                // if(rows[19] == null){
-                //     hasMore = false;
-                // }
-
-                if (rows[19] == null) {
-                    hasMore = false;
-                }
-
-                res.status(200).send({
-                    status: true,
-                    dataList: rows,
-                    pageNo: currentPage,
-                    hasMore: hasMore
-                }).end();
-
-            }
-        })
-    } catch (err) {
-        console.log('GetMemo Error LoginKey: ' + loginKey + '\t' + err);
-        res.status(416).send({
-            status: false,
-            errMsg: 'Error ' + err
-        }).end();
-    }
-})
-
-router.post('/api/test', (req, res) => {
-    try {
-        console.log("Post Test ");
-        console.log(req.body);
-
-        const body = req.body;
-        if (body.user_id == null) {
-            res.status(400).send({
-                status: "fail",
-                message: 'user_id 값이 없습니다.'
-            }).end();
-        } else if (body.user_pw == null) {
-            res.status(400).send({
-                status: "fail",
-                message: 'user_pw 값이 없습니다.'
-            }).end();
-        } else {
-            res.status(200).send({
-                status: "succ",
-                message: 'Success YapYap!',
-                object: {
-                    result: {
-                        record_cnt: "3"
-                    },
-                    result_cust_no_list: [
-                        {
-                            apos_cust_dgns_rslt_no: "174138"
-                        },
-                        {
-                            apos_cust_dgns_rslt_no: "1592"
-                        }
-                    ]
-                }
-            }).end();
-        }
-    } catch (err) {
-        console.log("Error" + err);
-        res.status(416).send({
-            status: false,
-            errMsg: err
-        }).end();
-    }
-})
-// [e] TEST 코드
 
 // [e] API
 

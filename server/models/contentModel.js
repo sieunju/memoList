@@ -109,7 +109,7 @@ const Memo = {
             console.log("Sort Opt " + utils.decode_utf8(query.sortOpt));
         } else {
             // ASC 오름 차순 오른쪽으로 갈수록 커진다.
-            queryBuf.append('ORDER BY TAG, TITLE ASC ');
+            queryBuf.append('ORDER BY TAG ASC ');
         }
 
         // 범위 설정
@@ -120,7 +120,8 @@ const Memo = {
         queryBuf.append('AS M ')
         queryBuf.append('LEFT JOIN MEMO_FILE_TB AS F ON (M.MEMO_ID = F.MEMO_ID)')
         // [e] SQL Query
-
+        console.log('Query ' + queryBuf.toString())
+        console.log('QUery Params ' + paramsArr)
         db.getQuery(queryBuf.toString(), paramsArr, callBack);
     },
 
