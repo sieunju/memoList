@@ -120,8 +120,8 @@ const Memo = {
         queryBuf.append('AS M ')
         queryBuf.append('LEFT JOIN MEMO_FILE_TB AS F ON (M.MEMO_ID = F.MEMO_ID)')
         // [e] SQL Query
-        console.log('Query ' + queryBuf.toString())
-        console.log('QUery Params ' + paramsArr)
+        // console.log('Query ' + queryBuf.toString())
+        // console.log('QUery Params ' + paramsArr)
         db.getQuery(queryBuf.toString(), paramsArr, callBack);
     },
 
