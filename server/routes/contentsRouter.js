@@ -271,6 +271,10 @@ router.get('/api/searchKeyword', (req, res) => {
     const cmmInfo = utils.reqInfo(req);
 })
 
+router.get('/api/mainTest',(req,res) => {
+    console.log(req.url,"MainTest")
+    
+})
 // [e] API
 
 module.exports = router
