@@ -22,4 +22,4 @@ logs/
 node_modules/
 
 # DummyUtils 제외
-dummyUtils.js
+dummyUtil.js
