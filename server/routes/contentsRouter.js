@@ -271,10 +271,14 @@ router.get('/api/searchKeyword', (req, res) => {
     const cmmInfo = utils.reqInfo(req);
 })
 
+// [e] API
+// [S] TEST
+const dummyUtil = require('../utils/dummyUtil');
+
 router.get('/api/mainTest',(req,res) => {
     console.log(req.url,"MainTest")
-    
+    res.status(200).send(dummyUtil.dummyMainTestJson())   
 })
-// [e] API
+// [E] TEST
 
 module.exports = router
