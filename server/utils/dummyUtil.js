@@ -147,13 +147,13 @@ exports.dummyMainTestJson = function () {
               "v_event_reg_dt": "20201216",
               "v_event_en_dt": "20201230",
               "v_banner_image_path": "/resource/img/IMG_1605422790861wgr0r6z222n.jpg",
-              "v_eventnm": "오늘도착, 전국지역 서비스 OPEN🚀"
+              "v_event_nm": "오늘도착, 전국지역 서비스 OPEN🚀"
             },
             {
               "v_event_reg_dt": "20201216",
               "v_event_en_dt": "20201230",
               "v_banner_image_path": "/resource/img/IMG_1605422790861wgr0r6z222n.jpg",
-              "v_eventnm": "오늘 도우착"
+              "v_event_nm": "오늘 도우착"
             }
           ],
           "v_title": "이벤트"
@@ -166,14 +166,14 @@ exports.dummyMainTestJson = function () {
             {
               "v_event_reg_dt": "20201216",
               "v_event_en_dt": "20201230",
-              "v_banner_image_path": "/resource/img/IMG_1605422790861wgr0r6z222n.jpg",
-              "v_eventnm": "오늘도착, 전국지역 서비스 OPEN🚀"
+              "v_event_img_path": "/resource/img/IMG_1605422790861wgr0r6z222n.jpg",
+              "v_event_nm": "오늘도착, 전국지역 서비스 OPEN🚀"
             },
             {
               "v_event_reg_dt": "20201216",
               "v_event_en_dt": "20201230",
-              "v_banner_image_path": "/resource/img/IMG_1605422790861wgr0r6z222n.jpg",
-              "v_eventnm": "오늘 도우착"
+              "v_event_img_path": "/resource/img/IMG_1605422790861wgr0r6z222n.jpg",
+              "v_event_nm": "오늘 도우착"
             }
           ],
           "v_title": "이벤트"
