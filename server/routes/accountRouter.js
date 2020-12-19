@@ -68,7 +68,6 @@ router.post('/api/signIn', (req, res) => {
     try {
         const loginKey = utils.reqInfo(req).loginKey
         dataModel.fetchUser(loginKey, req.body, function onMessage(err, rows) {
-            console.log(rows)
             if (err) {
                 res.status(400).send({
                     status: false,
