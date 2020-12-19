@@ -32,14 +32,17 @@ router.get('/signUp', (req, res) => {
 /**
  * ACCOUNT SIGN UP POST /api/signUp
  * BODY SAMPLE: 
- * {"user_id": "test",
- * "user_pw": "1234"}
+ * {
+ *  "user_nm": "테스트",
+ *  "user_id": "test",
+ *  "user_pw": "1234"
+ * }
  */
 router.post('/api/signUp', (req, res) => {
     const body = req.body;
     console.log("Sign Up ID\t" + body.user_id);
     console.log("Sign Up Pw\t" + body.user_pw);
-    dataModel.addUser(body.user_id, body.user_pw);
+    dataModel.postUser(body);
     res.status(200);
     res.write('Account Register Success');
     res.end();
@@ -47,47 +50,57 @@ router.post('/api/signUp', (req, res) => {
 
 /**
  * ACCOUNT SIGN_IN: POST /api/signin
- * BODY SAMPLE: {"user_id": "test",
- * "user_pw": "1234"}
+ * 
+ * BODY SAMPLE: 
+ * {
+ *  "user_id": "test",
+ *  "user_pw": "1234"
+ * }
+ * or 
+ * HEADER 
+ * {
+ *  "login_key" : unique Token
+ * }
  * ERROR CODE:
- *      104
+ *  400
  */
-router.post('/api/signin', (req, res) => {
+router.post('/api/signIn', (req, res) => {
     try {
-        const body = req.body;
-        console.log("Sign In Headers " + req.headers);
-        console.log("Sign In Id\t" + body.user_id);
-        console.log("Sign In Pw\t" + body.user_pw);
-        dataModel.userCheck(body.user_id, body.user_pw, function onMessage(isSuccess, loginKey) {
-            if (isSuccess) {
-                console.log("Login Success " + loginKey);
-
-                // 앱인경우.
-                if (utils.reqInfo(req).osType != null) {
-                    res.status(200).send({
-                        loginKey: loginKey
-                    })
-                }
-                // 웹인경우
-                else {
-                    res.cookie("loginKey", loginKey, {
-                        // maxAge: 600 * 60 * 1000
-                    });
-                    res.redirect('/memoList');
-                }
+        const loginKey = utils.reqInfo(req).loginKey
+        console.log(req.body)
+        dataModel.fetchUser(loginKey, req.body, function onMessage(err, rows) {
+            console.log(rows)
+            if (err) {
+                res.status(400).send({
+                    status: false,
+                    errMsg: err
+                }).end()
             } else {
-                console.log("Error");
-                res.status(404).send({
-                    error: 'Login Fail..'
-                })
-            }
-        });
-    } catch (err) {
-        console.log("Error /api/signin", err);
-        res.status(404).send({ error: '로그인 실패하였습니다.' });
-    }
+                if (rows[0] != null) {
+                    const json = new Object()
+                    json.status = true
+                    json.user_nm = rows[0].USER_NM
+                    json.res_path = rows[0].RES_PATH
+                    if(rows[0].LOGIN_KEY != null) {
+                        json.login_key = rows[0].LOGIN_KEY
+                    }
 
-});
+                    res.status(200).send(json).end()
+                } else {
+                    res.status(400).send({
+                        status: false,
+                        erroMsg: '유효하지 않은 값입니다.'
+                    }).end()
+                }
+            }
+        })
+    } catch (err) {
+        res.status(400).send({
+            status: false,
+            errMsg: err
+        }).end()
+    }
+})
 // [e] API
 
 module.exports = router

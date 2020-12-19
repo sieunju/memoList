@@ -1,18 +1,19 @@
 const db = require('../db/db_config');
 const utils = require('../utils/commandUtil');
+const StringBuffer = require('stringbuffer');
 
 const User = {
 
     /**
      * 사용자 추가 Query
-     * @param {String} id 사용자 아이디
-     * @param {String} pw 사용자 비밀 번호
+     * @param form {Login Form}
+     * user_id, user_pw, user_nm
      */
-    addUser: function (id, pw) {
-        const loginKey = utils.enc(id);
-        const sql = 'INSERT INTO ACT_USERS_TB (USER_ID,LOGIN_KEY,USER_PW,REGISTER_DATE)' +
-            'VALUES(?,?,?,?)';
-        const params = [id, loginKey, pw, new Date()];
+    postUser: function (form) {
+        const loginKey = utils.enc(form.user_id);
+        const sql = 'INSERT INTO ACT_USERS_TB (USER_NM,USER_ID,LOGIN_KEY,USER_PW,REGISTER_DATE)' +
+            'VALUES(?,?,?,?,?)';
+        const params = [form.user_nm, form.user_id, loginKey, form.user_pw, new Date()];
         db.getQuery(sql, params, function onMessage(err, rows) {
             if (err) {
                 console.log('Error ' + err);
@@ -20,6 +21,42 @@ const User = {
                 console.log('Sucees ' + rows.insertId);
             }
         })
+    },
+
+    /**
+     * 사용자 정보 체크 로직.
+     * @param {String} loginKey 
+     * @param {function} callback 
+     */
+    fetchUser: function (loginKey, body, callback) {
+        let userId = ''
+        let userPw = ''
+        const queryBuf = new StringBuffer();
+        const paramsArr = new Array();
+
+        if (utils.isEmpty(loginKey)) {
+            userId = body.user_id
+            userPw = body.user_pw
+            queryBuf.append('SELECT USER_NM, RES_PATH, LOGIN_KEY ')
+            queryBuf.append('FROM ACT_USERS_TB ')
+            queryBuf.append('WHERE USER_ID=? ')
+            queryBuf.append('AND ')
+            queryBuf.append('USER_PW=? ')
+
+            paramsArr.push(userId)
+            paramsArr.push(userPw)
+        } else {
+            userId = utils.dec(loginKey)
+            queryBuf.append('SELECT USER_NM, RES_PATH ')
+            queryBuf.append('FROM ACT_USERS_TB ')
+            queryBuf.append('WHERE USER_ID=? ')
+
+            paramsArr.push(userId)
+        }
+
+        console.log("QUERY " + queryBuf.toString())
+        console.log(paramsArr)
+        db.getQuery(queryBuf.toString(), paramsArr, callback)
     },
 
     /**

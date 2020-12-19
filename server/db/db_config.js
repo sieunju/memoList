@@ -26,15 +26,19 @@ module.exports = (function () {
 
                 // DB 연결 완료후 Table 생성.
                 /**
+                 * USER_NM          -> 사용자 이름
                  * USER_ID          -> 사용자 아이디 PK
                  * LOGIN_KEY        -> 사용자 식별 (암호화)
                  * USER_PW          -> 사용자 비밀 번호
+                 * RES_PATH         -> 프로필 사진 경로
                  * REGISTER_DATE    -> 사용자 등록 날짜 
                  */
                 // sqlQuery = "CREATE TABLE ACT_USERS_TB (" +
+                //     "USER_NM VARCHAR(30)," + 
                 //     "USER_ID VARCHAR(30) PRIMARY KEY," +
                 //     "LOGIN_KEY VARCHAR(200) NOT NULL," +
                 //     "USER_PW VARCHAR(40)," +
+                //     "RES_PATH VARCHAR(80)," +
                 //     "REGISTER_DATE DATETIME" +
                 //     ")";
                 // // Account Table Create
