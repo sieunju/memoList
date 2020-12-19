@@ -67,7 +67,6 @@ router.post('/api/signUp', (req, res) => {
 router.post('/api/signIn', (req, res) => {
     try {
         const loginKey = utils.reqInfo(req).loginKey
-        console.log(req.body)
         dataModel.fetchUser(loginKey, req.body, function onMessage(err, rows) {
             console.log(rows)
             if (err) {
