@@ -49,6 +49,12 @@ router.get('/api/app/version', (req, res) => {
         })
     }
 });
+
+router.get('/api/error',(req,res) => {
+    res.status(500).send({
+        error:'Error'
+    })
+})
 // [e] API
 
 module.exports = router
