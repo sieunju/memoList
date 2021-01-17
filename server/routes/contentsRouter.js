@@ -286,7 +286,8 @@ router.get('/api/jsonTest',(req,res) => {
         res.status(200).send({
             status : true,
             msg : "Hellow Test",
-            testMsg : "Hi Test"
+            testMsg : "Hi Test",
+            nullMsg : null
         }).end()
     } else {
         res.status(404).send({
