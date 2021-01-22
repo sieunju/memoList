@@ -16,6 +16,11 @@ router.get('/', (req, res) => {
     res.render('login.html');
 });
 
+router.get("/qtzz772",(req,res) => {
+    console.log("TEST Page " + req.path)
+    res.render('DaumSearchAddress.html')
+})
+
 // 로그인 페이지 진입.
 router.get('/login', (req, res) => {
     console.log("Login Page Enter " + req.path);
