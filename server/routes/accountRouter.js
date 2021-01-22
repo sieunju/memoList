@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     res.render('login.html');
 });
 
-router.get("/qtzz772",(req,res) => {
+router.get("/hoethoet",(req,res) => {
     console.log("TEST Page " + req.path)
     res.render('DaumSearchAddress.html')
 })
