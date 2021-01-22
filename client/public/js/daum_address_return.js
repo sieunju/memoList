@@ -22,7 +22,7 @@
 //
 //
 //
-//      
+//
           // 우편번호 찾기 찾기 화면을 넣을 element
     var element_wrap = document.getElementById('wrap');
     element_wrap.style.display = 'block';
@@ -34,8 +34,7 @@
 
                 if(data.userSelectedType=="R"){
                       // userSelectedType : 검색 결과에서 사용자가 선택한 주소의 타입
-                      // r
-                      "eturn type : R - roadAddress, J : jibunAddress
+                      // return type : R - roadAddress, J : jibunAddress
                       // TestApp 은 안드로이드에서 등록한 이름
                       alert("되었나?1");
                       window.OneaOneJavaInterface.setAddress(data.zonecode, data.roadAddress, data.buildingName);
