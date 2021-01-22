@@ -2,31 +2,33 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 user-scalable=yes target-densitydpi=device-dpi"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to Firebase Hosting</title>
-    <meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 user-scalable=yes target-densitydpi=device-dpi"/>
-
 </head>
 <body>
-<!--<script src="daum_address_script.js?autoload=false"></script>-->
-<!--<script src="daum_address_return.js"></script>-->
-
-<script type="text/javascript" src="../public/js/daum_address_script_test.js?autoload=false"></script>
-<script type="text/javascript" src="../public/js/daum_address_return.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
 <!-- !!중요. - autoload=false 를 반드시 붙혀주셔야 합니다.-->
-<!--<script>-->
-<!--      //load함수를 이용하여 core스크립트의 로딩이 완료된 후, 우편번호 서비스를 실행합니다.-->
-<!--    var element_layer = document.getElementById('layer');-->
-<!--      daum.postcode.load(function(){-->
-<!--          new daum.Postcode({-->
-<!--              oncomplete: function(data) {-->
-<!--                  alert("되나요");-->
-<!--                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.-->
-<!--                  // 예제를 참고하여 다양한 활용법을 확인해 보세요.-->
-<!--              }-->
-<!--          }).embed();-->
-<!--      });-->
-<!--  </script>-->
+<script>
+      //load함수를 이용하여 core스크립트의 로딩이 완료된 후, 우편번호 서비스를 실행합니다.
+    var element_layer = document.getElementById('layer');
+      daum.postcode.load(function(){
+          new daum.Postcode({
+              oncomplete: function(data) {
+                  if(data.userSelectedType=="R"){
+                  // userSelectedType : 검색 결과에서 사용자가 선택한 주소의 타입
+                  // return type : R - roadAddress, J : jibunAddress
+                  // TestApp 은 안드로이드에서 등록한 이름
+                  alert("되었나?1")
+                  window.OneaOneJavaInterface.setAddress(data.zonecode, data.roadAddress, data.buildingName);
+                  }
+                  else{
+                  alert("되었나?2")
+                  window.OneaOneJavaInterface.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
+                  }
+              }
+          }).embed();
+      });
+  </script>
 </iframe>
 </body>
 </html>
