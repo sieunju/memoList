@@ -21,6 +21,10 @@ router.get("/hoethoet",(req,res) => {
     res.render('DaumSearchAddress.html')
 })
 
+router.get("/api/timeout",(req,res) => {
+    console.log("Api Time Out")
+})
+
 // 로그인 페이지 진입.
 router.get('/login', (req, res) => {
     console.log("Login Page Enter " + req.path);
