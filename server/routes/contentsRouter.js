@@ -60,7 +60,7 @@ router.post('/api/memo', (req, res) => {
                     // insertId -> Memo Id이므로 전달.
                     res.status(200).send({
                         status: true,
-                        manageNo: rows.insertId 
+                        manageNo: rows.insertId
                     }).end();
                 }
                 // 웹인경우.
@@ -275,24 +275,223 @@ router.get('/api/searchKeyword', (req, res) => {
 // [S] TEST
 const dummyUtil = require('../utils/dummyUtil');
 
-router.get('/api/mainTest',(req,res) => {
-    console.log(req.url,"MainTest")
-    res.status(200).send(dummyUtil.dummyMainTestJson())   
+router.get('/api/mainTest', (req, res) => {
+    console.log(req.url, "MainTest")
+    res.status(200).send(dummyUtil.dummyMainTestJson())
 })
 
-router.get('/api/jsonTest',(req,res) => {
+router.get('/api/main', (req, res) => {
+    console.log(req.url, "Main")
+    var dummyImgpath1 = "https://media.vlpt.us/images/jojo_devstory/post/d55c083b-0876-4937-b594-2431992f874b/Jetpack_logo%20(2).png"
+    var dummyImgpath2 = "https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2B1N/image/sBdQ7stT2xeT4FNsSZ0-XzglOiM.jpg"
+    var dummyImgpath3 = "https://blog.kakaocdn.net/dn/Qyx8Y/btqDeUCcCzB/2DFAnzHdFCbbiVhrkCk9lk/img.png"
+    var dummyImgpath4 = "https://cdn.mos.cms.futurecdn.net/5NyzBxijspGUiFyCiz9F4-1200-80.jpg"
+    var dummyImgpath5 = "https://files.itworld.co.kr/archive/image/2016/10/apple-sept12-invite-100734328-large_3x2.jpg"
+
+    var dataList = new Array()
+    // 탑배너
+    dataList.push({
+        type: "topBanner",
+        dataList : [
+            {
+                v_image_path: dummyImgpath1
+            },
+            {
+                v_image_path: dummyImgpath2
+            },
+            {
+                v_image_path: dummyImgpath3
+            },
+            {
+                v_image_path: dummyImgpath4
+            },
+        ]
+    })
+    // 진한 생활 상품
+    dataList.push({
+        type : "prd",
+        dataList : [
+            {
+                v_title : "면역력",
+                v_code : "ff",
+                prd_list : [
+                    {
+                        v_title: "청량 파워업 (30포)",
+                        v_img_path : dummyImgpath1,
+                        v_price : 16500
+                    },
+                    {
+                        v_title: "1899시그니처 오일",
+                        v_img_path : dummyImgpath2,
+                        v_price : 18000
+                    },
+                    {
+                        v_title: "내공 냠냠",
+                        v_img_path : dummyImgpath3,
+                        v_price : 199999
+                    },
+                ]
+            },
+            {
+                v_title : "성인병",
+                v_code : "ff",
+                prd_list : [
+                    {
+                        v_title: "성인병 청량 파워업 (30포)",
+                        v_img_path : dummyImgpath1,
+                        v_price : 16500
+                    },
+                    {
+                        v_title: "성인병 1899시그니처 오일",
+                        v_img_path : dummyImgpath2,
+                        v_price : 18000
+                    },
+                    {
+                        v_title: "성인병 내공 냠냠",
+                        v_img_path : dummyImgpath3,
+                        v_price : 199999
+                    },
+                ]
+            }
+        ]
+    })
+    // 진한 생활 이벤트
+    dataList.push({
+        type : "event",
+        eventList : [
+            {
+                v_title : "이벤트1",
+                v_url: "www.google.com",
+                v_img_path : dummyImgpath4
+            },
+            {
+                v_title : "이벤트2",
+                v_url: "www.google.com",
+                v_img_path : dummyImgpath5
+            },
+            {
+                v_title : "이벤트3",
+                v_url: "www.google.com",
+                v_img_path : dummyImgpath4
+            }
+        ]
+    })
+    // 진한 생활 샘플링
+    dataList.push({
+        type : "sampling",
+        dataList : [
+            {
+                v_title : "이벤트1",
+                v_url: "www.google.com",
+                v_img_path : dummyImgpath4
+            },
+            {
+                v_title : "이벤트2",
+                v_url: "www.google.com",
+                v_img_path : dummyImgpath5
+            },
+            {
+                v_title : "이벤트1",
+                v_url: "www.google.com",
+                v_img_path : dummyImgpath4
+            }
+        ]
+    })
+
+    // 생활 정보.
+    dataList.push({
+        type : "tip",
+        dataList : [
+            {
+                v_title : "면역력",
+                v_code : "ff",
+                prd_list : [
+                    {
+                        v_title: "청량 파워업 (30포)",
+                        v_img_path : dummyImgpath1,
+                        v_price : 16500
+                    },
+                    {
+                        v_title: "1899시그니처 오일",
+                        v_img_path : dummyImgpath2,
+                        v_price : 18000
+                    },
+                    {
+                        v_title: "내공 냠냠",
+                        v_img_path : dummyImgpath3,
+                        v_price : 199999
+                    },
+                ]
+            },
+            {
+                v_title : "성인병",
+                v_code : "ff",
+                prd_list : [
+                    {
+                        v_title: "성인병 청량 파워업 (30포)",
+                        v_img_path : dummyImgpath1,
+                        v_price : 16500
+                    },
+                    {
+                        v_title: "성인병 1899시그니처 오일",
+                        v_img_path : dummyImgpath2,
+                        v_price : 18000
+                    },
+                    {
+                        v_title: "성인병 내공 냠냠",
+                        v_img_path : dummyImgpath3,
+                        v_price : 199999
+                    },
+                ]
+            }
+        ]
+    })
+
+    // 동영상
+    dataList.push({
+        type: "movie",
+        v_img_path : "https://img.youtube.com/vi/A5AmE_b68cg/hqdefault.jpg"
+    })
+
+    // 포인트?
+    dataList.push({
+        type : "point",
+        berr_point : 25000,
+        jin_point : 24999
+    })
+
+    // 타입을 찾아보자
+    dataList.push({
+        type : "skinFind"
+    })
+
+    // 공지 사항
+    dataList.push({
+        type : "notice",
+        contents : "공지사하아아아아아아아ㅏ아알ㄹㄹ"
+    })
+
+    res.status(200).send({
+        data: {
+            list: dataList,
+            success : true
+        }
+    })
+})
+
+router.get('/api/jsonTest', (req, res) => {
     let testNo = req.query.testNo
-    if(testNo != null) {
+    if (testNo != null) {
         res.status(200).send({
-            status : true,
-            msg : "Hellow Test",
-            testMsg : "Hi Test",
-            nullMsg : null
+            status: true,
+            msg: "Hellow Test",
+            testMsg: "Hi Test",
+            nullMsg: null
         }).end()
     } else {
         res.status(404).send({
-            status : false,
-            testMsg : null
+            status: false,
+            testMsg: null
         }).end()
     }
 })
