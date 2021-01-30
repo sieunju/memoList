@@ -67,7 +67,7 @@ app.use(session({
 }));
 
 // DB 세팅.
-mysql.init();
+// mysql.init();
 
 // Handle Error Setting
 app.use(function (err, req, res, next) {

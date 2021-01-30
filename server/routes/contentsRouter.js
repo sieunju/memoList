@@ -272,30 +272,5 @@ router.get('/api/searchKeyword', (req, res) => {
 })
 
 // [e] API
-// [S] TEST
-const dummyUtil = require('../utils/dummyUtil');
-
-router.get('/api/mainTest',(req,res) => {
-    console.log(req.url,"MainTest")
-    res.status(200).send(dummyUtil.dummyMainTestJson())   
-})
-
-router.get('/api/jsonTest',(req,res) => {
-    let testNo = req.query.testNo
-    if(testNo != null) {
-        res.status(200).send({
-            status : true,
-            msg : "Hellow Test",
-            testMsg : "Hi Test",
-            nullMsg : null
-        }).end()
-    } else {
-        res.status(404).send({
-            status : false,
-            testMsg : null
-        }).end()
-    }
-})
-// [E] TEST
 
 module.exports = router
