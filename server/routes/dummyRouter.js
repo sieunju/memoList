@@ -372,8 +372,8 @@ router.get('/api/product/list', (req, res) => {
                     v_prd_cd: "PRO" + (startIndex + i),
                     v_prd_nm: "자생 퍼펙트 쿠션 SPF50⁺, PA⁺⁺⁺",
                     v_img_path: dummyImgArr[getRanRange(dummyImgArr.length - 1)],
-                    tags: getRanTags(getRanRange(2)),
-                    hashTags: getRanHashTags(getRanRange(4)),
+                    tags: getRanStickers(getRanRange(2)),
+                    hashTags: getRanTags(getRanRange(4)),
                     v_price: getRanRange(1000000)
                 })
             }
@@ -383,8 +383,8 @@ router.get('/api/product/list', (req, res) => {
                     v_prd_cd: "PRO" + (startIndex + i),
                     v_prd_nm: "자생 퍼펙트 쿠션 SPF50⁺, PA⁺⁺⁺",
                     v_img_path: dummyImgArr[getRanRange(dummyImgArr.length - 1)],
-                    tags: getRanTags(getRanRange(2)),
-                    hashTags: getRanHashTags(getRanRange(4)),
+                    tags: getRanStickers(getRanRange(2)),
+                    hashTags: getRanTags(getRanRange(4)),
                     v_price: getRanRange(1000000)
                 })
             }
@@ -392,9 +392,9 @@ router.get('/api/product/list', (req, res) => {
 
         res.status(200).send({
             data: {
-                list: dataList,
-                success: true
-            }
+                list: dataList
+            },
+            success: true
         }).end()
     } catch (err) {
         console.log(err)
@@ -436,17 +436,140 @@ router.get('/api/notification/list', (req, res) => {
     }
 })
 
-router.get('/api/header/test', (req, res) => {
+router.get('/api/header', (req, res) => {
     try {
-        let headers = req.headers
-        console.log(headers)
+        console.log(req.headers)
+        res.header("Authorization", "qereotqnviejfjefjeffj")
+        res.status(200).send().end()
+    } catch (err) {
+        console.log("Error!!!! " + err)
+    }
+})
+
+router.post('/oauthserver/login', (req, res) => {
+    try {
+        console.log(req.headers)
+        let body = req.body
+        console.log(body)
+        if (body.username == "qwer") {
+            res.header("Authorization", "token_is_success111111")
+        } else {
+            res.header("Authorization", "token_is_fail")
+        }
         res.status(200).send({
-            headers
+            roles: {
+                memberStatus: null,
+                testList: [null],
+                testBoolean: "true"
+            }
+        }).end()
+    } catch (err) {
+        console.log("Error " + err)
+    }
+})
+
+
+
+router.get('/api/test', (req, res) => {
+    try {
+        let list = new Array()
+        list.push({
+            title
+        })
+        res.status(200).send({
+            arr
         }).end()
     } catch (err) {
         console.log("Error!!!! " + err)
     }
 })
+
+router.get('/app/goods/goodsDetailInfo', (req, res) => {
+    let obj = new Object()
+
+    try {
+        obj["goodsName"] = "이름이름 이름"
+        obj["goodsImages"] = getRanImgs(3)
+        obj["hashTags"] = getRanTags(5)
+        obj["stickers"] = getRanStickers(2)
+        obj["price"] = getRanRange(50000000)
+        let options = new Array()
+        for (let i = 0; i < 4; i++) {
+            options.push({
+                optCd: "SAP " + i,
+                optNm: (i + 1) * 10 + "호",
+                price: getRanRange(1000000)
+            })
+        }
+        obj["options"] = options
+        let videos = new Array()
+        videos.push({
+            title: "CF 영상",
+            youtubeLink: "https://www.youtube.com/watch?v=A5AmE_b68cg"
+        })
+        videos.push({
+            title: "사용 방법",
+            youtubeLink: "https://www.youtube.com/watch?v=Fao37s6Zf0Y"
+        })
+        videos.push({
+            title: "외형 재형",
+            youtubeLink: "https://www.youtube.com/watch?v=vI23DsDLKO4"
+        })
+        obj["videos"] = videos
+
+        let currTime = Date.now()
+        let reviewList = new Array()
+        // 리뷰 더미 데이터
+        for(let i =0; i< 20; i++) {
+            reviewList.push({
+                goodsReviewId : (i * 11),
+                appId : "qtzz772",
+                regDate : currTime,
+                reviewContent : "안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~",
+                starPoint : getRanRange(5),
+                reviewImages : getRanImgs(getRanRange(3))
+            })
+        }
+        obj["reviews"] = reviewList
+
+        setTimeout(function () {
+            res.status(200).send({
+                data : obj
+            }).end()
+        }, 500)
+    } catch (err) {
+        console.log("Error " + err)
+    }
+})
+
+router.get('/app/reviews/list',(req,res) => {
+    try {
+        res.status(200).send({
+            data : {
+                reviews : []
+            }
+        })
+    } catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+/**
+ * 랜덤 이미지
+ * @param {Array} list 
+ * @param {Integer} range 
+ */
+function getRanImgs(range) {
+    let list = new Array()
+    for (let i = 0; i < range; i++) {
+        list.push({
+            fileName: "Name " + i,
+            path: dummyImgArr[getRanRange(dummyImgArr.length - 1)],
+            resource: "ddddd"
+        })
+    }
+    return list
+}
 
 function getRanRange(range) {
     return getRanRange(range, true)
@@ -460,20 +583,40 @@ function getRanRange(range, isZero) {
     }
 }
 
+/**
+ * 랜덤 해쉬 테그.
+ * @param {Integer} range 
+ */
 function getRanTags(range) {
-    const tags = new Set()
+    const set = new Set()
     for (let i = 0; i < range; i++) {
-        tags.add(dummyTagArr[getRanRange(dummyTagArr.length - 1)])
+        set.add(dummyHashTagArr[getRanRange(dummyHashTagArr.length - 1)])
     }
-    return Array.from(tags)
+    const list = new Array()
+    for (let item of set) {
+        list.push({
+            tagText: item
+        })
+    }
+    return list
 }
 
-function getRanHashTags(range) {
-    const hashTags = new Set()
+/**
+ * 스티커 
+ * @param {Integer} range 
+ */
+function getRanStickers(range) {
+    const set = new Set()
     for (let i = 0; i < range; i++) {
-        hashTags.add(dummyHashTagArr[getRanRange(dummyHashTagArr.length - 1)])
+        set.add(dummyTagArr[getRanRange(dummyTagArr.length - 1)])
     }
-    return Array.from(hashTags)
+    const list = new Array()
+    for (let item of set) {
+        list.push({
+            stickerName: item
+        })
+    }
+    return list
 }
 
 function getDtm(nextDay) {
