@@ -13,6 +13,7 @@ const dummyImgpath5 = "https://files.itworld.co.kr/archive/image/2016/10/apple-s
 const dummyImgpath6 = "https://cdnweb01.wikitree.co.kr/webdata/editor/202005/09/img_20200509102113_fb2159a8.webp"
 const dummyImgpath7 = "https://bnetcmsus-a.akamaihd.net/cms/blog_header/t6/T6WOKKGZS7NV1540607288927.jpg"
 const dummyImgArr = new Array(dummyImgpath1, dummyImgpath2, dummyImgpath3, dummyImgpath4, dummyImgpath5, dummyImgpath6, dummyImgpath7)
+const dummyLongString = "V차트는 VIP자산운용의 최준철 대표이사님이 지인들과 함께 개발한 개념입니다. 오래 전에 집필한 저서 <가치투자가 쉬워지는 V차트>에 상세한 내용이 잘 적혀있습니다. V차트는 주가 변동을 나타내는 주가 차트와 달리, 기업의 이익이나 재무지표를 연도별 또는 분기별로 그래프화한 차트입니다. 저는 V차트를 좀 더 역동적으로 나타내기 위해 아래와 같이 주가차트와 비슷한 모양으로 그려 사용하고 있습니다만, 사실 V차트는 가장 단순한 형태의 선 그래프로만 나타내도 충분합니다."
 
 const dummyProduct1 = {
     v_prd_nm: "랜덤 상품 1",
@@ -366,7 +367,7 @@ router.get('/api/product/list', (req, res) => {
         let pageNo = req.query.pageNo
         let dataList = new Array()
         let startIndex = (pageNo - 1) * 20
-        if (pageNo == 5) {
+        if (pageNo == 6) {
             for (let i = 0; i < 16; i++) {
                 dataList.push({
                     v_prd_cd: "PRO" + (startIndex + i),
@@ -390,12 +391,23 @@ router.get('/api/product/list', (req, res) => {
             }
         }
 
-        res.status(200).send({
-            data: {
-                list: dataList
-            },
-            success: true
-        }).end()
+        if(pageNo == 1) {
+            res.status(200).send({
+                data: {
+                    list: dataList
+                },
+                success: true
+            }).end()
+        } else {
+            setTimeout(function () {
+                res.status(200).send({
+                    data: {
+                        list: dataList
+                    },
+                    success: true
+                }).end()
+            }, 5000)
+        }
     } catch (err) {
         console.log(err)
     }
@@ -451,40 +463,31 @@ router.post('/oauthserver/login', (req, res) => {
         console.log(req.headers)
         let body = req.body
         console.log(body)
-        if (body.username == "qwer") {
+        if (body.username == "qtzz772") {
             res.header("Authorization", "token_is_success111111")
         } else {
             res.header("Authorization", "token_is_fail")
         }
-        res.status(200).send({
-            roles: {
+
+        setTimeout(function () {
+            res.status(500).send({
+                success : false,
                 memberStatus: null,
-                testList: [null],
-                testBoolean: "true"
-            }
-        }).end()
+                loginFailCnt : 0
+            }).end()
+        }, 6000)
+
+        // res.status(500).send({
+        //     success : false,
+        //     memberStatus: null,
+        //     loginFailCnt : 0
+        // }).end()
     } catch (err) {
         console.log("Error " + err)
     }
 })
 
-
-
-router.get('/api/test', (req, res) => {
-    try {
-        let list = new Array()
-        list.push({
-            title
-        })
-        res.status(200).send({
-            arr
-        }).end()
-    } catch (err) {
-        console.log("Error!!!! " + err)
-    }
-})
-
-router.get('/app/goods/goodsDetailInfo', (req, res) => {
+router.get('/donginbi/app/goods/goodsDetailInfo', (req, res) => {
     let obj = new Object()
 
     try {
@@ -511,10 +514,10 @@ router.get('/app/goods/goodsDetailInfo', (req, res) => {
             title: "사용 방법",
             youtubeLink: "https://www.youtube.com/watch?v=Fao37s6Zf0Y"
         })
-        videos.push({
-            title: "외형 재형",
-            youtubeLink: "https://www.youtube.com/watch?v=vI23DsDLKO4"
-        })
+        // videos.push({
+        //     title: "외형 재형",
+        //     youtubeLink: "https://www.youtube.com/watch?v=vI23DsDLKO4"
+        // })
         obj["videos"] = videos
 
         let currTime = Date.now()
@@ -525,12 +528,26 @@ router.get('/app/goods/goodsDetailInfo', (req, res) => {
                 goodsReviewId : (i * 11),
                 appId : "qtzz772",
                 regDate : currTime,
-                reviewContent : "안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~안녕하세요 리뷰입니다~",
+                reviewContent : dummyLongString + dummyLongString,
                 starPoint : getRanRange(5),
                 reviewImages : getRanImgs(getRanRange(3))
             })
         }
         obj["reviews"] = reviewList
+
+        let reviewVideoList = new Array()
+        reviewVideoList.push({
+            url : "https://www.youtube.com/watch?v=vI23DsDLKO4"
+        })
+
+        // reviewVideoList.push({
+        //     url : "https://www.youtube.com/watch?v=vI23DsDLKO4"
+        // })
+
+        // reviewVideoList.push({
+        //     url : "https://www.youtube.com/watch?v=vI23DsDLKO4"
+        // })
+        obj["reviewFiles"] = reviewVideoList
 
         setTimeout(function () {
             res.status(200).send({
@@ -549,6 +566,88 @@ router.get('/app/reviews/list',(req,res) => {
                 reviews : []
             }
         })
+    } catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+router.get('/donginbi/app/login/findId',(req,res) => {
+    try {
+        res.status(200).send({
+            data : {
+                appId : "eeee",
+                status : "SUSPENDED",
+                kakaoMemberYn : "Y",
+                offlineMember : "false"
+            },
+            success : "true"
+        })
+    }catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+router.get('/api/single',(req,res) => {
+    try {
+        console.log(req)
+        res.status(404).send({
+            success : true
+        }).end()
+    } catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+router.put('/api/single',(req,res) => {
+    try {
+        console.log(req)
+        res.status(666).send({
+            success : true
+        }).end()
+    } catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+router.post('/api/single',(req,res) => {
+    try {
+        console.log(req)
+        res.status(416).send({
+            success : true
+        }).end()
+    } catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+router.delete('/api/single',(req,res) => {
+    try {
+        console.log(req)
+        res.status(404).send({
+            success : true
+        }).end()
+    } catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+router.post('/donginbi/app/goods/insertInterest',(req,res) => {
+    try {
+        console.log(req)
+        res.status(200).send({
+            success : true
+        }).end()
+    } catch(err) {
+        console.log("Error " + err)
+    }
+})
+
+router.delete('/donginbi/app/goods/deleteInterest',(req,res) => {
+    try {
+        console.log(req)
+        res.status(200).send({
+            success : true
+        }).end()
     } catch(err) {
         console.log("Error " + err)
     }
